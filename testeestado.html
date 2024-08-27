@@ -1,0 +1,329 @@
+
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Busca Agências</title>
+    <link rel="shortcut icon" href="https://mais.correios.com.br/core/templates/bunker/img/favi-ect.png"/>
+    <link rel="stylesheet" href="https://mais.correios.com.br/core/templates/bunker/css/bunker.css">
+    <link rel="stylesheet" href="https://mais.correios.com.br/static/css/global.css">
+    <link rel="stylesheet" href="https://mais.correios.com.br/core/templates/bunker/css/rodape.css">
+        <link rel="stylesheet" href="index.css?30152">
+    <link rel="stylesheet" href="mais.css">
+    <link rel="stylesheet" href="./lib/css/datatables.min.css">
+    <link rel="stylesheet" href="./lib/css/fixedHeader.dataTables.min.css">
+    <link rel="stylesheet" href="./lib/css/jquery.dataTables.min.css">
+   
+</head>
+<body>
+
+    <!--section id="acessibilidade">
+    <a tabindex="1"></a>
+    <span id="language" style="display: inherit;">
+        <img class="bandeiras-block" src="https://mais.correios.com.br/core/templates/bunker/img/bandeira-brasil.png"        width="25" height="20" id="pt" alt="Bandeira do Brasil">
+        <img class="bandeiras-none"  src="https://mais.correios.com.br/core/templates/bunker/img/bandeira-espanha.png"       width="25" height="20" id="es" alt="Bandeira da Espanha">
+        <img class="bandeiras-none"  src="https://mais.correios.com.br/core/templates/bunker/img/bandeira-reino-unido.png"   width="25" height="20" id="en" alt="Bandeira do Reino Unido">
+        <form action="">
+            <select id="idioma" style="width: 100px;">
+                <option value="pt">Português</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+            </select>         
+        </form>
+    </span>  
+</section-->
+<div id="acessibilidade">
+    <a id="btnAcessibilidade" accesskey="c">Acessibilidade</a>
+    <a class="idioma"><img src="../core/templates/bunker/img/bandeira-brasil.png" alt="Bandeira do Brasil"  width="30" height="20"><span>Português</span></a>
+</div>
+<div id="acess-drop-down">
+    <header>
+        <a class="close"><img src="../core/templates/bunker/img/close.svg" alt="Fechar"  width="30" height="30"></a>
+    </header>
+    <section>
+        <a class="conteudo numero" data-numero="1" accesskey="1">Ir para o conteúdo</a>
+        <a class="menu numero" data-numero="2" accesskey="2">Ir para o menu</a>
+        <a class="footer numero" data-numero="3" accesskey="3">Ir para o rodapé</a>
+        <a class="contraste" accesskey="4">Alto contraste</a>
+        <a class="libras" accesskey="5">Libras</a>
+        <a class="saiba-mais" accesskey="6">Saiba mais sobre acessibilidade</a>        
+    </section>
+</div>
+<div id="language-drop-down">
+    <header>
+        <a class="close"><img src="../core/templates/bunker/img/close.svg" alt="Fechar"  width="30" height="30"></a>
+    </header>
+    <section>
+        <a class="idioma" accesskey="p" value="pt"><img src="../core/templates/bunker/img/bandeira-brasil.png" alt="Bandeira do Brasil"  width="30" height="20">Português</a>
+        <a class="idioma" accesskey="i" value="en"><img src="../core/templates/bunker/img/bandeira-reino-unido.png" alt="Bandeira do Reino Unido"  width="30" height="20">English</a>
+        <a class="idioma" accesskey="e" value="es"><img src="../core/templates/bunker/img/bandeira-espanha.png" alt="Bandeira da Espanha"  width="30" height="20">Español</a>      
+    </section>
+</div>
+<div id="menu">
+    <!--a class="hamburger" tabindex="1"></a-->
+    <button class="hamburger" tabindex="1"><img src="../core/templates/bunker/img/menu.svg"  alt="Abre Menu"  width="30" height="30"></button>
+    <span class="logo"><a href="https://www.correios.com.br/"><img src="../core/templates/bunker/img/logo-ect.svg"  alt="Logo dos Correios"  width="142" height="30"></a></span>
+    <div class="menu">
+        <section>
+            <span id="h6">Busca Agências v3.0.1</span>
+            <input id="tag" type="hidden" value="v3.0.1.52">
+            <input id="ambiente" type="hidden" value="P">
+        </section>
+        
+<a href="https://mais.correios.com.br/app/index.php">Busca Agências</a>
+    </div>
+</div>
+
+<main  id="inicioConteudo">
+    
+    <h1 data-i18n="pagina">Busca Agências</h1>
+    <input type="hidden" id="hddClientHours" name="hddClientHours" value="">
+    <div class="container">
+        <div class="campos">
+            <div class="campo col-12">
+                <div class="controle linhas">                
+                    <label id="label-proximidade" data-i18n="Proximidade" class="radio">
+                        Proximidade      
+                    </label>
+                    <label id="label-localidade" data-i18n="Localidade" class="radio">
+                        Localidade                      
+                    </label>                   
+                </div>                
+            </div>
+            <div id="divlocalidade" title="Localidade" class="campo col-12">
+                <div class="rotulo">
+                    <label for="cmbEstado" data-i18n="Label-estado">Estado *:</label>
+                </div>
+                <div class="controle">
+                    <select name="cmbEstado" id="cmbEstado" onchange="atualizar_municipio();">
+                        <option value="" data-i18n="cmbEstado">Selecione o Estado</option>                            
+                                                    <option value="AC"> ACRE </option>
+                                                    <option value="AL"> ALAGOAS </option>
+                                                    <option value="AP"> AMAPÁ </option>
+                                                    <option value="AM"> AMAZONAS </option>
+                                                    <option value="BA"> BAHIA </option>
+                                                    <option value="CE"> CEARÁ </option>
+                                                    <option value="DF"> DISTRITO FEDERAL </option>
+                                                    <option value="ES"> ESPÍRITO SANTO </option>
+                                                    <option value="GO"> GOIÁS </option>
+                                                    <option value="MA"> MARANHÃO </option>
+                                                    <option value="MT"> MATO GROSSO </option>
+                                                    <option value="MS"> MATO GROSSO DO SUL </option>
+                                                    <option value="MG"> MINAS GERAIS </option>
+                                                    <option value="PA"> PARÁ </option>
+                                                    <option value="PB"> PARAÍBA </option>
+                                                    <option value="PR"> PARANÁ </option>
+                                                    <option value="PE"> PERNAMBUCO </option>
+                                                    <option value="PI"> PIAUÍ </option>
+                                                    <option value="RJ"> RIO DE JANEIRO </option>
+                                                    <option value="RN"> RIO GRANDE DO NORTE </option>
+                                                    <option value="RS"> RIO GRANDE DO SUL </option>
+                                                    <option value="RO"> RONDÕNIA </option>
+                                                    <option value="RR"> RORAIMA </option>
+                                                    <option value="SC"> SANTA CATARINA </option>
+                                                    <option value="SP"> SÃO PAULO </option>
+                                                    <option value="SE"> SERGIPE </option>
+                                                    <option value="TO"> TOCANTINS </option>
+                         
+                    </select>
+                </div>
+                <div class="rotulo">
+                    <label for="cmbMunicipio" data-i18n="Label-municipio">Município *:</label> 
+                </div>
+                <div class="controle">
+                    <select name="cmbMunicipio" id="cmbMunicipio" onchange="atualizar_bairro();">
+                        <option value="" data-i18n="cmbMunicipio">Selecione o Município</option> 
+                    </select>
+                </div>
+                <div class="rotulo">
+                    <label for="cmbBairro" data-i18n="Label-bairro">Bairro *:</label>
+                </div>
+                <div class="controle">
+                    <select name="cmbBairro" id="cmbBairro" onchange="atualizar_agencia_localidade();">                               
+                        <option value="" data-i18n="cmbBairro">Selecione o Bairro</option>
+                    </select>
+                </div>
+            </div>
+            <div id="divproximidade" title="Proximidade" class="campo col-12 botoes">
+                <button id="meio" class="button nao-selecionado">0,5 km</button>            
+                <button id="um" class="button selecionado">1 km</button>            
+                <button id="cinco" class="button nao-selecionado">5 km</button>
+                <!--<button id="dez" class="button nao-selecionado" onclick="selecionaProximidade('dez')">10 km</button>-->
+            </div>
+            <div id="divcarregando" class="campo col-12">
+                <img width="100" height="100" src="lib/img/loading-loader.svg" alt="Carregando...">
+                <pre>Carregando...</pre>
+            </div>
+            <div id="divsemresultado" class="campo col-12">
+                <pre>Nenhuma agência encontrada.</pre>
+            </div>
+            <div id="lista_agencias">
+
+            </div>
+        </div>
+    </div>
+    
+</main>
+
+    <footer id="rodape" class="bg-amarelo">
+        
+<!-- Div repons&#225;vel pelo portlet de rodap&#233; -->
+<div id="portal-footer">
+    <div id="rodape-content">
+		<div class="rodape bg-amarelo">
+			<div class="largura-maxima">
+				<div class="flex">
+					<div class="rodape-links">
+						<h2>Fale Conosco</h2>
+						<ul class="lista-icone">
+							<li>
+								<a href="https://faleconosco.correios.com.br/faleconosco/app/index.php">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/tv.svg" alt="Tela de computador azul escuro" />
+									<span>Registro de manifestações</span>
+								</a>
+							</li>
+						</ul>
+                        <ul class="lista-icone">
+							<li>
+								<a href="https://www.correios.com.br/resolveuid/248fa4a5e6ad4153a1e998b7d91a0b5a">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/duvida.svg" alt="Balão de conversa com interrogação no meio, ambos na cor azul escuro" />
+									<span>Central de atendimento</span>
+								</a>
+							</li>
+						</ul>
+                        <ul class="lista-icone">
+							<li>
+								<a href="https://faleconosco.correios.com.br/faleconosco//app/cadastro/contrate/index.php">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/negocios.svg" alt="Mala de ferramenta azul escuro" />
+									<span>Soluções para o seu negócio</span>
+								</a>
+							</li>
+						</ul>
+                        <ul class="lista-icone">
+							<li>
+								<a href="https://faleconosco.correios.com.br/faleconosco//app/cadastro/suporte/index.php">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/headset.svg" alt="Headset azul escuro" />
+									<span>Suporte ao cliente com contrato</span>
+								</a>
+							</li>
+						</ul>
+                        <ul class="lista-icone">
+							<li>
+								<a href="https://www.correios.com.br/resolveuid/eb76d3c3abe346eda992c2e73fb2dfaf">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/ouvidoria.svg" alt="Balão de conversa com três pontos, tudo na cor azul escuro" />
+									<span>Ouvidoria</span>
+								</a>
+							</li>
+						</ul>
+                        <ul class="lista-icone">
+							<li>
+								<a href="https://www.correios.com.br/resolveuid/5d5f40edc49a444e854ef7a58f37f2a7">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/denuncia.svg" alt="busto de um boneco e uma lupa, ambos na cor azul escuro" />
+									<span>Denúncia</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+                    <div class="rodape-links">
+						<h2>Sobre os Correios</h2>
+						<ul class="lista-icone">
+							<li>
+								<a href="https://www.correios.com.br/acesso-a-informacao/institucional/identidade-corporativa">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/identidade.svg" alt="documento azul com busto de um boneco e duas linhas à direita, tudo na cor azul escuro" />
+									<span>Identidade corporativa</span>
+								</a>
+							</li>
+						</ul>
+                        <ul class="lista-icone">
+							<li>
+								<a href="https://www.correios.com.br/resolveuid/416b07f07f3a40fb8e29c8a5475b87ec">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/educacao.svg" alt="cabeça redonda sem rosto, com um capelo em cima, tudo na cor azul escuro" />
+									<span>Educação e cultura</span>
+								</a>
+							</li>
+						</ul>
+                        <ul class="lista-icone">
+							<li>
+								<a href="https://www.correios.com.br/resolveuid/8e38c5ea6e8143e794f443f10ce09448">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/etica.svg" alt="livro aberto com linhas tracejadas nas folhas, tudo na cor azul escuro" />
+									<span>Código de ética</span>
+								</a>
+							</li>
+						</ul>
+                        <ul class="lista-icone">
+							<li>
+								<a href="https://www.correios.com.br/acesso-a-informacao/institucional/publicacoes/processos-de-contas-anuais-prestacao-de-contas/processos-de-contas-anuais-prestacao-de-contas-1">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/lupa.svg" alt="Lupa azul escuro" />
+									<span>Transparência e prestação de contas</span>
+								</a>
+							</li>
+						</ul>
+                        <ul class="lista-icone">
+							<li>
+								<a href="https://www.correios.com.br/resolveuid/36414fa7519b4598b8c7b1cd10f38f3f">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/cadeado.svg" alt="cadeado azul escuro" />
+									<span>Política de privacidade e cookies</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+                    <div class="rodape-links">
+						<h2>Outros Sites</h2>
+						<ul class="lista-icone">
+							<li>
+								<a href="http://shopping.correios.com.br/wbm/store/script/store.aspx?cd_company=ErZW8Dm9i54=">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/carrinho.svg" alt="carrinho de compras azul escuro" />
+									<span>Loja online dos Correios</span>
+								</a>
+							</li>
+						</ul>
+                        <!--ul class="lista-icone">
+							<li>
+								<a href="https://www.gov.br/mcom/pt-br">
+									<img class="proporcao-link-rodape" src="https://mais.correios.com.br/core/templates/bunker/img/icones/outline/ministerio.svg" alt="logo do Governo Federal na cor azul escuro" />
+									<span>Ministério das Comunicações</span>
+								</a>
+							</li>
+						</ul-->
+					</div>
+				</div>
+				<div>
+					<!--div class="rodape marca-gov">
+						<img src="https://mais.correios.com.br/core/templates/bunker/img/marca-gov.png" alt="Imagem com a logo do Governo Federal" />
+					</div-->
+					<div class="row">
+						<div class="copyright"><span>© Copyright 2021 Correios</span>			
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	    
+    </div>
+</div>
+    </footer>
+
+<div id="alerta">
+    <div class="msg"></div>
+    <div class="act"></div>
+</div>
+
+<script type="module" src="https://mais.correios.com.br/core/templates/bunker/js/bunker.js?2"></script>
+    <script type="text/javascript" src="lib/js/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="lib/js/datatables.min.js"></script>
+    <script type="text/javascript" src="lib/js/dataTables.fixedHeader.min.js"></script>
+    <script type="text/javascript" src="lib/js/alerta.js"></script>
+    <script type="text/javascript" src="lib/js/acessibilidade.js"></script>
+    <script type="text/javascript" src="lib/js/HttpService.js"></script>
+    <script type="text/javascript" src="lib/js/padrao.js"></script>
+    <!--script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASBQIKouehHj8AMNWp4MZgJrYju876Qcc"></script--> 
+    <script type="text/javascript" src="lib/js/mapa.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="mais.js"></script>
+    <noscript>Seu navegador não oferece suporte ao código JavaScript!</noscript>
+
+</body>
+</html>
