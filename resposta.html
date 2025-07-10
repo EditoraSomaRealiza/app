@@ -72,7 +72,7 @@
 
     const dados = JSON.parse(localStorage.getItem("dadosOracao"));
     const nome = dados.tipo === "eu" ? dados.quemPede : dados.quemRecebe;
-    const intro = `Esta oração foi feita por <strong>${dados.quemPede}</strong> ${dados.tipo === "eu" ? "para si mesmo" : `para <strong>${dados.quemRecebe}</strong>`}.`;
+    const intro = `Esta oração foi pedida por <strong>${dados.quemPede}</strong> ${dados.tipo === "eu" ? "atendida agora" : `para <strong>${dados.quemRecebe}</strong>`}.`;
     const sentimento = dados.sentimento ? ` Que neste momento está se sentindo: <em>${dados.sentimento}</em>.` : "";
     const motivoTexto = textos[dados.motivo] || ["Senhor, Tu conheces o coração e sabes o que é preciso."];
     const oracao = `${motivoTexto[Math.floor(Math.random() * motivoTexto.length)]}${sentimento}`;
