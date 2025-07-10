@@ -1,68 +1,111 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gerador de Oração</title>
-  
-  <link rel="shortcut icon" type="image/x-icon" href="https://editorasomarealiza.github.io/app/Logo%20Ore%20Por%20Mim.png">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f3f8f7;
-            text-align: center;
-            padding: 40px;
-        }
-        input, select, button {
-            font-size: 18px;
-            margin: 10px;
-            padding: 10px;
-            width: 80%;
-            max-width: 400px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Oração Gerada</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background: #eaf4f1;
+      padding: 40px;
+      line-height: 1.6;
+    }
+    #oracao {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 12px #ccc;
+    }
+    .botoes {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <h1>Ore por Mim</h1>
-    <p>Preencha os campos abaixo para gerar uma oração personalizada:</p>
-    <form id="formOracao">
-        <input type="text" id="quemPede" placeholder="Seu nome" required><br>
-        <select id="tipoOração">
-            <option value="eu">Quero oração para mim</option>
-            <option value="outro">Quero oração para outra pessoa</option>
-        </select><br>
-        <input type="text" id="quemRecebe" placeholder="Nome da pessoa" style="display:none;"><br>
-        <select id="motivo">
-            <option value="cura">Cura</option>
-            <option value="libertacao">Libertação</option>
-            <option value="agradecimento">Agradecimento</option>
-            <option value="familia">Família</option>
-            <option value="financas">Finanças</option>
-        </select><br>
-        <input type="text" id="sentimento" placeholder="Como você (ou a pessoa) está se sentindo?"><br>
-        <button type="submit">Gerar Oração</button>
-    </form>
+  <h1>Oração Especial</h1>
+  <div id="oracao"></div>
 
-    <script>
-        document.getElementById("tipoOração").addEventListener("change", function() {
-            const outroCampo = document.getElementById("quemRecebe");
-            outroCampo.style.display = this.value === "outro" ? "inline-block" : "none";
-        });
+  <div class="botoes">
+    <button onclick="window.print()">🖨️ Imprimir</button>
+    <button onclick="compartilhar()">📤 Compartilhar</button>
+    <button onclick="gerarImagem()">🖼️ Baixar como imagem</button>
+  </div>
 
-        document.getElementById("formOracao").addEventListener("submit", function(e) {
-            e.preventDefault();
-            const dados = {
-                quemPede: document.getElementById("quemPede").value,
-                tipo: document.getElementById("tipoOração").value,
-                quemRecebe: document.getElementById("quemRecebe").value,
-                motivo: document.getElementById("motivo").value,
-                sentimento: document.getElementById("sentimento").value
-            };
-            localStorage.setItem("dadosOracao", JSON.stringify(dados));
-            window.location.href = "resposta.html";
-        });
-    </script>
+  <!-- Biblioteca html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <script>
+    const textos = {
+      cura: [
+        "Senhor, toque com Teu poder de cura esta vida que necessita de um milagre físico e espiritual.",
+        "Pai amado, cura toda dor, enfermidade e tristeza com Teu amor poderoso."
+      ],
+      libertacao: [
+        "Deus, quebra todas as correntes e liberta este coração do que o aprisiona.",
+        "Que Tua luz dissipe toda escuridão e traga liberdade completa."
+      ],
+      agradecimento: [
+        "Gratidão, Senhor, por tantas bênçãos. Continue a agir poderosamente nesta vida.",
+        "Obrigado, Deus, pela resposta recebida. Que esta oração seja um louvor ao Teu nome."
+      ],
+      familia: [
+        "Senhor, abençoa esta família com união, paz e amor em abundância.",
+        "Cuida, Pai, dos lares e dos corações, trazendo cura e reconciliação."
+      ],
+      financas: [
+        "Deus provedor, abre portas onde não há, envia sustento e sabedoria financeira.",
+        "Confio em Ti, Senhor, para transformar a área financeira desta vida com Tua provisão."
+      ]
+    };
+
+    const encerramentos = [
+      "Em nome de Jesus, amém.",
+      "Que assim seja, para a glória de Deus.",
+      "Glorificado seja o Teu nome, Senhor!"
+    ];
+
+    const dados = JSON.parse(localStorage.getItem("dadosOracao"));
+    const nome = dados.tipo === "eu" ? dados.quemPede : dados.quemRecebe;
+    const intro = `Esta oração foi feita por <strong>${dados.quemPede}</strong> ${dados.tipo === "eu" ? "para si mesmo" : `para <strong>${dados.quemRecebe}</strong>`}.`;
+    const sentimento = dados.sentimento ? ` Que neste momento está se sentindo: <em>${dados.sentimento}</em>.` : "";
+    const motivoTexto = textos[dados.motivo] || ["Senhor, Tu conheces o coração e sabes o que é preciso."];
+    const oracao = `${motivoTexto[Math.floor(Math.random() * motivoTexto.length)]}${sentimento}`;
+    const final = encerramentos[Math.floor(Math.random() * encerramentos.length)];
+
+    document.getElementById("oracao").innerHTML = `
+      <p>${intro}</p>
+      <p>${oracao}</p>
+      <p><strong>${final}</strong></p>
+    `;
+
+    // Compartilhamento nativo
+    function compartilhar() {
+      const textoCompartilhamento = `${dados.quemPede} fez esta oração:\n\n${oracao}\n\n${final}`;
+      if (navigator.share) {
+        navigator.share({
+          title: 'Oração Gerada',
+          text: textoCompartilhamento
+        }).catch(err => console.log('Erro ao compartilhar:', err));
+      } else {
+        alert("Compartilhamento não suportado neste navegador. Copie e cole o texto manualmente.");
+      }
+    }
+
+    // Gera imagem da oração
+    function gerarImagem() {
+      html2canvas(document.querySelector("#oracao")).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "oracao.png";
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+  </script>
 </body>
 </html>
