@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de Oração</title>
+  
+  <link rel="shortcut icon" type="image/x-icon" href="https://editorasomarealiza.github.io/app/Logo%20Ore%20Por%20Mim.png">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f8f7;
+            text-align: center;
+            padding: 40px;
+        }
+        input, select, button {
+            font-size: 18px;
+            margin: 10px;
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ore por Mim</h1>
+    <p>Preencha os campos abaixo para gerar uma oração personalizada:</p>
+    <form id="formOracao">
+        <input type="text" id="quemPede" placeholder="Seu nome" required><br>
+        <select id="tipoOração">
+            <option value="eu">Quero oração para mim</option>
+            <option value="outro">Quero oração para outra pessoa</option>
+        </select><br>
+        <input type="text" id="quemRecebe" placeholder="Nome da pessoa" style="display:none;"><br>
+        <select id="motivo">
+            <option value="cura">Cura</option>
+            <option value="libertacao">Libertação</option>
+            <option value="agradecimento">Agradecimento</option>
+            <option value="familia">Família</option>
+            <option value="financas">Finanças</option>
+        </select><br>
+        <input type="text" id="sentimento" placeholder="Como você (ou a pessoa) está se sentindo?"><br>
+        <button type="submit">Gerar Oração</button>
+    </form>
+
+    <script>
+        document.getElementById("tipoOração").addEventListener("change", function() {
+            const outroCampo = document.getElementById("quemRecebe");
+            outroCampo.style.display = this.value === "outro" ? "inline-block" : "none";
+        });
+
+        document.getElementById("formOracao").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const dados = {
+                quemPede: document.getElementById("quemPede").value,
+                tipo: document.getElementById("tipoOração").value,
+                quemRecebe: document.getElementById("quemRecebe").value,
+                motivo: document.getElementById("motivo").value,
+                sentimento: document.getElementById("sentimento").value
+            };
+            localStorage.setItem("dadosOracao", JSON.stringify(dados));
+            window.location.href = "resposta.html";
+        });
+    </script>
+</body>
+</html>
