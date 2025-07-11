@@ -127,7 +127,7 @@
     const nome = dados.tipo === "eu" ? dados.quemPede : dados.quemRecebe;
     const intro = `Esta oração foi pedida por <strong>${dados.quemPede}</strong> ${dados.tipo === "eu" ? "atendida agora" : `para <strong>${dados.quemRecebe}</strong>`}.`;
     const sentimento = dados.sentimento ? ` Que neste momento está se sentindo: <em>${dados.sentimento}</em>.` : "";
-    const motivoTexto = textos[dados.motivo] || ["Senhor, Tu conheces o coração e sabes o que é preciso."];
+    const motivoTexto = textos[dados.motivo] || ["Senhor, Tu conheces o coração de <strong>${dados.quemPede}</strong> e sabes exatamente do que ele precisa. Te peço que entres com Tua providência divina e realizes um milagre em sua vida e em sua família. Derrama paz, amor, prosperidade, cura e tudo o que lhe tem faltado. Que o Teu poder venha como resposta, trazendo uma reação positiva e transformadora, para a glória do Teu nome."];
     const oracao = `${motivoTexto[Math.floor(Math.random() * motivoTexto.length)]}${sentimento}`;
     const final = encerramentos[Math.floor(Math.random() * encerramentos.length)];
 
