@@ -1,83 +1,419 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Gerador de Oração</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f3f8f7;
-            text-align: center;
-            padding: 40px;
-        }
-        input, select, button {
-            font-size: 18px;
-            margin: 10px;
-            padding: 10px;
-            width: 80%;
-            max-width: 400px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Oração Gerada</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background: #eaf4f1;
+      padding: 40px;
+      line-height: 1.6;
+    }
+    #oracao {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 12px #ccc;
+    }
+    .botoes {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <h1>Ore por Mim</h1>
-    <p>Preencha os campos abaixo para gerar uma oração personalizada:</p>
-    <form id="formOracao">
-        <input type="text" id="quemPede" placeholder="Seu nome" required><br>
-        <select id="tipoOração">
-            <option value="eu">Quero oração para mim</option>
-            <option value="outro">Quero oração para outra pessoa</option>
-        </select><br>
-        <input type="text" id="quemRecebe" placeholder="Nome da pessoa" style="display:none;"><br>
-        <select id="motivo">
-            <option value="Escolha">Escolha um motivo</option>
-            <option value="cura">Cura</option>
-            <option value="cura1">Cura do corpo</option>
-            <option value="cura2">Cura da alma</option>
-            <option value="libertacao">Libertação</option>
-            <option value="libertacao1">Libertação de vicios</option>
-            <option value="libertacao2">Libertação de desejo homicida</option>
-            <option value="libertacao3">Libertação de desejo suicida</option>
-            <option value="agradecimento">Agradecimento</option>
-            <option value="agradecimento1">Agradecimento pela cura</option>
-            <option value="agradecimento2">Agradecimento do aniversário</option>
-            <option value="agradecimento3">Agradecimento do noivado</option>
-            <option value="agradecimento4">Agradecimento do casamento</option>
-            <option value="agradecimento5">Agradecimento do novo emprego</option>
-            <option value="agradecimento6">Agradecimento da gravidez</option>
-            <option value="agradecimento7">Agradecimento do nascimento do bebê</option>
-            <option value="agradecimento8">Agradecimento pela formatura</option>
-            <option value="agradecimento9">Agradecimento de Benção alcançada</option>
-            <option value="familia">Família</option>
-            <option value="familia1">Crise na família</option>
-            <option value="financas">Desemprego</option>
-            <option value="financas1">Dividas</option>
-            <option value="financas2">Causas impossiveis</option>
-        </select><br>
-        <input type="text" id="sentimento" placeholder="Como você (ou a pessoa) está se sentindo?"><br>
-        <button type="submit">Gerar Oração</button>
-    </form>
+  <h1>Oração Especial</h1>
+  <div id="oracao"></div>
 
-    <script>
-        document.getElementById("tipoOração").addEventListener("change", function() {
-            const outroCampo = document.getElementById("quemRecebe");
-            outroCampo.style.display = this.value === "outro" ? "inline-block" : "none";
-        });
+  <div class="botoes">
+    <button onclick="window.print()">🖨️ Imprimir</button>
+    <button onclick="location.reload()">🙏 Gerar Nova Oração</button>
+    <button onclick="compartilhar()">📤 Compartilhar</button>
+    <button onclick="gerarImagem()">🖼️ Baixar como imagem</button>
+  </div>
+  <!-- Biblioteca html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-        document.getElementById("formOracao").addEventListener("submit", function(e) {
-            e.preventDefault();
-            const dados = {
-                quemPede: document.getElementById("quemPede").value,
-                tipo: document.getElementById("tipoOração").value,
-                quemRecebe: document.getElementById("quemRecebe").value,
-                motivo: document.getElementById("motivo").value,
-                sentimento: document.getElementById("sentimento").value
-            };
-            localStorage.setItem("dadosOracao", JSON.stringify(dados));
-            window.location.href = "resposta.html";
-        });
-    </script>
+  <script>
+    const textos = {
+       cura: [        
+        "Senhor, toque com Teu poder de cura esta vida tão necessitada de um milagre físico e espiritual. Tu conheces cada célula, cada dor, cada diagnóstico. Se há tratamento, que ele funcione; se for preciso cirurgia, que haja êxito; se não houver esperança médica, que Tua mão poderosa faça o impossível. Que a cura venha agora, segundo a Tua misericórdia. Que a força espiritual supere a fraqueza do corpo e que o Teu amor envolva esta vida por inteiro. Que a paz da Tua presença seja mais forte que qualquer enfermidade.",
+        "Pai Celestial, estende Teu toque curador sobre esta pessoa. Tu sabes o que a medicina não pode alcançar, o que os exames não mostram, e o que o coração sente. Seja uma dor, uma doença rara ou um mal invisível, que Teu poder traga alívio e restauração imediata. Que o nome de Jesus seja glorificado através dessa cura. Que cada novo dia traga sinais de melhora e esperança renovada. Que o Teu Espírito acalme o coração e fortaleça a fé nesta jornada de restauração.",
+        "Deus de compaixão, eu Te clamo por cura total nesta vida. Talvez o diagnóstico seja recente ou o tratamento esteja cansando o corpo e a alma. Talvez seja um mal antigo ou um problema emocional que reflete no físico. Mas Tu és o Médico dos médicos. Entra com providência agora e cura por completo, para que todos saibam que Tu és Deus. Renova as forças internas e restaura a alegria de viver. Que cada célula seja tocada pelo poder criador das Tuas mãos.",
+        "Senhor, nada é impossível para Ti. Toca com Teu Espírito Santo este corpo e esta mente. Se houver infecção, que desapareça; se houver ferida, que cicatrize; se houver tumor, que desapareça. Se houver tristeza, que a alegria volte. Em Teu nome, declaramos cura sobre tudo que estiver fora do lugar, pela fé no poder do Teu amor. Que haja testemunho de vitória e louvor em cada passo rumo à recuperação. Que esta cura se torne sinal vivo da Tua fidelidade e compaixão.",
+        "Senhor amado, olha com misericórdia para esta vida que clama por cura. Se os médicos disseram que não há mais o que fazer, nós cremos que o Teu sim ainda pode acontecer. Não importa o nome da enfermidade, importa o nome que está acima de todo nome: Jesus. Toca agora, Senhor, e muda esse quadro com o Teu poder. Que a esperança brote novamente como luz que vence a escuridão. Que esta cura glorifique o Teu nome e transforme a vida de todos ao redor.",
+        "Senhor da vida, levanto esta oração em favor daquele que clama por cura. Conheces os cantos mais profundos do corpo e da alma, e sabes onde habita a dor que ninguém vê. Opera com Tua mão soberana, removendo cada enfermidade, cada aflição, cada peso físico ou emocional. Que o sopro do Teu Espírito traga restauração imediata. Que o tempo da espera não apague a fé, e que o coração se renove na certeza do Teu cuidado. Toca com poder e derrama saúde onde antes havia sofrimento.",
+        "Deus misericordioso, olha com compaixão para esta vida que Te busca com esperança. Nenhum diagnóstico Te assusta, nenhuma dor é maior que o Teu poder. Que a cura venha como resposta à fé, como testemunho da Tua grandeza. Se houver medo, que se transforme em paz; se houver fraqueza, que seja substituída por vigor. Que os dias difíceis sejam vencidos pela força que vem de Ti. Que essa cura seja completa, profunda e duradoura, para a glória do Teu nome.",
+        "Pai amoroso, diante de Ti apresentamos este corpo e esta alma necessitada. Tu conheces o cansaço das noites mal dormidas, as lágrimas que não foram vistas, e o grito silencioso por socorro. Toca agora, Senhor, com Teu poder que restaura o impossível. Que toda inflamação se acalme, que toda dor retroceda, e que haja vida abundante. Que cada célula seja alinhada pela Tua vontade. Renova também o coração, trazendo esperança e fé renovada.",
+        "Senhor, não há limites para o Teu agir. Por isso, clamo com fé por esta vida que precisa urgentemente da Tua intervenção. Onde houver desequilíbrio, restaura; onde houver angústia, pacifica; onde houver doença, cura com Teu toque especial. Que os tratamentos deem frutos e que a recuperação seja rápida e estável. Que essa jornada traga crescimento espiritual, e que Teu nome seja exaltado em cada avanço alcançado. Cura, Senhor, por amor e por misericórdia.",
+        "Deus eterno, socorre agora esta pessoa que depende unicamente do Teu mover. O corpo pede alívio, a alma pede descanso, e o espírito clama por Tua presença curadora. Que essa doença não defina o futuro, mas que a Tua graça reescreva essa história com saúde e paz. Que os dias vindouros sejam melhores que os passados. Sustenta com ânimo e renova a alegria perdida. Que todo resultado surpreenda para o bem, e que o louvor Te seja dado em cada respiração restaurada."
+        ],
+       cura1: [
+         "Senhor, Tu sondas cada órgão, cada veia, cada célula do corpo humano. Se este irmão sofre no pâncreas, no sangue, nos pulmões ou no sistema nervoso, envia Teu toque curador. Se há pressão alta, falha nos batimentos, nódulos ou alterações silenciosas, manifesta Teu poder. Cria o que precisa existir, remove o que impede a vida de fluir. Que a saúde floresça de novo, pelo Teu agir sobrenatural. E que esta cura seja testemunho vivo do Teu amor e fidelidade.",
+         "Deus de poder, entra com intervenção divina neste organismo que grita por alívio. Se há dores nas articulações, deformações, inflamações ou doenças que se espalham sem controle, paralisa agora toda raiz do mal. Que a circulação seja restaurada, que os sentidos sejam despertados, e que o corpo volte a funcionar em perfeita harmonia. Opera o milagre que a ciência não pode prever. E que a paz que excede todo entendimento encha este corpo e alma.",
+         "Pai eterno, estende Tua mão sobre este irmão que sofre em silêncio. Se há sintomas nos pulmões, no fígado, na visão, nos ossos ou na pele, realiza Tua obra completa. Que os exames apresentem melhora, que os médicos se surpreendam, que a dor desapareça sem deixar vestígios. Tu és o Criador, e pode refazer tudo do início. Que haja recomeço cheio de vida. Que cada respiração seja sinal da Tua presença restauradora.",
+         "Senhor Jesus, age com Tua autoridade sobre este corpo enfraquecido. Se há úlceras, feridas, complicações cardíacas ou dores nos membros, levanta Teu estandarte de cura. Que cada sistema — digestivo, circulatório, respiratório, muscular — seja renovado em força e equilíbrio. Remove toda ameaça, todo desconforto, e restitui a saúde plena. Que esta vida Te louve por cada célula restaurada. Que o impossível se dobre diante do Teu nome.",
+         "Espírito Santo, visita cada parte deste corpo com Tua presença curadora. Onde há ruído nos exames, alteração nos batimentos, fraqueza nos músculos ou falhas nos rins, seja feita Tua vontade de restauração. Que o fluxo sanguíneo se normalize, que as funções vitais se reorganizem, e que a paz reine sobre cada órgão. Que esta cura glorifique o nome de Jesus perante todos que esperam o milagre. E que a força espiritual fortaleça cada passo rumo à vitória.",
+         "Senhor de misericórdia, visita agora este corpo necessitado do Teu toque divino. Se há dor nos membros, desequilíbrio nos hormônios, ou falhas nos órgãos internos, estende Teu poder curador. Que o sangue seja purificado, que os pulmões respirem com leveza e que o coração volte a bater com força e ritmo perfeitos. Que tudo volte ao lugar pela força do Teu nome. Que a vida floresça onde havia desgaste e que a paz tome o lugar da dor.",
+         "Pai Celestial, em Ti colocamos a esperança de cura. Se este irmão enfrenta enfermidades no coração, estômago, rins ou articulações, opera agora Teu milagre. Elimina toda inflamação, dissolve cada impedimento físico, e restaura cada função vital com perfeição. Que os sintomas sejam neutralizados pela Tua presença. Que esta oração se converta em testemunho vivo da Tua graça sobre o corpo e a alma.",
+         "Senhor, Tu que criaste cada célula com sabedoria, entra agora neste corpo com Teu poder. Onde há infecção, restaura; onde há desgaste, renova; onde há diagnóstico difícil, transforma com Tua cura. Que os sistemas internos se alinhem ao Teu propósito de vida. Que o irmão sinta o renovo desde o mais profundo até a superfície. Que a força do alto supere qualquer fraqueza humana.",
+         "Deus fiel, clamamos pela restauração completa deste organismo. Se há danos nos ossos, complicações na pele, ou falhas em órgãos essenciais, intervém com Tua mão poderosa. Tu és capaz de recriar o que foi perdido e de fazer o que nenhum médico pode fazer. Que haja milagre invisível operando agora. Que cada exame futuro revele o Teu agir, e que a fé se fortaleça junto com a saúde.",
+         "Espírito Santo, sopre vida sobre este corpo que luta contra a enfermidade. Se há debilidade nos nervos, confusão nos sinais cerebrais ou sobrecarga nos sistemas internos, organiza com Tua ordem celestial. Renova o vigor, estabiliza os batimentos, e faz tudo funcionar como deveria. Que o milagre aconteça sem alarde, mas com grande glória. Que a cura reflita o cuidado de Deus em cada detalhe do corpo.",
+         "Senhor de toda ciência e poder, apresentamos diante de Ti este irmão que enfrenta o desafio do câncer. Tu és maior que qualquer diagnóstico e mais forte que qualquer célula danificada. Que os tratamentos tragam resultado, que os órgãos se recuperem, e que as dores sejam aliviadas. Que haja milagre nos exames e paz no coração. Que o Teu nome seja glorificado através da superação e da cura completa.",
+         "Pai amado, esta vida luta contra a diabetes, mas confiamos que o Senhor pode equilibrar cada nível, cada função interna. Se há descontrole, regula com Tua sabedoria. Se há fraqueza nos membros ou visão comprometida, traz renovação. Toca no pâncreas, no sangue, e no sistema nervoso. Que a dependência de medicamentos diminua e que a saúde seja restaurada com força e paz vindas do alto.",
+         "Deus fiel, quando a imunidade se volta contra o próprio corpo, clamamos pela Tua intervenção. Se esta pessoa sofre com uma doença autoimune, que o Senhor acalme o sistema interno e traga ordem ao que está em guerra. Restaura os tecidos, reequilibra os sinais, e protege cada função vital. Que o milagre seja completo, e a paz reine onde havia conflito. Que a esperança não falhe nem por um dia.",
+         "Senhor Jesus, olha para quem enfrenta complicações respiratórias: falta de ar, bronquite, asma ou mesmo sequelas nos pulmões. Sopra Teu fôlego de vida e restaura a capacidade de respirar com leveza e vigor. Elimina o peso no peito, limpa os brônquios, e protege contra novas crises. Que cada respiração seja prova viva do Teu cuidado e da Tua cura. Que este corpo respire graça e saúde todos os dias.",
+         "Espírito Santo, entra com restauração sobre este irmão que convive com dores crônicas, inflamações constantes ou limitações nos movimentos. Que as articulações voltem ao lugar, que as dores sejam silenciadas e que o corpo recupere sua mobilidade. Cria alívio onde há tensão e força onde há fraqueza. Que cada passo seja firme e cada dia traga renovação. Que a alegria do Senhor seja a força nesta caminhada de cura.",
+         "Senhor, esta mente está cansada, aflita e sobrecarregada. Se há ansiedade, tristeza, insônia ou pensamentos que não cessam, envia Teu alívio emocional. Que o coração volte a ter paz e que a alma respire liberdade. Restaura os pensamentos, acalma os sentimentos e reestrutura a esperança perdida. Que a Tua luz ilumine as áreas escuras e que a cura interior reflita também no corpo.",
+         "Pai amado, Tu conheces as batalhas invisíveis que ninguém vê. Se esta pessoa enfrenta depressão, pânico ou desânimo profundo, toca com Teu bálsamo de vida. Remove o peso da alma, quebra as correntes da angústia e traz descanso ao espírito. Que o amor substitua o medo e que a fé floresça onde tudo parecia seco. Que a saúde emocional seja renovada com Teu cuidado constante.",
+         "Espírito Santo, consola esta alma que sofre em silêncio. Se há dor que o corpo não expressa mas o coração sente, entra com cura espiritual e emocional. Toca nos traumas, nas memórias dolorosas e nos sentimentos de abandono. Envolve com Teu abraço invisível e renova a alegria de viver. Que o espírito se levante em força e que cada dia seja vivido com esperança e gratidão.",
+         "Senhor Jesus, fortalece o coração cansado de lutar. Se o tratamento é difícil, se os dias são pesados, se o medo tenta ocupar espaço, traz paz interior. Que o Teu amor transborde, que a fé se torne combustível e que a perseverança vença o cansaço. Que a presença do Senhor seja mais forte que qualquer dor emocional. Que a cura comece por dentro e se revele por fora.",
+         "Deus fiel, entra com refrigério nesta mente inquieta e neste coração abatido. Se há esgotamento mental, sofrimento silencioso ou crises existenciais, restaura com Tua verdade e amor. Remove os fardos, traz leveza e sopra novos propósitos. Que cada lágrima seja colhida pelo Senhor e transformada em força. Que esta alma conheça descanso verdadeiro em Tua presença."
+         ],
+     cura2: [
+         "Senhor, sabemos que o inimigo tenta destruir não apenas o corpo, mas também a alma e a mente. Quando pensamentos confusos tomam conta, quando o desespero se instala e a paz se perde, só o Teu poder pode restaurar. Se este irmão ou irmã está sofrendo com insônia, ansiedade, vozes perturbadoras, tristeza profunda ou desequilíbrios emocionais, te clamamos: entra com libertação! Cura a alma, acalma a mente, restaura o espírito com Tua presença.",
+         "Pai Santo, o mal tem lançado dardos na mente de Teus filhos, causando tormentos, angústias, pesadelos e descontrole emocional. Mas Tu és o Deus que sara a alma ferida e traz ordem ao caos interior. Se há alguém aqui buscando ajuda por si ou por um ente querido, livra-o dos gritos silenciosos da alma, das crises de pânico, da falta de sentido e da confusão mental. Coloca Tua mão sobre a cabeça e traga equilíbrio, cura e refrigério.",
+         "Deus Poderoso, a alma humana é frágil e tantas vezes esmagada pelas pressões deste mundo. Se este pedido vem de alguém que tem sentido angústia, desânimo, perturbações na mente, ou está em meio à escuridão emocional, clamo por intervenção divina. Senhor, quebra as correntes invisíveis, acalma o coração inquieto e devolve a sanidade e a alegria. Que a alma encontre abrigo em Ti e seja renovada pela Tua graça.",
+         "Senhor, o Teu olhar alcança os recantos mais profundos da alma. Se esta oração vem por alguém que sofre com dores psíquicas, surtos emocionais, distúrbios mentais ou crises espirituais, Te suplico: toca com Teu poder. Que cesse toda perturbação, que os sussurros malditos calem, que a mente seja restaurada ao equilíbrio. Repreende todo espírito de loucura, medo ou confusão, e traz paz que excede todo entendimento.",
+         "Pai querido, o sofrimento da alma pode ser silencioso, mas Tu escutas cada clamor. Se há uma mente em guerra, se há pensamentos insanos, se o emocional está despedaçado, manifesta agora Teu socorro. Livra das insônias, dos calafrios espirituais, das tristezas que não passam. Se for familiar de alguém, alcança a casa toda com libertação e restauração. Renova as emoções e fortalece o interior com Teu amor e Tua luz.",
+         "Senhor da paz, Te clamamos por esta alma ferida pelas lutas invisíveis. Se há medo constante, sentimentos de culpa, confusão interior ou traumas não resolvidos, manifesta Teu poder de cura emocional. Que a mente encontre repouso, o coração seja restaurado, e o espírito encontre nova direção em Ti. Que os laços da dor sejam quebrados e que o amor reconstrua tudo. Que esta alma floresça de novo na Tua presença.",
+         "Deus bondoso, há corações que não sangram por fora, mas estão despedaçados por dentro. Se há falta de perdão, angústia que consome ou vazio que faz tudo perder sentido, envia Teu Espírito restaurador. Cura a alma com Teu toque de afeto, renova os pensamentos com Tua verdade e alinha as emoções com Teu querer. Que cada lágrima não desperdiçada seja colhida e transformada em força. Que a fé ressuscite onde a dor reinava.",
+         "Pai de misericórdia, vem ao encontro de quem se perdeu dentro de si. Se esta pessoa sofre com confusão espiritual, ausência de propósito ou crises de identidade, acende a luz da revelação interior. Que Tua Palavra traga sentido, que Teu amor traga direção e que o interior seja aquietado pela Tua paz. Cura as raízes emocionais mais antigas. Que esta alma saiba quem é, e a quem pertence.",
+         "Espírito Santo, visita agora esta alma em lágrimas. Se há dor que ninguém vê, gritos calados no íntimo, pensamentos em conflito e desejo de desistir, envolve com Tua presença suave. Que cada angústia se dissolva no Teu abraço e que a vida interior seja restaurada com esperança renovada. Que o silêncio seja preenchido com Tua voz de conforto. E que o espírito reencontre alegria verdadeira.",
+         "Senhor amado, ergue os caídos do interior, os que estão quebrados por memórias e aflições ocultas. Se há depressão espiritual, traumas antigos ou marcas emocionais profundas, cura com Teu cuidado de Pai. Liberta do peso do passado, traz leveza à alma cansada e renova o espírito com Tua presença constante. Que esta vida volte a sonhar e tenha coragem de viver plenamente em Ti. Que o amor restaure tudo que se perdeu.",
+         "Senhor, sabemos que o inimigo tenta destruir não apenas o corpo, mas também a alma e a mente. Quando pensamentos confusos tomam conta, quando o desespero se instala e a paz se perde, só o Teu poder pode restaurar. Se este irmão ou irmã está sofrendo com insônia, ansiedade, vozes perturbadoras, tristeza profunda ou desequilíbrios emocionais, te clamamos: entra com libertação! Cura a alma, acalma a mente, restaura o espírito com Tua presença.",
+         "Pai Santo, o mal tem lançado dardos na mente de Teus filhos, causando tormentos, angústias, pesadelos e descontrole emocional. Mas Tu és o Deus que sara a alma ferida e traz ordem ao caos interior. Se há alguém aqui buscando ajuda por si ou por um ente querido, livra-o dos gritos silenciosos da alma, das crises de pânico, da falta de sentido e da confusão mental. Coloca Tua mão sobre a cabeça e traga equilíbrio, cura e refrigério.",
+         "Deus Poderoso, a alma humana é frágil e tantas vezes esmagada pelas pressões deste mundo. Se este pedido vem de alguém que tem sentido angústia, desânimo, perturbações na mente, ou está em meio à escuridão emocional, clamo por intervenção divina. Senhor, quebra as correntes invisíveis, acalma o coração inquieto e devolve a sanidade e a alegria. Que a alma encontre abrigo em Ti e seja renovada pela Tua graça.",
+         "Senhor, o Teu olhar alcança os recantos mais profundos da alma. Se esta oração vem por alguém que sofre com dores psíquicas, surtos emocionais, distúrbios mentais ou crises espirituais, Te suplico: toca com Teu poder. Que cesse toda perturbação, que os sussurros malditos calem, que a mente seja restaurada ao equilíbrio. Repreende todo espírito de loucura, medo ou confusão, e traz paz que excede todo entendimento.",
+         "Pai querido, o sofrimento da alma pode ser silencioso, mas Tu escutas cada clamor. Se há uma mente em guerra, se há pensamentos insanos, se o emocional está despedaçado, manifesta agora Teu socorro. Livra das insônias, dos calafrios espirituais, das tristezas que não passam. Se for familiar de alguém, alcança a casa toda com libertação e restauração. Renova as emoções e fortalece o interior com Teu amor e Tua luz.",
+         "Senhor da paz, Te clamamos por esta alma ferida pelas lutas invisíveis. Se há medo constante, sentimentos de culpa, confusão interior ou traumas não resolvidos, manifesta Teu poder de cura emocional. Que a mente encontre repouso, o coração seja restaurado, e o espírito encontre nova direção em Ti. Que os laços da dor sejam quebrados e que o amor reconstrua tudo. Que esta alma floresça de novo na Tua presença.",
+         "Deus bondoso, há corações que não sangram por fora, mas estão despedaçados por dentro. Se há falta de perdão, angústia que consome ou vazio que faz tudo perder sentido, envia Teu Espírito restaurador. Cura a alma com Teu toque de afeto, renova os pensamentos com Tua verdade e alinha as emoções com Teu querer. Que cada lágrima não desperdiçada seja colhida e transformada em força. Que a fé ressuscite onde a dor reinava.",
+         "Pai de misericórdia, vem ao encontro de quem se perdeu dentro de si. Se esta pessoa sofre com confusão espiritual, ausência de propósito ou crises de identidade, acende a luz da revelação interior. Que Tua Palavra traga sentido, que Teu amor traga direção e que o interior seja aquietado pela Tua paz. Cura as raízes emocionais mais antigas. Que esta alma saiba quem é, e a quem pertence.",
+         "Espírito Santo, visita agora esta alma em lágrimas. Se há dor que ninguém vê, gritos calados no íntimo, pensamentos em conflito e desejo de desistir, envolve com Tua presença suave. Que cada angústia se dissolva no Teu abraço e que a vida interior seja restaurada com esperança renovada. Que o silêncio seja preenchido com Tua voz de conforto. E que o espírito reencontre alegria verdadeira.",
+         "Senhor amado, ergue os caídos do interior, os que estão quebrados por memórias e aflições ocultas. Se há depressão espiritual, traumas antigos ou marcas emocionais profundas, cura com Teu cuidado de Pai. Liberta do peso do passado, traz leveza à alma cansada e renova o espírito com Tua presença constante. Que esta vida volte a sonhar e tenha coragem de viver plenamente em Ti. Que o amor restaure tudo que se perdeu.",
+         "Senhor, esta alma está cansada de lutar. Se há depressão leve que tira o brilho dos dias, traz renovação. Se há tristeza constante, falta de alegria ou silêncio doloroso, envia Teu Espírito Consolador. Que cada pensamento seja alinhado à Tua verdade, e que a paz volte a habitar o coração. Que o Teu amor vença toda sombra e restaure a saúde emocional por completo.",
+         "Pai Celestial, quando a mente pesa e o corpo não quer levantar, precisamos de Ti. Se esta depressão está roubando os sonhos, o apetite, a fé ou a vontade de viver, entra com Teu toque sobrenatural. Que cada célula seja revigorada e que a alma volte a sorrir sem culpa. Que o fardo invisível se transforme em alívio. E que a esperança ressuscite com força e luz.",
+         "Senhor da cura, vem ao encontro de quem enfrenta depressão moderada e sente que o mundo perdeu o sentido. Se há angústia ao amanhecer, medo da rotina ou cansaço na alma, sopra Teu fôlego de vida. Restaura a perspectiva, traga ânimo e renova o espírito abatido. Que a recuperação emocional seja possível e que o nome de Jesus seja glorificado.",
+         "Espírito Santo, consola aqueles que caminham na escuridão da depressão profunda. Se há vontade de desistir, isolamento constante e dor que não se expressa, rompe essa cadeia com Tua luz. Que cada crise seja vencida com fé, que o amor acolha os pedaços quebrados e que a vida seja restaurada de dentro pra fora. Que ninguém se perca nessa batalha interior.",
+         "Deus bondoso, fortalece os jovens que enfrentam depressão silenciosa. Se há excesso de cobranças, confusão emocional ou peso social, traz alívio e direção. Que a identidade seja restaurada em Ti e que cada coração encontre propósito verdadeiro. Cura os pensamentos distorcidos e que a juventude não seja roubada por dores invisíveis. Que o futuro volte a parecer possível.",
+         "Pai eterno, olha com misericórdia para os idosos que enfrentam tristeza prolongada. Se há solidão, saudade, esvaziamento da rotina ou cansaço emocional, fortalece com Teu cuidado. Que cada lembrança traga paz, e não peso. Que a vida tenha sentido mesmo na maturidade e que a alegria volte com leveza. Sustenta com amor e carinho constante.",
+         "Senhor, entra com restauração na vida de quem sofre com depressão pós-traumática. Se há lembranças dolorosas, gatilhos frequentes ou noites inquietas, traz cura às memórias e paz ao espírito. Que a mente não fique refém do passado, e que a alma receba nova esperança. Reescreve a história com Tua graça e transforma cicatrizes em testemunhos vivos.",
+         "Deus da verdade, repreende toda mentira que alimenta a depressão. Se esta pessoa acredita que não há valor, que não há saída ou que ninguém se importa, revela agora o quanto é amada por Ti. Que o amor seja mais forte que o desânimo. Que a autoimagem seja restaurada e que o espírito seja erguido com dignidade e fé. Que a verdade cure o interior.",
+         "Senhor Jesus, visita quem vive em depressão espiritual — que perdeu a fé, o entusiasmo, ou o desejo de buscar Tua presença. Que essa alma reencontre o caminho do altar, o prazer na oração e o descanso na Tua Palavra. Cura o distanciamento, restaura o brilho da comunhão, e que o relacionamento contigo volte a ser fonte de paz e identidade.",
+         "Espírito Santo, derrama Teu bálsamo sobre quem chora escondido e vive sorrindo por fora. Que a máscara emocional seja removida com segurança e que a cura seja completa. Que haja espaço para pedir ajuda, para reconhecer a dor e para se abrir ao Teu agir. Que essa vida se sinta acolhida por Ti em cada passo da jornada. Que a redenção alcance até o mais profundo do ser.",
+         "Senhor, esta pessoa está em tratamento e confia que o Teu agir acompanha cada passo. Se há uso de remédios, que eles funcionem sem efeitos colaterais nocivos. Se há psicoterapia, que seja instrumento da Tua cura. Que a combinação da ciência e da fé produza paz duradoura. Sustenta este coração com esperança constante e enche a jornada com sinais do Teu cuidado.",
+         "Pai amado, Tu conheces cada reação física e emocional de quem está lutando contra a depressão. Se há dias difíceis mesmo com medicamentos, se a mente oscila e o corpo não responde, Te pedimos força e equilíbrio. Que os ajustes sejam precisos, que o avanço seja real, e que o paciente sinta que não está sozinho. Que Tua presença acompanhe cada consulta e cada pensamento.",
+         "Espírito Santo, acalma a alma de quem se sente aflita mesmo sob tratamento. Se os medicamentos ajudam, mas não curam completamente, se há sensação de estagnação, sopra novo ânimo. Usa os profissionais certos, envia recursos eficazes e fortalece os laços familiares. Que o tratamento não seja uma prisão, mas uma ponte para a liberdade interior. Renova o ânimo e traz paz diária.",
+         "Senhor Jesus, fortalece quem enfrenta recaídas e tem medo de retroceder. Se as emoções voltam com força, se os sintomas reaparecem, dá coragem para continuar. Que cada passo para trás seja apenas impulso para um salto maior. Que ninguém se entregue ao desânimo. Restaura a confiança e renova a fé de que a cura completa está a caminho.",
+         "Pai fiel, há quem use medicamentos e ainda enfrente sentimentos confusos. Tu és o médico dos médicos, o psiquiatra celestial que vai além dos diagnósticos. Equilibra os neurotransmissores, acalma os pensamentos e restaura o brilho nos olhos. Que os remédios sejam ferramentas e não fardos. Que a Tua paz complemente o que a ciência começa.",
+         "Deus compassivo, visita os terapeutas, médicos e cuidadores que acompanham este tratamento. Dá-lhes sabedoria, sensibilidade e direção em cada abordagem. Que sejam canal do Teu amor e que as palavras certas cheguem na hora certa. Fortalece o vínculo entre paciente e profissional. Que a cura emocional seja construída com fé e ciência em harmonia.",
+         "Senhor, há quem precise de internação, afastamento ou silêncio para se curar. Que esses momentos sejam usados por Ti para restaurar o interior. Que o ambiente clínico seja acolhedor, que os procedimentos sejam eficazes, e que a Tua presença invada os espaços hospitalares. Que essa pausa não seja derrota, mas reinício. Que o novo tempo comece com esperança.",
+         "Pai Santo, ajuda quem sente vergonha por estar em tratamento. Repreende toda condenação, todo preconceito, e mostra que cuidar da alma é sinal de sabedoria. Que essa pessoa se sinta amada, respeitada e compreendida. Que os estigmas caiam por terra, e que o amor construa um ambiente favorável à cura. Que a fé seja maior que o julgamento externo.",
+         "Senhor da verdade, cura também a alma que resiste ao tratamento por medo, desconfiança ou cansaço. Envia paz ao coração relutante. Mostra que há luz no caminho, que os recursos disponíveis são respostas da Tua providência. Que haja abertura, entrega e vontade de continuar. Que o orgulho seja vencido pela esperança de renascer.",
+         "Espírito Santo, acompanha cada dose, cada sessão terapêutica, cada noite inquieta e cada lágrima silenciosa. Que os medicamentos sejam ajustados pela Tua sabedoria e que os conselhos humanos estejam sob Tua direção. Que a recuperação seja completa, que não haja desistência e que a fé floresça com força. Que a cura emocional glorifique o Teu nome em cada detalhe."
+         ],
+      libertacao: [
+        "Senhor meu Deus, esta pessoa clama por libertação, mesmo sem dizer qual é a sua dor. Pode ser o vício, o pecado, uma dívida pesada, uma ameaça escondida ou uma prisão invisível. Mas Tu, ó Deus, conheces tudo e tens o poder de quebrar correntes que ninguém vê. Em nome de Jesus, quebra agora toda amarra! Que as algemas caiam, que o espírito se liberte, que essa alma respire em paz e volte a Te louvar.",
+        "Pai, o Teu Filho veio para libertar os cativos, e hoje Te suplico por esta vida. Não sei o que a prende — talvez vícios, relacionamentos destrutivos, erros do passado ou ciladas espirituais. Mas o Senhor tudo sabe. Entra com providência, desfaz toda obra maligna, corta os laços de opressão e sopra Tua liberdade. Pelo sangue de Cristo, que haja restauração, força para resistir e uma nova caminhada.",
+        "Deus poderoso, quem está aqui orando busca a Tua libertação. Ainda que não diga o que o sufoca, o Senhor conhece o íntimo do coração. Liberta, Senhor! Se for o peso do pecado, a dor de uma acusação, o vício que domina ou o medo que paralisa — age com Teu poder. Rasga as cadeias espirituais, limpa os pensamentos, alivia a alma e mostra um novo caminho. Liberta para que Te sirva com alegria!",
+        "Meu Deus, essa pessoa quer se livrar de algo que a tem aprisionado — e o Senhor sabe exatamente o que é. Seja um hábito destrutivo, uma injustiça, um sentimento de culpa ou opressão maligna, peço que intervenhas com autoridade. Em nome de Jesus, ordeno que tudo o que amarra essa vida seja destruído. Toca com Teu fogo libertador, restaura a dignidade e renova a esperança. Hoje começa um novo tempo.",
+        "Senhor, aquele que está com o coração apertado talvez nem tenha forças para dizer o que o escraviza. Mas Tu vês! Vês o vício escondido, o pecado não confessado, a dívida sem solução, a dor do abuso ou da culpa. Liberta, Pai! Que a corrente do inimigo seja quebrada, que as portas da prisão espiritual se abram, que o fardo caia por terra. Toma essa vida nas mãos e mostra que há libertação real no Teu nome.",
+        "Senhor poderoso, entra com libertação sobre esta vida que está presa em cadeias invisíveis. Se há vícios, tormentos espirituais, opressões ou pensamentos repetitivos, quebra agora esses grilhões. Que toda amarra caia por terra e que a alma seja livre para Te adorar. Que a luz substitua a escuridão, e que a verdade vença todo engano. Que essa libertação seja completa, sem retorno, e firmada na Tua Palavra.",
+        "Pai Celestial, liberta esta mente que vive em confusão e medo constante. Se há influência maligna, palavras negativas, traumas enraizados ou opressões noturnas, entra com Teu poder. Toca no mais profundo do ser e restaura o equilíbrio espiritual e emocional. Que toda presença estranha seja expulsa e que a paz volte a reinar. Que esta pessoa ande em liberdade pelo sangue de Jesus.",
+        "Deus da salvação, há vidas que estão presas em vícios que roubam o propósito e consomem a esperança. Liberta agora do alcoolismo, drogas, pornografia, dependência emocional ou qualquer laço destrutivo. Que o poder do Espírito Santo seja mais forte que o desejo de cair. Restaura o domínio próprio e planta novos hábitos em santidade. Que a mente seja renovada e o corpo purificado.",
+        "Senhor Jesus, repreende toda ação demoníaca que tenta dominar esta vida. Se há perturbações, visitas espirituais malignas, peso constante no peito ou bloqueios espirituais, envia Teus anjos para guerrear. Que toda obra contrária, feitiçaria ou maldição hereditária seja quebrada agora. Que o nome de Jesus se levante com autoridade. Que essa libertação seja selada com fogo e paz.",
+        "Espírito Santo, liberta esta alma das prisões do passado. Se há traumas antigos, mágoas profundas, lembranças que machucam e paralisam, cura com Tua presença suave e poderosa. Que o perdão flua, que a alma respire de novo e que a vida avance sem medo. Que a história seja reescrita sob Tua direção. Que a libertação interior seja tão forte quanto a vitória exterior.",
+        "Deus justo, quebra toda cadeia espiritual que afasta esta pessoa da comunhão contigo. Se há orgulho, rebeldia, religiosidade ou pecado oculto, traz arrependimento genuíno. Que as escamas caiam, que os olhos se abram, e que haja restauração no altar. Que o coração volte a pulsar com fome pela Tua presença. Que a santidade seja prazer e a obediência leveza.",
+        "Senhor, liberta esta casa da opressão que tem gerado conflitos, insônia e falta de paz. Purifica os ambientes, expulsa toda presença maligna, e consagra cada espaço ao Teu nome. Que o lar se torne refúgio e lugar de adoração verdadeira. Que nenhuma força contrária permaneça. Que a atmosfera mude pelo poder da intercessão e da Tua autoridade.",
+        "Pai fiel, há quem esteja preso em sentimentos que escravizam — inveja, ciúme, orgulho, culpa ou autoacusação. Liberta do que limita, do que prende e impede o crescimento. Que a alma respire leveza e que o espírito avance sem amarras. Que a identidade seja restaurada em Cristo e que cada área seja tocada pelo Teu amor libertador.",
+        "Espírito Santo, visita as madrugadas difíceis onde há medo, choro escondido e visitas espirituais opressoras. Que o sono seja protegido, que os sonhos sejam limpos, e que a paz reine sobre cada noite. Repreende ataques, desvia palavras malditas e cobre com Tua luz. Que o quarto se encha da Tua presença. Que toda madrugada seja segura em Ti.",
+        "Senhor amado, liberta agora quem está preso emocionalmente a relacionamentos tóxicos, ciclos destrutivos ou situações que não vêm de Ti. Dá força para romper, coragem para escolher a liberdade e sabedoria para seguir em paz. Que essa libertação seja caminho para restauração completa. Que o Teu querer se sobreponha ao medo de mudar.",
+        "Senhor, visita esta família com Teu poder libertador. Se há vícios geracionais, brigas constantes, doenças espirituais ou ciclos repetitivos de dor, quebra agora toda maldição. Que o sangue de Jesus cubra cada lar, cada quarto, cada conversa. Que o ambiente mude, que a paz entre, e que o amor vença o caos. Que a libertação familiar seja completa e cheia da Tua presença.",
+        "Pai Celestial, muitos lares estão acorrentados por palavras malditas, pactos inconscientes e feridas antigas. Entra com cura e libertação onde houve abandono, traição ou violência emocional. Restaura o vínculo entre pais e filhos, quebra o jugo do desrespeito e da frieza. Que a Tua glória toque o sobrenatural da casa. Que o lar se torne um altar consagrado a Ti.",
+        "Deus fiel, liberta os jovens que estão cercados de influências malignas. Se há envolvimento com vícios, amizades destrutivas, conteúdos impuros ou rebeldia espiritual, intervém com Teu agir forte. Que a luz da Tua verdade afaste toda escuridão. Que o coração volte a pulsar por Ti e que o futuro seja protegido. Que a juventude seja cheia da Tua graça.",
+        "Senhor, há filhos que se afastaram da fé e vivem presos em prisões emocionais e espirituais. Traz de volta aqueles que se perderam, que estão enganados por ideologias ou confusões de identidade. Que o Espírito Santo os alcance onde estiverem, e que cada palavra plantada volte a florescer. Liberta da cegueira espiritual e restaura a comunhão com o céu.",
+        "Espírito Santo, repreende agora toda obra de ocultismo presente nesta família. Se houve envolvimento com feitiçaria, consultas espirituais, pactos ou objetos consagrados, cancela todo vínculo maligno. Que o fogo do Senhor purifique cada espaço. Que nenhuma força das trevas permaneça. Que o nome de Jesus seja declarado em cada canto do lar.",
+        "Pai amado, liberta quem está preso em religiosidade sem intimidade. Se há conhecimento sem prática, culto sem coração ou tradição sem transformação, derrama revelação. Que a presença de Deus se torne viva novamente. Que o Espírito Santo reacenda a chama e liberte dos ritos vazios. Que a adoração seja verdadeira e que a fé se renove.",
+        "Senhor da guerra espiritual, protege esta família da ação de espíritos de confusão, divisão e destruição. Que toda estratégia maligna contra este lar seja anulada. Levanta um muro de proteção divina e enche cada espaço com Teu poder. Que o perdão seja liberado e que a paz tome o lugar da contenda. Que haja libertação que gere reconciliação.",
+        "Espírito Santo, entra nos lares em que há filhos com crise de identidade, rejeição ou pensamentos de autodestruição. Que todo laço emocional seja quebrado, toda mentira do inimigo seja silenciada. Que o amor cure o que foi negado, que o propósito seja revelado e que haja renascimento espiritual. Que o Teu abraço envolva cada jovem agora.",
+        "Senhor, liberta os corações dominados por ressentimentos, ódio e mágoas antigas. Que os casamentos sejam restaurados, que os filhos perdoem os pais e que os irmãos caminhem unidos. Que nenhuma dor passada permaneça como barreira. Que haja reconciliação profunda. E que o Espírito Santo seja o elo de cura entre todos os corações.",
+        "Deus justo, visita aquelas famílias que têm histórico de suicídio, violência ou abandono. Que os padrões sejam quebrados agora pelo poder do sangue de Jesus. Que o ciclo de dor seja encerrado e que uma nova geração se levante em paz, fé e dignidade. Que o Teu nome seja glorificado nessa casa. Que a libertação seja a base de uma nova história.",
+        "Senhor, restaura este casal ferido por palavras duras, silêncio prolongado e mágoas não resolvidas. Que o amor volte a aquecer o coração, que o perdão seja liberado, e que as alianças sejam refeitas com sinceridade. Repreende toda influência contrária à união e renova os votos diante da Tua presença. Que esta casa volte a ser refúgio e não campo de batalha.",
+        "Pai Celestial, liberta este relacionamento da frieza, da rotina pesada e da indiferença emocional. Renova o interesse mútuo, reacende a paixão santa e restaura a comunicação. Que a presença do Senhor seja o elo mais forte entre eles. Que haja reconciliação profunda e desejo de recomeçar com humildade. Que o amor cure o que a distância feriu.",
+        "Senhor da cura, entra no coração dos pais e filhos que se afastaram. Se houve brigas, incompreensão ou decisões dolorosas, traz reconciliação verdadeira. Que a honra seja restaurada, o diálogo seja reaberto, e que o abraço volte a acontecer. Que nenhuma lembrança negativa seja maior que o Teu perdão. Que essa família viva o milagre da restauração.",
+        "Deus de compaixão, alcança os irmãos que não se falam mais, que se esqueceram dos laços de sangue. Que o orgulho caia, que o rancor seja vencido e que o afeto seja reconstruído. Que haja reconciliação que venha do alto. Que os encontros sejam doces e que o passado seja curado. Que o amor familiar volte a ser ponte e não muro.",
+        "Senhor Jesus, entra nos lares onde há separação iminente. Se há vontade de desistir, esgotamento emocional ou traição, envia Teu poder restaurador. Que o casal volte a se ver com olhos de graça. Que a Tua presença ensine a perdoar e a recomeçar. Que nenhum plano do inimigo prospere. Que o amor seja mais forte que qualquer ferida.",
+        "Espírito Santo, visita os ambientes de trabalho onde há opressão, fofoca, perseguição ou injustiça. Liberta os corações aflitos e restaura a paz no convívio. Que a ética prevaleça, que a verdade se levante, e que o respeito seja renovado. Que os conflitos sejam silenciados pela Tua sabedoria. E que a luz de Deus ilumine os lugares profissionais.",
+        "Pai amado, protege aqueles que sofrem com manipulação ou abuso de autoridade no trabalho. Fortalece o emocional, quebra toda humilhação e traz justiça. Que os limites sejam respeitados e que o ambiente seja saudável novamente. Que haja promoção sem opressão, e dignidade sem medo. Que cada trabalhador seja honrado como filho Teu.",
+        "Senhor, liberta os profissionais que estão presos à exaustão, estresse crônico e sentimento de incapacidade. Restaura o ânimo, traz equilíbrio emocional e renova o propósito no labor. Que o trabalho volte a ser fonte de sustento e não de dor. Que a saúde física e mental seja protegida. Que o Teu descanso seja parte da jornada diária.",
+        "Deus justo, entra nas empresas contaminadas por corrupção, mentira e valores distorcidos. Levanta intercessores, restaura líderes íntegros e transforma estruturas. Que a presença de Deus seja notável nos corredores e escritórios. Que o nome de Jesus seja respeitado até nos negócios. Que o ambiente seja libertado pelo Teu mover.",
+        "Espírito Santo, cobre de graça os autônomos, empreendedores e trabalhadores informais que vivem sob pressão e insegurança. Que toda ansiedade por resultados seja substituída pela confiança no Teu cuidado. Liberta do medo da escassez e revela caminhos de prosperidade. Que o trabalho seja bênção e o dia a dia cheio da Tua paz." 
+        ],
+      libertacao1: [
+        "Eterno Deus, me coloco diante de Ti por esta vida que sofre com o peso do vício. A alma está cansada, o corpo enfraquecido, e a família ferida. Não importa se o vício é cigarro, bebida, drogas, pornografia, jogo ou qualquer outra prisão — o Senhor conhece e tem poder para libertar. Que as correntes caiam agora, que o desejo destrutivo seja arrancado pela raiz, e que a liberdade em Cristo comece a florescer hoje.",
+        "Senhor Todo-Poderoso, olha com compaixão para este coração escravizado pelos vícios. Talvez ninguém saiba, mas Tu sabes — e é por isso que clamamos por libertação. Apaga da alma o desejo do cigarro, do álcool, das drogas, do sexo descontrolado, dos jogos que consomem o que se tem. Liberta, Senhor! Arranca essa amarra com a Tua mão poderosa e restaura essa vida para o louvor da Tua glória.",
+        "Pai querido, venho interceder por alguém que sofre em silêncio, afundado num vício que virou sofrimento. O coração pede socorro, e o Senhor é o único que pode libertar de verdade. Não importa qual vício seja — o Senhor quebra todas as correntes. Liberta agora, arranca o desejo, seca a fonte do mal e restaura essa vida. Dá forças para resistir, para lutar, para vencer. Em nome de Jesus.",
+        "Meu Deus, esta pessoa se afundou em hábitos que já se tornaram vício, e hoje clama por uma chance de recomeço. Seja o álcool, a droga, o jogo, o cigarro, a pornografia ou qualquer outro vício, toca agora com Teu poder! Liberta, cura, fortalece o espírito e enche essa vida com o Teu Espírito Santo. Que esse grito de socorro não passe despercebido, e que um novo tempo comece agora.",
+        "Senhor, a dor do vício tem sido grande demais para suportar. O sofrimento já atingiu o corpo, a alma e os relacionamentos. Mas sei que o Senhor é maior que qualquer dependência. Seja química, emocional ou espiritual — quebra as cadeias agora. Toca, liberta e restaura. Dá nova mente, novo fôlego, novo rumo. Que a libertação comece neste instante, em nome de Jesus.",
+        "Senhor, esta vida está presa em vícios que roubam a paz e a dignidade. Se há dependência de álcool, drogas, pornografia, jogos, ou qualquer hábito destrutivo, liberta agora com Teu poder. Que os desejos enganadores percam força diante da Tua presença. Que a mente seja renovada, o corpo seja fortalecido e o espírito encontre liberdade verdadeira em Ti.",
+        "Pai Celestial, muitos estão lutando contra vícios ocultos que drenam sua alegria. Se há laços com o cigarro, medicamentos, mentiras ou comportamentos compulsivos, quebra essas correntes agora. Que a alma seja purificada, que o prazer seja redirecionado ao que edifica. Que a vontade seja fortalecida e que haja recomeço em santidade.",
+        "Espírito Santo, entra com libertação onde há prisão emocional disfarçada de escolha. Se esta pessoa se afunda no consumo para fugir da dor, revela Teu amor capaz de curar tudo. Que o vício não domine mais as decisões, que o autocontrole seja restaurado e que a consciência volte a brilhar com verdade. Que a libertação seja completa e cheia de paz.",
+        "Senhor da restauração, visita os que já tentaram parar, mas não conseguem. Que toda recaída se transforme em força renovada. Que o ciclo de culpa, prazer e desespero seja quebrado. Envia pessoas certas, ambientes seguros e estratégias eficazes. Que o milagre se manifeste nos detalhes e que a liberdade seja vivida dia após dia.",
+        "Pai amado, há filhos Teus escravizados por vícios modernos: redes sociais, pornografia, compras, séries e distrações constantes. Liberta dessa dependência emocional e mental. Que a mente volte a descansar, que o coração se acalme e que o propósito brilhe de novo. Que o tempo volte a ser usado com sabedoria e paz.",
+        "Senhor Jesus, muitos estão presos em vícios alimentares que prejudicam o corpo e a alma. Liberta da compulsão, do desequilíbrio e da busca emocional por comida ou jejum extremo. Restaura o prazer de se cuidar, purifica os pensamentos e fortalece os hábitos saudáveis. Que o corpo seja templo restaurado e cheio da Tua glória.",
+        "Espírito Santo, visita os lares onde vícios familiares se repetem. Se há padrões de vício herdados, marcas do passado ou comportamentos aprendidos, corta agora esse ciclo. Que esta geração seja livre, que os filhos não repitam as dores dos pais, e que a bênção substitua a prisão. Que a história seja reescrita em santidade.",
+        "Pai justo, liberta quem está preso à dependência emocional: relacionamentos tóxicos, obsessões afetivas ou carências que aprisionam. Restaura a identidade em Cristo, mostra que o amor verdadeiro começa em Ti. Que ninguém busque em outro o que só o céu pode oferecer. Que essa alma seja livre para amar com maturidade.",
+        "Senhor da luz, liberta também os que usam a religião como vício — escondendo feridas, fugindo de processos internos ou julgando sem amor. Que haja cura do legalismo, da rigidez e da falsa santidade. Que a comunhão contigo seja leve, íntima e verdadeira. Que o evangelho seja vivenciado com graça e liberdade.",
+        "Deus fiel, acompanha cada passo da jornada de quem busca se libertar. Que os grupos de apoio tenham Tua bênção, que os tratamentos sejam eficazes, e que o sobrenatural complemente o natural. Que a vergonha seja removida, que o orgulho seja vencido, e que o Teu nome seja exaltado em cada vitória alcançada."
+        ],
+      libertacao2: [
+    "Bondoso Deus, a ira e o desejo de vingança podem invadir o coração humano e tirar a paz. Mas Tu, Senhor, és Deus de misericórdia. Acalma o espírito dessa pessoa que está dominada pelo ódio, pelo desejo de revidar, até mesmo de tirar vidas. Que ela encontre força no perdão e receba agora um coração novo, cheio de amor, mansidão e equilíbrio. Tua Palavra diz que a vingança pertence a Ti, então ensina-a a entregar a dor em Tuas mãos.",
+    "Senhor dos Exércitos, venho clamar pela alma aflita e perturbada que deseja vingança com as próprias mãos. Talvez ferida, humilhada, desrespeitada, essa pessoa pensa que a morte é a única justiça. Mas o Senhor é justo juiz! Toca neste coração com Tua paz. Que a raiva se transforme em misericórdia, e o desejo homicida em compaixão. Arranca o plano maligno, substitui por perdão e traga paz profunda agora.",
+    "Deus de amor, quantas vezes a dor e o orgulho transformam pessoas em bombas prestes a explodir. Mas Teu Espírito Santo é poderoso para restaurar até os pensamentos mais sombrios. Liberta, Senhor, esta vida do desejo de matar. Cessa a fúria, interrompe o ciclo de violência e semeia perdão onde havia desejo de morte. Dá sabedoria, serenidade e domínio próprio a quem clama por libertação agora.",
+    "Pai Celestial, coloco diante de Ti alguém que luta contra um desejo sombrio de vingança. Talvez a raiva tenha se enraizado tão fundo que só o Teu toque pode curar. Toca, Senhor, nesse coração endurecido. Tira todo pensamento homicida, todo plano de destruição, toda amargura. Substitui por um espírito de paz, de bondade e humildade. O Senhor pode transformar a guerra em perdão. Faz isso agora, Senhor!",
+    "Meu Deus, sei que há momentos em que a raiva cega e leva ao limite, ao ponto de pensar em tirar a vida de alguém. Mas sei também que Teu amor quebra todo ódio. Liberta agora essa pessoa desse desejo maligno. Que o Espírito Santo traga clareza, paz e arrependimento. Onde há escuridão, brilha Tua luz. Onde há ódio, planta o Teu amor. Livra, cura e transforma esse coração em nome de Jesus!",
+    "Senhor, entra agora nesta mente que tem sido atacada por pensamentos homicidas. Se há ira acumulada, traumas não tratados, ódio profundo ou influência espiritual maligna, envia Tua luz poderosa. Repreende toda sombra da morte, todo impulso destrutivo e toda fantasia de vingança. Que o Teu Espírito traga paz, controle e amor restaurador. Que a vida volte a ser vista como sagrada.",
+    "Pai Celestial, somente Teu poder pode transformar os desejos que ferem. Se esta pessoa sofre com pensamentos de violência, raiva descontrolada e impulsos perigosos, clamo por libertação urgente. Que o coração seja purificado da intenção de matar, que a mente seja curada do desejo de ferir. Que o Teu amor vença o ódio e a Tua paz reine sobre cada sentimento sombrio.",
+    "Espírito Santo, visita agora com Teu bálsamo restaurador esta alma que batalha contra pensamentos homicidas. Se há marcas do passado, opressão demoníaca ou desespero emocional, entra com resgate completo. Que os olhos sejam iluminados pela compaixão. Que o desejo de vingança seja cancelado pelo perdão. E que cada impulso contrário à vida seja transformado em intercessão.",
+    "Senhor Jesus, Tu venceste a morte para que nenhum de nós precise se render à escuridão. Liberta esta mente do desejo de matar, de pensamentos sangrentos, de planos ocultos de destruição. Que a ira se dissolva na Tua presença. Que o nome de Jesus cubra toda tentativa maligna. Restaura o valor da vida e planta amor onde havia sede de ódio.",
+    "Deus da paz, entra na mente dominada pelo caos, pela vingança, pela dor que quer se transformar em violência. Repreende todo espírito de assassinato, toda influência infernal, todo pacto de destruição. Que a alma se torne templo do Espírito Santo. Que os desejos sejam curados e que a vontade volte a se alinhar com o céu. Que essa libertação seja definitiva.",
+    "Senhor, há pessoas que se calam por vergonha, mas lutam todos os dias contra pensamentos de morte contra outros. Que o Teu Espírito revele a raiz, a dor, e a chave da cura. Que o mal seja vencido pela revelação. Que o silêncio se transforme em oração, e que a oração gere libertação. Que o Teu amor entre onde nem as palavras conseguiram entrar.",
+    "Pai Santo, liberta também quem já praticou atos de violência e ainda luta com fantasias homicidas. Que haja arrependimento profundo, renovo completo, e libertação do ciclo da destruição. Que o sangue de Jesus purifique não só as mãos, mas a consciência. Que a nova criatura vença o antigo eu. E que a paz interior testemunhe a Tua vitória.",
+    "Espírito Santo, que todo desejo de vingança seja substituído por compaixão. Que toda lembrança dolorosa seja curada pela Tua misericórdia. Que a mente deixe de alimentar planos cruéis e passe a interceder por transformação. Que o perdão seja mais forte que a dor. E que a vida do outro volte a ser vista como reflexo da Tua imagem.",
+    "Senhor, visita agora os que têm pensamento homicida contra si mesmos e contra outros. Liberta da confusão mental, dos impulsos obscuros e da opressão espiritual. Que a mente volte a ser segura, que a alma se sinta viva e que o coração encontre refrigério. Que todo plano das trevas seja frustrado. Que haja salvação, equilíbrio e paz.",
+    "Deus justo, cancela agora toda influência espiritual maligna que instigou pensamentos homicidas. Repreende o espírito de morte, destruição, fúria descontrolada e sede de sangue. Que a Tua justiça reine sobre essa vida. Que o domínio próprio floresça. Que haja libertação, reconstrução emocional e amor renovado. Que o nome de Jesus brilhe sobre essa mente curada."
+    ],
+      libertacao3: [
+    "Deus de compaixão, tantas coisas ruins acontecem em nossas vidas, e para algumas pessoas essas dores se tornam pesadas demais. Esta alma que pede oração está cansada, sem forças, talvez pensando em desistir. Mas o fato de ainda buscar uma oração mostra que existe esperança. Senhor, entra agora com poder, quebra esse espírito de morte e renova o fôlego de vida. Restaura o amor próprio, traz luz onde há escuridão e sopra paz onde há guerra interior.",
+    "Senhor amado, venho interceder por alguém que está à beira do desespero, dominado por uma tristeza profunda. Talvez tenha perdido alguém querido, um sonho, ou a si mesmo. Mas Tu és o Deus que recolhe lágrimas e cura feridas. Quebra, Pai, toda intenção suicida e traz alívio imediato a essa mente perturbada. Que a esperança volte a florescer e que esta vida sinta que ainda há propósito no Teu amor.",
+    "Pai Celestial, toca agora nesse coração ferido que pensa em acabar com a própria vida. O inimigo quer roubar, matar e destruir, mas o Senhor veio para dar vida e vida em abundância. Renova os sentimentos, silencia as vozes negativas, e planta em seu íntimo a certeza de que há uma saída, há perdão, restauração e novos dias. Que ela ou ele sinta agora o Teu abraço e permaneça firme!",
+    "Meu Deus, essa pessoa está lutando contra pensamentos de morte, carregando um fardo invisível que ninguém vê. Mas Tu vês. Tu sondas o coração e sabes das angústias mais profundas. Então, visita agora com o Teu Espírito Santo, dissipa a escuridão e substitui a dor por esperança. Que essa vida entenda que ainda é amada, que não está sozinha, e que há beleza no amanhã. Liberta agora, Senhor!",
+    "Senhor, neste momento clamo por alguém que não vê mais sentido na vida. Talvez esteja chorando sozinho, ferido por dentro, e tentando esconder o desespero. Mas Tu, ó Deus, és refúgio nos dias maus. Entra nessa situação, remove o peso da tristeza e o espírito de suicídio. Enche essa alma com a certeza de que vale a pena viver, que o Senhor tem planos maiores. Liberta e cura com Teu amor poderoso.",
+    "Senhor, entra agora na mente que está sobrecarregada de pensamentos suicidas. Se há desespero profundo, escuridão interior ou sentimento de inutilidade, rompe com Teu poder toda tentativa das trevas. Que o valor da vida seja restaurado. Que o desejo de morrer seja substituído pela coragem de viver. Que esta alma seja coberta pela Tua luz e abraçada pelo Teu amor.",
+    "Pai amado, há corações que carregam dores tão pesadas que pensam em desistir da vida. Mas Tu és socorro presente na angústia. Liberta esta alma dos pensamentos destrutivos, da culpa, da tristeza sem fim e da sensação de que não há saída. Que o Teu Espírito Santo sopre esperança agora. Que o respirar volte a ter sentido. Que viver seja resposta ao Teu chamado.",
+    "Espírito Santo, visita quem chora escondido, quem planeja calado, quem já pensou no pior. Entra com resgate antes que a dor se transforme em tragédia. Repreende o espírito de morte. Restaura o amor-próprio, revela o propósito e reacende a fé. Que a vontade de morrer se transforme em sede de recomeço. Que o sangue de Jesus cubra toda intenção suicida.",
+    "Senhor Jesus, Tu venceste a morte para que nenhum de nós precise se render a ela. Liberta esta mente dos desejos de fim, dos pensamentos desesperados e da ausência de esperança. Que o futuro volte a brilhar. Que a dor seja curada por dentro e por fora. Que o Teu nome seja a força que levanta quem pensa em desistir. Que a vida vença em nome de Jesus.",
+    "Deus da restauração, muitos vivem sorrindo por fora e gritando por dentro. Se há alguém próximo da decisão final, entra agora com intervenção divina. Silencia o impulso suicida. Que o Espírito Santo envolva com ternura. Que a alma se acalme, que o coração se fortaleça, e que a vida volte a ter direção. Que o milagre da vida aconteça hoje.",
+    "Senhor, há jovens e adolescentes sendo bombardeados por mentiras — que não são amados, que não pertencem, que o fim é melhor que o caminho. Quebra agora essas vozes malignas. Liberta do sentimento de solidão e da dor silenciosa. Que cada pensamento seja renovado pela Tua verdade. Que viver volte a ser leve, possível e desejável.",
+    "Pai justo, liberta também os que sofreram abusos, traumas e feridas profundas. Se o desejo de morrer veio por não suportar a memória, cura agora essas marcas. Que o passado não determine o fim. Que o presente seja redimido. Que cada célula volte a vibrar com esperança. Que ninguém se sinta sozinho. Que o Teu amor seja abrigo constante.",
+    "Senhor da vida, toca quem está em tratamento psiquiátrico, em uso de medicamentos ou em acompanhamento terapêutico. Que os remédios ajudem, mas que o Teu Espírito cure. Que as sessões sejam canais de libertação. Que cada lágrima não desperdiçada se transforme em força. Que o desejo suicida desapareça e dê lugar ao renascimento interior.",
+    "Espírito Santo, protege quem já tentou suicídio e vive com medo de recaídas. Que a vergonha não domine. Que o amor envolva com cuidado. Que cada dia seja novo, cheio de pequenos milagres. Que a mente encontre descanso. Que o coração pulse novamente com fé. Que viver seja motivo de gratidão e não de dor.",
+    "Pai eterno, levanta intercessores por aqueles que estão em risco. Que as famílias saibam como agir, que os amigos sejam acolhedores e que a igreja seja canal de cura. Que toda tentativa seja frustrada pelo Teu agir. Que a vida se torne testemunho vivo da Tua graça. Que os sobreviventes se tornem mensageiros da esperança.",
+    "Senhor, esta vida sobreviveu à tentativa de suicídio e precisa de restauração completa. Que o corpo seja curado, a mente renovada e a alma fortalecida. Que a culpa seja apagada e o recomeço seja possível. Que cada batida do coração lembre que há um propósito ainda em curso. Que o Teu amor seja o combustível para continuar.",
+    "Pai amado, visita os corações enlutados pela perda de alguém que se foi por suicídio. Que o luto seja abraçado com graça, que a dor seja suavizada e que a memória seja tratada com afeto. Que não haja condenação, mas consolo. Que cada lágrima seja recolhida por Ti e que a paz volte a entrar pelas portas da casa.",
+    "Senhor Jesus, alcança quem ainda não tem coragem de pedir ajuda. Se a dor é silenciosa, se o desespero está sendo escondido, envia agora pessoas sensíveis, palavras precisas e sinais do céu. Que essa alma entenda que pedir socorro é sinal de sabedoria. Que cada passo em direção à cura seja leve e abençoado.",
+    "Espírito Santo, restaura aqueles que vieram do fundo do poço e agora buscam sentido para viver. Que o passado não defina o presente. Que os traumas se transformem em testemunhos. Que a alma reencontre alegria, que a mente se reconcilie com a paz, e que a esperança se torne companheira diária.",
+    "Senhor, liberta também os que têm medo de recaídas. Que o histórico não determine o futuro. Que cada tentativa frustrada de seguir seja substituída por uma nova força. Que viver deixe de ser um fardo e volte a ser uma conquista. Que a fé se renove com simplicidade e amor verdadeiro.",
+    "Pai Celestial, visita os que se culpam por não perceberem os sinais, por acharem que poderiam ter feito mais. Que o fardo do 'e se' seja retirado com Tua verdade. Que o Teu amor envolva com compreensão, e que o perdão seja vivido plenamente. Que a paz ultrapasse o trauma e abrace o coração arrependido.",
+    "Senhor da vida, intercedemos agora por todos que pensam em desistir. Que cada oração silenciosa chegue ao céu como grito de socorro. Que o milagre da intervenção divina aconteça antes do último passo. Que a mão estendida do Espírito Santo segure o que parecia perdido. Que a vida vença.",
+    "Espírito Santo, quebra toda cadeia espiritual que empurra para o abismo emocional. Que as trevas sejam dissipadas, que a presença maligna seja removida, e que a luz triunfe. Que a mente volte a ser clara, que o coração se aquiete e que a alma se sinta segura. Que o nome de Jesus governe essa libertação.",
+    "Pai eterno, visita os hospitais, clínicas e quartos onde pessoas estão em recuperação pós-tentativa. Que o ambiente seja de cura, que os profissionais sejam usados por Ti, e que cada novo dia seja vivido como um presente. Que a restauração seja integral: física, emocional e espiritual.",
+    "Senhor, declaramos vida sobre quem está à beira do desespero. Que o Teu sopro reviva sonhos, que a Tua graça cure feridas e que a Tua verdade vença toda mentira do inimigo. Que a frase final não seja de dor, mas de esperança. Que viver seja prova de que Tu és fiel."
+    ],
+      agradecimento: [
+    "Pai amado, venho apenas agradecer. Obrigado pelas bênçãos derramadas, pelos livramentos, pela paz nos momentos difíceis e pelas vitórias inesperadas. Que meu coração jamais se esqueça do que o Senhor já fez por mim.",
+    "Senhor Deus, minha alma se alegra em Ti. Hoje não venho pedir, mas agradecer. Agradeço pela vida, pela saúde, pela Tua fidelidade em cada detalhe. Tu és bom o tempo todo, e eu Te louvo por isso.",
+    "Deus de amor, reconheço que cada conquista, cada cura, cada momento de paz vem das Tuas mãos. Obrigado por ouvir minhas orações, por me sustentar quando eu pensei que ia cair. A Ti toda honra e glória.",
+    "Senhor, minha gratidão é imensa. Mesmo sem merecer, tenho provado da Tua bondade. Obrigado pelo milagre, pela porta aberta, pela resposta recebida. Que meu testemunho seja para edificar outras vidas também.",
+    "Meu Deus, hoje dobro os joelhos só para agradecer. Obrigado por me dar força, por me consolar nas lágrimas e por renovar minha fé. Que meu coração seja sempre grato e que eu jamais esqueça de Te louvar.",
+    "Senhor, meu coração se enche de gratidão por tudo o que tens feito. Pelas bênçãos visíveis e pelos milagres ocultos. Pelo sustento diário, pela proteção constante e pelo Teu amor sem medidas. Obrigado por estar presente até nos momentos em que achei que estava só. Te louvo por cada detalhe da minha história.",
+    "Pai amado, Te agradeço por abrir portas que ninguém mais poderia abrir. Por transformar caminhos de dor em jornadas de aprendizado. Pela força que recebi nos dias difíceis e pela paz que excede todo entendimento. Tu tens sido fiel, mesmo quando meu coração hesitou. Te exalto porque nunca falhaste.",
+    "Espírito Santo, obrigado pelas vezes que falaste no silêncio. Pelas lágrimas recolhidas, pelos sorrisos restaurados e pelas decisões guiadas por Ti. Agradeço por não desistir de mim, por me lembrar que sou amado e por andar ao meu lado mesmo quando não mereço. Toda honra é Tua!",
+    "Senhor Jesus, não há palavras que alcancem a profundidade da minha gratidão. Obrigado pela cruz, pela salvação, pelo perdão e pela nova vida que tenho em Ti. Obrigado por renovar minha esperança, por me ensinar a amar e por me levantar quando caí. Te glorifico por ser o meu Redentor.",
+    "Deus fiel, agradeço pelas bênçãos materiais e espirituais que me concedeste. Pela saúde, pela família, pelas oportunidades e pela proteção contra o que nem percebi. Obrigado pela provisão que chegou no tempo certo, e pelas portas fechadas que me livraram de perigos ocultos. Te louvo com alegria!",
+    "Pai Celestial, reconheço que cada dia é presente Teu. Obrigado pela vida, pelo respirar, pelo amanhecer e pelo descanso. Pelos abraços recebidos, pelas lições vividas e pela Tua presença constante. Que minha gratidão seja eterna, mesmo quando as circunstâncias tentarem me calar.",
+    "Senhor da minha alma, Te agradeço pelas pessoas que colocaste no meu caminho. Por cada amizade verdadeira, por cada oração que me sustentou, por cada gesto de carinho que veio de Ti. Obrigado por ser a resposta que eu não sabia que precisava. Que meu louvor alcance Teu trono.",
+    "Espírito Santo, obrigado por consolar meu coração nos dias sombrios. Por trazer luz onde havia dúvida, e por me ensinar a confiar quando tudo parecia perdido. Agradeço pelo discernimento, pela paz interior e pela certeza de que Tu estás comigo. Minha alma Te exalta sem reservas.",
+    "Pai de amor, Te louvo por não ser apenas Deus, mas também Amigo. Obrigado por ouvir meus pensamentos mais profundos, por aceitar meu jeito de falar contigo e por me moldar com paciência. Minha gratidão não se expressa só em palavras, mas em viver para Te agradar.",
+    "Senhor, agradeço por me permitir ver a Tua mão em cada estação. Na alegria e na dor, na conquista e na espera. Tu és constante quando tudo muda. Por isso, Te glorifico com todo o meu ser. Que cada agradecimento seja semente plantada no altar da Tua presença."
+    ],
+      agradecimento1: [
+    "Jeová meu Senhor, alguém recebeu a Tua bênção na forma grandiosa de cura e hoje se alegra em testemunhar o Teu poder. Obrigado por agir com misericórdia e amor, trazendo saúde a quem tanto precisava.",
+    "Deus Poderoso, venho agradecer pela cura recebida. Sei que foi Tua mão que operou esse milagre. Agradeço por não desamparar essa vida e por restaurar a saúde em meio à dor. Toda glória seja dada a Ti!",
+    "Senhor, a cura chegou como resposta de oração. Louvo-Te por cada passo rumo à recuperação, por cada dor aliviada e por cada dia de vida concedido. Obrigado, Pai, por não abandonar os que clamam a Ti.",
+    "Grato sou, Senhor, porque o Teu poder foi revelado na cura que presenciamos. Testemunhar esse milagre fortalece a nossa fé. Que essa vida continue a caminhar contigo e jamais esqueça de Te louvar.",
+    "Deus de bondade, hoje o coração se enche de gratidão. A cura chegou e a alegria voltou. Obrigado por ouvir o clamor, por agir no tempo certo e por demonstrar Tua fidelidade. Que Teu nome seja exaltado!",
+    "Senhor, meu coração se curva em gratidão pela cura que realizaste. Tu ouviste minha oração, tocaste onde a medicina não alcançou e restauraste o que estava quebrado. Te louvo pela Tua compaixão, pela Tua fidelidade e pelo milagre que agora testemunho com alegria. Toda honra é Tua!",
+    "Pai amado, obrigado por cuidar de cada detalhe da minha saúde. Onde havia dor, agora há alívio. Onde havia medo, agora há paz. Tu foste meu socorro nos dias difíceis, meu refúgio na noite escura e agora és motivo do meu louvor. Te exalto por trazer cura ao corpo e descanso à alma.",
+    "Espírito Santo, Te agradeço por me renovar por dentro e por fora. Pela restauração completa que só pode vir do céu. Pelos dias em que seguraste minha mão e pelas noites em que me consolaste. Agora sou prova viva do Teu poder. Que minha vida glorifique Teu nome todos os dias.",
+    "Senhor Jesus, fui curado não só fisicamente, mas espiritualmente. Tu tocaste minha dor com Tua presença e devolveste vigor ao que estava sem forças. Obrigado por ser o Médico dos médicos e o Redentor da minha história. Que essa cura seja um marco de fé e louvor constante.",
+    "Deus fiel, agradeço pela cura que veio no tempo certo, da forma mais inesperada e com Tua assinatura divina. Tu usaste mãos humanas, mas o poder veio do alto. Agradeço pelas respostas que não vi, pelas lutas que venci e pela saúde que me permite Te servir com alegria.",
+    "Pai Celestial, obrigado por transformar meu sofrimento em testemunho. Cada exame, cada lágrima e cada passo da recuperação foram sustentados por Ti. Hoje celebro a vida com gratidão sincera e plena. Que essa cura seja lembrança viva da Tua bondade para comigo.",
+    "Senhor da vida, Te louvo por cada célula restaurada, cada diagnóstico revertido e cada dor que cessou. Tu és digno de todo agradecimento. Que minha saúde renovada seja dedicada a Ti. Que eu use esse novo tempo para Te adorar com mais intensidade e viver Teus propósitos.",
+    "Espírito Santo, obrigado por estar comigo durante todo o tratamento. Por renovar minha fé quando tudo parecia incerto. Por me fortalecer quando o cansaço tomava conta. Agora que estou curado, minha alma canta com alegria. Que essa cura glorifique Teu nome sempre.",
+    "Senhor, agradeço por não ter desistido de mim, mesmo nos dias em que eu duvidei. Tu foste persistente em amor, fiel em compaixão e perfeito em cada detalhe da cura. Que minha vida seja gratidão em movimento. Que outros vejam em mim o milagre que Tu realizaste.",
+    "Pai eterno, minha cura é mais que física — é sinal do Teu cuidado pessoal. Obrigado por me alcançar com Teu amor, por restaurar o que estava falhando e por me dar uma nova chance de viver com propósito. Te agradeço com todo o meu coração. Toda glória seja Tua!"
+    ],
+      agradecimento2: [
+    "Deus amado, hoje celebramos mais um ano de vida concedido por Ti. Obrigado por cada dia, cada livramento e cada vitória. Que esta nova etapa venha repleta da Tua graça e da Tua direção.",
+    "Senhor, gratidão por mais um aniversário! O sopro da vida vem de Ti, e cada instante vivido é prova do Teu amor. Abençoa este novo ciclo com saúde, paz e sabedoria vinda do alto.",
+    "Pai Celestial, obrigado pelo privilégio de viver mais um ano sob o Teu cuidado. Que os próximos dias sejam cheios da Tua presença, e que nunca falte fé, esperança e amor no coração.",
+    "Eterno Deus, louvado seja o Teu nome por mais um ano de vida. Que esta data seja lembrada como sinal da Tua fidelidade e que cada novo amanhecer traga bênçãos renovadas.",
+    "Senhor, neste dia especial de aniversário, ergue-se um coração agradecido. Obrigado por mais um ano, por todas as experiências vividas e por tudo que ainda virá segundo a Tua vontade!",
+    "Senhor, Te agradeço por mais um ano de vida. Pela oportunidade de respirar, sonhar e caminhar com fé. Por cada livramento, cada aprendizado e cada momento de amor que vivenciei. Que este novo ciclo seja repleto da Tua presença. Que minha vida continue sendo para Tua glória.",
+    "Pai amado, chegou meu aniversário e meu coração se enche de gratidão. Pelos dias bons e também pelos difíceis, onde pude sentir Tua mão me sustentando. Obrigado por nunca me abandonar e por escrever minha história com graça. Que o futuro seja cheio das Tuas promessas.",
+    "Senhor Jesus, Te louvo pela vida que me deste. Por cada ano vivido, por cada passo que trilhei sob Teu olhar. Agradeço pelas pessoas ao meu redor, pelas vitórias e por tudo que ainda está por vir. Que minha existência continue refletindo Teu amor.",
+    "Espírito Santo, neste dia especial eu Te agradeço pela saúde, pela força e pelo renovo que me concedeste. Por cada lágrima transformada em cura, por cada sonho que se manteve vivo. Que este novo ciclo seja guiado pela Tua sabedoria e paz.",
+    "Deus fiel, mais um ano completo — e só posso agradecer. Tu estiveste comigo em cada decisão, em cada livramento e em cada esperança renovada. Que os próximos dias sejam ainda mais cheios de Tua bondade e que minha vida continue sendo canal de bênçãos.",
+    "Senhor, hoje celebro mais um ano com gratidão profunda. Porque Tu me sustentaste até aqui, me ensinaste a crescer e me cercaste com Tua graça. Que cada novo dia seja vivido com propósito. Obrigado por ser o autor de cada capítulo da minha história.",
+    "Pai Celestial, neste aniversário Te agradeço por tudo o que sou e pelo que estou me tornando. Que os anos me aproximem de Ti, que as experiências moldem meu coração e que Teu amor continue sendo minha base. A Ti toda minha celebração e honra.",
+    "Espírito Santo, obrigado por me formar, cuidar e conduzir por mais um ciclo. Pelos sorrisos espontâneos, pelos recomeços necessários e por cada detalhe que provei da Tua bondade. Que este novo tempo venha com paz, direção e muitos motivos para agradecer.",
+    "Senhor amado, neste dia em que comemoro a vida, quero lembrar que foi a Tua misericórdia que me sustentou. Obrigado pelos amigos, pela família e por cada momento que vivi na Tua presença. Que este novo ciclo seja leve e repleto da Tua luz.",
+    "Deus da vida, hoje é o meu dia — e tudo que posso fazer é Te agradecer. Obrigado por cuidar de mim, por me renovar e por me guardar até aqui. Que este novo ano venha com crescimento, plenitude e comunhão contigo. Que a gratidão me acompanhe em cada passo.",
+    "Senhor, hoje celebramos o aniversário desta pessoa querida. Te agradecemos pela vida, pela saúde, pelos livramentos e pelas promessas que ainda vão se cumprir. Que o novo ciclo venha com paz, graça e sabedoria. Que o Teu amor continue guiando cada passo. Que muitos anos sejam vividos na Tua presença.",
+    "Pai amado, obrigado por mais um ano de vida desta pessoa especial. Pelos momentos compartilhados, pelas bênçãos que acompanham seu caminhar e pela alegria que ela representa. Que o céu se abra sobre ela neste novo tempo. Que haja crescimento, renovo e paz abundante.",
+    "Senhor Jesus, Te agradecemos por este aniversário tão importante. Que esta vida seja coberta pela Tua graça, protegida pelo Teu sangue e guiada pela Tua vontade. Obrigado por cada vitória que ela viveu até aqui. Que o novo ano seja cheio de luz e comunhão contigo.",
+    "Espírito Santo, obrigado por sustentar esta pessoa por mais um ano. Que a gratidão se torne parte da jornada e que o Teu favor acompanhe cada dia. Que este aniversário seja marco de alegria e de novas experiências contigo. Que sua vida continue abençoando muitos ao redor.",
+    "Pai Celestial, hoje o coração se alegra ao celebrar a existência de alguém tão especial. Obrigado pelos dons que ela carrega, pela fé que a sustenta e pelo amor que compartilha. Que este novo ano venha com bênçãos multiplicadas. Que cada sonho seja visitado por Ti.",
+    "Senhor da vida, Te louvamos por tudo o que realizaste na história desta pessoa. Por cada recomeço, por cada superação e por cada sorriso que a Tua graça sustentou. Que esta data seja celebrada com reconhecimento e louvor. Que os próximos dias tragam ainda mais da Tua presença.",
+    "Pai de amor, agradecemos por cada detalhe da vida deste filho(a). Pelo crescimento que vimos acontecer, pelas bênçãos que cercam sua caminhada, e pelo futuro que está sendo construído em fé. Que seu coração se mantenha firme no Senhor. Que este novo tempo seja cheio de paz.",
+    "Senhor, agradecemos por mais um ano de casamento, de companheirismo e de vida compartilhada. Que este aniversário traga ainda mais harmonia, crescimento espiritual e amor mútuo. Que a pessoa amada continue sendo reflexo do Teu cuidado. Que o Teu nome seja exaltado na família.",
+    "Espírito Santo, este amigo querido celebra mais um ciclo e Te agradecemos por sua vida. Pela leveza que traz, pela fé que compartilha e pelos momentos em que foi canal de bênção. Que o novo ano venha com direção divina e muitas conquistas. Que ele(a) seja fortalecido(a) em tudo.",
+    "Senhor eterno, este irmão em Cristo completa mais um ano de caminhada contigo. Te agradecemos pela graça que o sustenta, pela fé que ele carrega, e pelo testemunho que edifica. Que este aniversário seja marcado por renovo espiritual e novas experiências sobrenaturais."
+    ],
+       
+   agradecimento3: [
+        "",
+        "",
+        "",
+        "",
+        "Breve.",
+        ],
+
+agradecimento4: [
+        "",
+        "",
+        "",
+        "",
+        "Breve.",
+        ],
+      agradecimento5: [
+        "",
+        "",
+        "",
+        "",
+        "Breve.",
+        ],
+      agradecimento6: [
+  "Senhor amado, recebo com alegria esta bênção da gravidez. Obrigado por confiar a mim este presente precioso da vida. Cuida de cada detalhe dessa gestação, pois tudo vem de Ti.",
+  
+  "Deus da criação, agradeço por essa nova vida que começa a crescer no ventre. Que cada batida do coração do bebê seja um louvor ao Teu nome. Toda glória a Ti por este milagre!",
+  
+  "Pai Celestial, minha alma se alegra em Ti por esta nova etapa. Agradeço pela oportunidade de gerar uma vida e peço que abençoes essa gestação com saúde e paz.",
+  
+  "Gratidão, Senhor, por essa gravidez tão esperada. És Tu quem dá a vida e a sustenta. Que esse bebê cresça rodeado de amor e da Tua presença poderosa.",
+  
+  "Deus maravilhoso, estou profundamente grato por essa nova jornada como pai/mãe. Que a Tua mão esteja sobre essa criança desde o ventre até a eternidade. Obrigado pelo dom da vida."
+],
+      agradecimento7: [
+  "Senhor da vida, agradeço com todo meu coração pelo nascimento deste bebê. Te louvo por cada detalhe perfeito que criaste, e por essa nova vida cheia de promessas e esperança.",
+  
+  "Deus bondoso, o choro de um bebê é a melodia da Tua graça. Obrigado pelo milagre do nascimento e por nos permitir vivenciar esse momento tão sagrado e cheio de amor.",
+  
+  "Pai eterno, agradeço por ter acompanhado essa gestação e por agora nos alegrar com a chegada desse bebê. Que ele(a) cresça cercado(a) de saúde, amor e da Tua presença.",
+  
+  "Glória a Ti, Senhor, por este lindo nascimento! Que essa criança seja um instrumento da Tua luz no mundo. Obrigado por essa dádiva que nos renova a fé e a esperança.",
+  
+  "Obrigado, Senhor, por esse novo sopro de vida. Celebramos com gratidão o nascimento deste bebê, confiando que ele(a) crescerá debaixo da Tua proteção e orientação divina."
+],
+      agradecimento8: [
+  "Senhor, agradeço imensamente por essa conquista tão esperada. A formatura é fruto de muito esforço, e nada teria sido possível sem a Tua ajuda. Toda honra e glória a Ti!",
+  
+  "Meu Deus, obrigado por conduzir este(a) filho(a) Teu por todo o percurso acadêmico. Hoje, celebramos a vitória que veio com Tua força, sabedoria e proteção. Bendito seja o Teu nome!",
+  
+  "Pai amado, a jornada foi longa, mas com Tua graça chegamos até aqui. Obrigado por abrir portas, renovar as forças nos momentos difíceis e permitir essa realização tão especial.",
+  
+  "Senhor, a Tua fidelidade se revelou em cada etapa dessa caminhada. Gratidão eterna por essa formatura, que seja apenas o começo de uma nova etapa repleta da Tua direção.",
+  
+  "Glorifico o Teu nome, Senhor, por mais essa vitória. Agradeço por cada noite de estudo, cada superação e cada lição que aprendemos ao longo do caminho. Toda essa conquista é Tua!"
+],
+      agradecimento9: [
+        "",
+        "",
+        "",
+        "",
+        "Breve.",
+        ],
+      familia: [
+  "Senhor, coloco esta família em Tuas mãos poderosas. Que haja proteção sobre o lar, sustento diário, saúde para todos, e paz em cada ambiente. Que o Teu amor una cada membro e que nunca falte o pão na mesa.",
+  
+  "Deus amado, abençoa esta família com moradia segura, alimento sobre a mesa, conforto nos dias difíceis e união constante. Que Teu Espírito Santo esteja presente em cada coração e em cada canto da casa.",
+  
+  "Pai celestial, protege esta família de todo mal, guarda o lar contra tragédias, doenças e divisões. Que haja amor verdadeiro, saúde contínua, alegria duradoura e prosperidade em tudo o que fizerem.",
+  
+  "Senhor da provisão, entra com amparo e paz sobre este lar. Que cada membro da família sinta Teu cuidado, encontre forças nos momentos difíceis e que a harmonia reine dentro deste lar abençoado por Ti.",
+  
+  "Meu Deus, pedimos por conforto, alimento, união e proteção para essa família. Que não lhes falte abrigo, carinho e direção. Que o Senhor seja a base desse lar e que cada dia seja repleto da Tua paz."
+],
+      familia1: [
+        "Breve.",
+        ],
+      financas: [
+        "Deus provedor, abre portas onde não há, envia sustento e sabedoria financeira.",
+        "Confio em Ti, Senhor, para transformar a área financeira desta vida com Tua provisão."
+      ],
+      financas1: [
+        "Deus provedor, abre portas onde não há, envia sustento e sabedoria financeira.",
+        "Confio em Ti, Senhor, para transformar a área financeira desta vida com Tua provisão."
+      ],
+      financas2: [
+        "Deus provedor, abre portas onde não há, envia sustento e sabedoria financeira.",
+        "Confio em Ti, Senhor, para transformar a área financeira desta vida com Tua provisão."
+      ]
+    };
+
+   const encerramentos = [
+      "Em nome de Jesus, amém.",
+      "Que assim seja, para a glória de Deus.",
+      "Glorificado seja o Teu nome, Senhor!"
+    ];
+
+    const dados = JSON.parse(localStorage.getItem("dadosOracao"));
+    const nome = dados.tipo === "eu" ? dados.quemPede : dados.quemRecebe;
+    const intro = `Esta oração foi pedida por <strong>${dados.quemPede}</strong> ${dados.tipo === "eu" ? "atendida agora" : `para <strong>${dados.quemRecebe}</strong>`}.`;
+    const sentimento = dados.sentimento ? ` Que neste momento está se sentindo: <em>${dados.sentimento}</em>.` : "";
+   const motivoTexto = textos[dados.motivo] || [
+  `Senhor Deus, Tu sondas o coração de <strong>${dados.quemPede}</strong> e sabes daquilo que ele mais necessita. Derrama Tua graça sobre sua vida e sobre sua casa. Que o Teu milagre aconteça, trazendo luz onde há escuridão, esperança onde há desânimo, e resposta onde há espera.`,
+  `Pai amado, olha com misericórdia para <strong>${dados.quemPede}</strong>. Entra com Teu agir sobrenatural, trazendo direção, consolo, livramento e abundância de bênçãos. Que tudo aquilo que está fora do lugar seja alinhado pela Tua vontade. Que o Teu nome seja exaltado nesta vida.`,
+  `Deus de amor, visita agora <strong>${dados.quemPede}</strong> com o Teu Espírito Santo. Onde houver tristeza, coloca alegria; onde houver dúvida, dá fé; onde houver necessidade, envia provisão. Age com poder, Senhor, e faz dessa oração um instrumento do Teu mover.`
+];
+const oracao = `${motivoTexto[Math.floor(Math.random() * motivoTexto.length)]}${sentimento}`;
+    const final = encerramentos[Math.floor(Math.random() * encerramentos.length)];
+
+    document.getElementById("oracao").innerHTML = `
+      <p>${intro}</p>
+      <p>${oracao}</p>
+      <p><strong>${final}</strong></p>
+    `;
+
+    // Compartilhamento nativo
+    function compartilhar() {
+      const textoCompartilhamento = `${dados.quemPede} fez esta oração:\n\n${oracao}\n\n${final}`;
+      if (navigator.share) {
+        navigator.share({
+          title: 'Oração Gerada',
+          text: textoCompartilhamento
+        }).catch(err => console.log('Erro ao compartilhar:', err));
+      } else {
+        alert("Compartilhamento não suportado neste navegador. Copie e cole o texto manualmente.");
+      }
+    }
+
+    // Gera imagem da oração
+    function gerarImagem() {
+      html2canvas(document.querySelector("#oracao")).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "oracao.png";
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+  </script>
 </body>
 </html>
