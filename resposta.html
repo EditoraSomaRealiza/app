@@ -1271,10 +1271,10 @@ compartilhar: [
 
     ];
 
-    const dados = JSON.parse(localStorage.getItem("dadosOracao"));
+  const dados = JSON.parse(localStorage.getItem("dadosOracao"));
     const nome = dados.tipo === "eu" ? dados.quemPede : dados.quemRecebe;
     const intro = `Esta oração foi pedida por <strong>${dados.quemPede}</strong> ${dados.tipo === "eu" ? "atendida agora" : `para <strong>${dados.quemRecebe}</strong>`}.`;
-    const sentimento = dados.sentimento ? ` Que neste momento está se sentindo: <em>${dados.sentimento}</em>.` : "";
+    const sentimento = dados.sentimento ? `<br> Data: <em>${dados.sentimento}</em>.` : "";
    const motivoTexto = textos[dados.motivo] || [
   `Senhor Deus, Tu sondas o coração de <strong>${dados.quemPede}</strong> e sabes daquilo que ele mais necessita. Derrama Tua graça sobre sua vida e sobre sua casa. Que o Teu milagre aconteça, trazendo luz onde há escuridão, esperança onde há desânimo, e resposta onde há espera.`,
   `Pai amado, olha com misericórdia para <strong>${dados.quemPede}</strong>. Entra com Teu agir sobrenatural, trazendo direção, consolo, livramento e abundância de bênçãos. Que tudo aquilo que está fora do lugar seja alinhado pela Tua vontade. Que o Teu nome seja exaltado nesta vida.`,
@@ -1314,3 +1314,4 @@ const oracao = `${motivoTexto[Math.floor(Math.random() * motivoTexto.length)]}${
   </script>
 </body>
 </html>
+
