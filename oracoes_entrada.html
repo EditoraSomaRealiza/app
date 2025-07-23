@@ -1,0 +1,148 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Boas-vindas Espirituais</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Georgia, serif;
+      color: white;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: url('https://dummyimage.com/600x10/124da1/124ea1') no-repeat center center/cover;
+    }
+    .oracao-container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 800px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="oracao-container">
+    <h1>🙏 Palavra de Fé para Você 🙏</h1>
+    <p id="mensagem"></p>
+  </div>
+
+  <script>
+    const oracoes = ["Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Pai querido, sei que nada acontece por acaso, e esta pessoa foi guiada até aqui pelos Teus caminhos. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Creia: milagres acontecem quando oramos com fé. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Toca em cada área da vida desta pessoa: saúde, família, finanças, e sonhos, trazendo resposta divina. Com toda autoridade do céu, declaro vitória sobre tua vida. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus de amor, neste momento especial eu oro por esta vida que acessou este aplicativo. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Deus eterno, derrama sobre este visitante a Tua paz e Tua graça, pois ele veio em busca de algo maior. Que a tua presença seja sentida agora mesmo, enchendo esta alma de esperança, alegria e força renovada. Que esta seja uma nova etapa em tua vida com Deus à frente de tudo. Amém.",
+"Senhor da providência, receba com carinho quem chegou até esta página com fé no coração. Enche sua casa de luz, protege seus familiares e envia anjos para guiar seus caminhos. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Abre portas onde não há saída, levanta a autoestima abatida, e afasta todo mal com teu poder. Em nome de Jesus, que esta oração gere frutos eternos. Amém.",
+"Senhor dos Exércitos, Tu que conheces os corações, abençoa quem agora nos visita. Cura as dores que ela carrega em silêncio, fortalece seu espírito e direciona seus próximos passos. Receba esta oração com fé, pois quem busca em Deus nunca está só. Amém."];
+    const mensagem = oracoes[Math.floor(Math.random() * oracoes.length)];
+    document.getElementById("mensagem").innerText = mensagem;
+  </script>
+</body>
+</html>
+
