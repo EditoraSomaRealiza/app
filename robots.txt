@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://orandoja.com.br/sitemap.xml
