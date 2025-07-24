@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fortalecendo sua Fé</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f7f7f7; padding: 30px; }
+    .card { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="mb-4 text-center">Fortalecendo sua Fé</h2>
+    <p class="text-center">Abaixo estão as áreas em que você teve pontuação baixa. Escolha as que deseja melhorar e veja o que pode ser feito:</p>
+
+    <form id="melhoriaForm">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="naoEvang" id="naoEvang">
+        <label class="form-check-label" for="naoEvang">Não é evangélico</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="naoBatizado" id="naoBatizado">
+        <label class="form-check-label" for="naoBatizado">Ainda não é batizado nas águas</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="naoOra" id="naoOra">
+        <label class="form-check-label" for="naoOra">Ora apenas quando tem problemas</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="naoLeBiblia" id="naoLeBiblia">
+        <label class="form-check-label" for="naoLeBiblia">Nunca leu a Bíblia completa</label>
+      </div>
+      <!-- Adicione mais campos conforme necessário -->
+
+      <button type="button" class="btn btn-primary mt-3" onclick="mostrarSugestoes()">Ver Sugestões</button>
+    </form>
+
+    <div id="sugestoes" class="mt-4"></div>
+  </div>
+
+  <script>
+    function mostrarSugestoes() {
+      const resultados = [];
+      if (document.getElementById('naoEvang').checked) {
+        resultados.push(`<b>Você ainda não é evangélico:</b> que tal aceitar Jesus hoje mesmo? Clique aqui para aceitar e ser orientado por uma igreja próxima.`);
+      }
+      if (document.getElementById('naoBatizado').checked) {
+        resultados.push(`<b>Ainda não é batizado:</b> inscreva-se no curso preparatório para o batismo e escolha uma igreja parceira para realizar este passo de fé.`);
+      }
+      if (document.getElementById('naoOra').checked) {
+        resultados.push(`<b>Ora apenas em dificuldades:</b> crie uma rotina de oração com ajuda do nosso app. Comece com 5 minutos por dia.`);
+      }
+      if (document.getElementById('naoLeBiblia').checked) {
+        resultados.push(`<b>Nunca leu a Bíblia completa:</b> baixe nosso plano de leitura diária para concluir em 1 ano ou menos.`);
+      }
+      document.getElementById('sugestoes').innerHTML =
+        resultados.length > 0
+          ? '<h4>Sugestões para sua caminhada espiritual:</h4><ul class="list-group">' + resultados.map(r => `<li class="list-group-item">${r}</li>`).join('') + '</ul>'
+          : '<p class="text-success">Parabéns! Nenhuma área selecionada. Continue firme com Deus.</p>';
+    }
+  </script>
+</body>
+</html>
