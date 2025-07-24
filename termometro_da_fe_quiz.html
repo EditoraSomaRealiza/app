@@ -220,12 +220,20 @@
     }
 
     function showBreakdown() {
-      const list = weakAnswers.map(q => `<li>${q}</li>`).join("");
-      document.getElementById("breakdown").innerHTML = `<strong>Perguntas que indicam pontos a melhorar:</strong><ul>${list}</ul>`;
-      document.getElementById("breakdown").classList.add("show");
-    }
+  const list = weakAnswers.map(q => `<li>${q}</li>`).join("");
+  document.getElementById("breakdown").innerHTML = `
+    <strong>Perguntas que indicam pontos a melhorar:</strong>
+    <ul>${list}</ul>
+    <a href="pagina_melhoria.html" class="btn btn-primary mt-3" style="display:inline-block; margin-top:15px; padding:10px 20px; background-color:#007bff; color:white; border-radius:6px; text-decoration:none;">
+      Ver Sugestões
+    </a>
+  `;
+  document.getElementById("breakdown").classList.add("show");
+}
 
-    showQuestion();
-  </script>
+showQuestion();
+
+ 
+ </script>
 </body>
 </html>
