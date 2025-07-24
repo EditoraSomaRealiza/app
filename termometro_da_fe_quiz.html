@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termômetro da Fé</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      text-align: center;
+    }
+    .quiz-container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+    }
+    .options button {
+      display: block;
+      width: 100%;
+      margin: 5px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #e0f2f1;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .options button:hover {
+      background-color: #b2dfdb;
+    }
+    .thermometer {
+      width: 30px;
+      height: 200px;
+      border: 2px solid #aaa;
+      margin: 20px auto;
+      border-radius: 20px;
+      background: #eee;
+      position: relative;
+    }
+    .mercury {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: red;
+      border-radius: 20px;
+      transition: height 0.5s ease;
+    }
+    .result, .breakdown {
+      display: none;
+      font-size: 1.1em;
+      margin-top: 20px;
+    }
+    .breakdown ul {
+      text-align: left;
+    }
+    .show {
+      display: block !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>Termômetro da Fé</h2>
+    <div class="thermometer">
+      <div class="mercury" id="mercury" style="height: 0%"></div>
+    </div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <div class="result" id="result"></div>
+    <div class="breakdown" id="breakdown"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        q: "Você é evangélico há quanto tempo?",
+        a: ["Mais de 5 anos", "Menos de 5 anos", "Não é evangélico"]
+      },
+      {
+        q: "Qual é o seu estado civil?",
+        a: ["Casado/Solteiro fiel", "Amigado", "Infiel"]
+      },
+      {
+        q: "Qual o sacrifício que você mais realiza para Deus?",
+        a: ["Jejuar/Orar no monte", "Outros", "Nenhum"]
+      },
+      {
+        q: "Você já leu a Bíblia toda?",
+        a: ["Mais de uma vez", "Uma vez", "Ainda não"]
+      },
+      {
+        q: "Qual é o seu envolvimento na igreja?",
+        a: ["Líder/Obreiro", "Membro", "Apenas participa"]
+      },
+      {
+        q: "Você leva sua Bíblia consigo?",
+        a: ["Sempre", "Quando vai à igreja", "Nunca"]
+      },
+      {
+        q: "Você divulga a Palavra de Deus?",
+        a: ["Sempre", "Dificilmente", "Nunca"]
+      },
+      {
+        q: "Você frequenta a igreja?",
+        a: ["Constantemente", "Eventualmente", "Não costuma ir"]
+      },
+      {
+        q: "Quando você ora?",
+        a: ["Todos os dias", "Às vezes", "Somente em problemas"]
+      },
+      {
+        q: "Você tem vícios?",
+        a: ["Nenhum", "Leves", "Intensos"]
+      },
+      {
+        q: "Você teme a quem?",
+        a: ["A Deus", "A Jesus", "Ao Diabo"]
+      },
+      {
+        q: "Você é batizado nas águas?",
+        a: ["Sim", "Não, mas quero", "Não quero"]
+      },
+      {
+        q: "Você tem certeza da salvação?",
+        a: ["Sim, plenamente", "Mais ou menos", "Não"]
+      },
+      {
+        q: "Qual é o grau da sua fé?",
+        a: ["Forte", "Média", "Fraca"]
+      },
+      {
+        q: "Sua família é evangélica?",
+        a: ["Quase toda", "Alguns", "Ninguém"]
+      },
+      {
+        q: "Você é batizado com o Espírito Santo?",
+        a: ["Sim", "Não tenho certeza", "Não"]
+      },
+      {
+        q: "Sua vida pessoal (financeira, saúde e amorosa) é:",
+        a: ["Equilibrada", "Altos e baixos", "Sempre ruim"]
+      },
+      {
+        q: "Você é feliz e animado?",
+        a: ["Sempre", "Às vezes", "Pouco"]
+      },
+      {
+        q: "Você é uma pessoa pacífica?",
+        a: ["Sim, completamente", "Nem sempre", "Não"]
+      },
+      {
+        q: "Você se envolve com política?",
+        a: ["Só voto", "Participo de eventos", "Sou político"]
+      },
+      {
+        q: "Você aposta em jogos ou torce fanaticamente?",
+        a: ["Não me envolvo", "Somente por lazer", "Sou viciado"]
+      },
+      {
+        q: "Você perdoa quem te magoa?",
+        a: ["Sim", "Algumas vezes", "Não"]
+      },
+      {
+        q: "Você agradece a Deus até pelas pequenas bênçãos?",
+        a: ["Sempre", "Às vezes", "Não"]
+      },
+      {
+        q: "Você respeita os governantes?",
+        a: ["Sempre", "Se fizerem o certo", "Não"]
+      },
+      {
+        q: "Você evangeliza alguém por mês?",
+        a: ["Sim, sempre que posso", "De vez em quando", "Nunca"]
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let weakAnswers = [];
+
+    function showQuestion() {
+      const q = questions[current];
+      document.getElementById("question").innerText = `${current + 1}. ${q.q}`;
+      const opts = q.a.map((option, i) => `<button onclick="answer(${i})">${option}</button>`).join("");
+      document.getElementById("options").innerHTML = opts;
+    }
+
+    function answer(i) {
+      const value = i === 0 ? 4 : i === 1 ? 2 : 0;
+      score += value;
+      if (value === 0) weakAnswers.push(questions[current].q);
+      current++;
+      document.getElementById("mercury").style.height = `${(score / (questions.length * 4)) * 100}%`;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById("question").style.display = "none";
+      document.getElementById("options").style.display = "none";
+      const msg = score >= 90 ? "Parabéns! Sua fé está em alta!"
+        : score >= 60 ? "Você está no caminho! Vamos continuar crescendo."
+        : "Vamos começar a reconstruir sua intimidade com Deus.";
+      document.getElementById("result").innerHTML = `<strong>Resultado:</strong><br>Sua pontuação: ${score}<br>${msg}<br><br><button onclick='showBreakdown()'>Ver pontos que precisam de atenção</button>`;
+      document.getElementById("result").classList.add("show");
+    }
+
+    function showBreakdown() {
+      const list = weakAnswers.map(q => `<li>${q}</li>`).join("");
+      document.getElementById("breakdown").innerHTML = `<strong>Perguntas que indicam pontos a melhorar:</strong><ul>${list}</ul>`;
+      document.getElementById("breakdown").classList.add("show");
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
