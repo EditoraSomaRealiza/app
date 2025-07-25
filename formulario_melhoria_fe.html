@@ -18,15 +18,19 @@
     <form id="melhoriaForm">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="naoEvang" id="naoEvang">
-        <label class="form-check-label" for="naoEvang">Não é evangélico</label>
+        <label class="form-check-label" for="naoEvang">Não é evangélico?</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="infiel" id="infiel">
-        <label class="form-check-label" for="infiel">Infiel</label>
+        <label class="form-check-label" for="infiel">Você é Infiel?</label>
       </div>
-<div class="form-check">
+      <div class="form-check">
         <input class="form-check-input" type="checkbox" value="sacrificio" id="sacrificio">
- <label class="form-check-label" for="sacrificio">Sacrificio para Deus?</label>
+        <label class="form-check-label" for="sacrificio">Faz sacrificio para Deus?</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="biblia" id="biblia">
+        <label class="form-check-label" for="biblia">Não leu a Bíblia?</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="naoBatizado" id="naoBatizado">
@@ -140,6 +144,41 @@
 <p>&nbsp; &nbsp;Essas ações não são pequenas — são sacrifícios vivos, agradáveis a Deus. <b>“Apresenteis os vossos corpos como sacrifício vivo, santo e agradável a Deus, que é o vosso culto racional.”</b> (Romanos 12:1)</p>
 `);
       }
+      if (document.getElementById('biblia').checked) {
+        resultados.push(`<p><b>&nbsp; &nbsp;Já leu a Bíblia toda?</b>
+
+  <p>&nbsp; &nbsp;A Bíblia não é apenas um livro — ela é a <strong>Palavra viva de Deus</strong>, fonte de sabedoria, direção e salvação. Muito mais importante do que livros obrigatórios na escola, ela deveria ser essencial para todos que desejam se aproximar do Senhor.</p>
+
+  <p>&nbsp; &nbsp;Infelizmente, muitas pessoas deixam de lado a leitura da Bíblia para consumir conteúdos vazios ou até nocivos. Dizem que ficam sonolentas, que não entendem o que está escrito... mas essas desculpas não convencem a Deus.</p>
+
+  <p>&nbsp; &nbsp;É como ignorar as leis de um juiz: elas exigem compromisso, e o Senhor espera de nós esse esforço.</p>
+
+  <b>Comece Agora com um Propósito</b>
+
+  <p>&nbsp; &nbsp;Declare com fé: <em>“Hoje eu começo minha jornada na leitura da Bíblia!”</em></p>
+
+  <blockquote>
+    “Deus, meu Pai, quero fazer a Tua vontade revelada na Tua Palavra.  
+    Não desejo ser levado por opiniões alheias, mas encontrar prazer em ler o Teu livro sagrado, do início ao fim — não apenas uma vez, mas sempre.  
+    Abre meus olhos espirituais, retira a preguiça e o sono.  
+    Desperta meu entendimento e ajuda-me a compreender o que leio.  
+    Eu Te agradeço, Senhor! Muito obrigado por me conduzir a essa decisão. Amém.”
+  </blockquote>
+
+  <b>Plano de Leitura</b>
+  <ul>
+    <li><strong>7 capítulos por dia</strong> → completa a Bíblia em <strong>6 meses</strong></li>
+    <li><strong>4 capítulos por dia</strong> → conclui em <strong>menos de 1 ano</strong></li>
+  </ul>
+
+  <p>&nbsp; &nbsp;Use um aplicativo que combine texto com áudio para facilitar o acompanhamento. Escolha um horário fixo — pela manhã, à noite ou em momentos tranquilos — e mantenha a constância como quem alimenta o espírito diariamente.</p>
+
+  <blockquote>
+    <strong>“Medita nela dia e noite, para que tenhas cuidado de fazer conforme tudo quanto nela está escrito; então farás prosperar o teu caminho, e serás bem-sucedido.”</strong>  
+    (Josué 1:8)
+  </blockquote>
+`);
+      }
       if (document.getElementById('naoOra').checked) {
         resultados.push(`<b>Ora apenas em dificuldades:</b> crie uma rotina de oração com ajuda do nosso app. Comece com 5 minutos por dia.`);
       }
@@ -152,6 +191,5 @@
           : '<p class="text-success">Parabéns! Nenhuma área selecionada. Continue firme com Deus.</p>';
     }
   </script>
-
 </body>
 </html>
