@@ -13,12 +13,20 @@
 <body>
   <div class="container">
     <h2 class="mb-4 text-center">Fortalecendo sua Fé</h2>
-    <p class="text-center">Abaixo estão as áreas em que você teve pontuação baixa. Escolha as que deseja melhorar e veja o que pode ser feito:</p>
+    <p class="text-center">Abaixo estão áreas em que você possa ter tido pontuação baixa. Escolha as que deseja melhorar e veja o que pode ser feito:</p>
 
     <form id="melhoriaForm">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="naoEvang" id="naoEvang">
         <label class="form-check-label" for="naoEvang">Não é evangélico</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="infiel" id="infiel">
+        <label class="form-check-label" for="infiel">Infiel</label>
+      </div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="sacrificio" id="sacrificio">
+ <label class="form-check-label" for="sacrificio">Sacrificio para Deus?</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="naoBatizado" id="naoBatizado">
@@ -44,10 +52,93 @@
     function mostrarSugestoes() {
       const resultados = [];
       if (document.getElementById('naoEvang').checked) {
-        resultados.push(`<b>Você ainda não é evangélico:</b> que tal aceitar Jesus hoje mesmo? Clique aqui para aceitar e ser orientado por uma igreja próxima.`);
+        resultados.push(`<b>Você ainda não é evangélico:</b> <p>&nbsp; &nbsp;Ser evangélico é uma bênção — um passo importante na caminhada com Deus. No entanto, essa identidade não define, por si só, a profundidade da sua intimidade com Cristo.
+
+<p>&nbsp; &nbsp;A Palavra nos ensina que a verdadeira conexão com Deus vai além de uma filiação denominacional ou prática religiosa. Jesus disse: “Este povo me honra com os lábios, mas o seu coração está longe de mim.” (Mateus 15:8)
+
+<p>&nbsp; &nbsp;A intimidade com Deus se constrói por meio de uma vida de arrependimento, obediência e fé genuína. Como está escrito: “Chegai-vos a Deus, e Ele se chegará a vós.” (Tiago 4:8)
+
+<p>&nbsp; &nbsp;Assim como uma criança inocente é acolhida por Deus, o pecador arrependido também é recebido com graça. Ser um evangélico que erra e não busca transformação pode se afastar da verdadeira comunhão com o Senhor.
+
+<p>&nbsp; &nbsp;Por isso, não basta apenas o título — é necessário viver uma fé viva. Jesus morreu por você, e sua morte não deve ser em vão. Ele quer mais que seguidores, quer filhos íntimos.</p>
+<p><b>&nbsp; &nbsp;Conclusão</b>
+<p>&nbsp; &nbsp;Portanto, ser evangélico é um passo essencial — mas o verdadeiro caminho da salvação e da intimidade com Deus exige entrega, fé viva e comunhão constante.
+
+<p>&nbsp; &nbsp;Jesus disse: “Eu sou o caminho, e a verdade, e a vida. Ninguém vem ao Pai senão por mim.” (João 14:6)
+
+<p>&nbsp; &nbsp;Se hoje você deseja fortalecer esse relacionamento com o Senhor, feche agora os seus olhos e faça esta oração com sinceridade:
+
+<p><b>&nbsp; &nbsp;“Senhor, meu Pai, estou consciente de que preciso Te aceitar como meu Pai, e a Jesus Cristo como único Salvador da minha vida e da minha alma. Com todo o meu coração, eu Te recebo e me comprometo a buscar o Teu Espírito Santo, para viver em intimidade contigo e receber Tuas bênçãos. Tem misericórdia de mim e da minha família. Prometo dedicar-me à leitura da Tua Palavra e seguir os Teus conselhos, hoje e sempre. Amém.”</b>
+
+<p>&nbsp; &nbsp;Se você orou com fé, saiba que os céus se alegram com sua decisão: “Há alegria na presença dos anjos de Deus por um pecador que se arrepende.” (Lucas 15:10)</p>
+
+<p><b>&nbsp; &nbsp;Finalizando com Propósito 🙌</b>
+<p>&nbsp; &nbsp;Agora que você recebeu Jesus Cristo como seu único e verdadeiro Salvador, saiba que uma nova jornada começa. De coração aberto, você pode se considerar verdadeiramente cristão — e inclusive evangélico — como alguém que busca viver conforme os ensinamentos da Palavra, diferenciado dos costumes do mundo.</p>
+
+<p>&nbsp; &nbsp;✨ Refazer o quiz agora será uma oportunidade de confirmar essa transformação: com mais entendimento espiritual, sua pontuação certamente refletirá o crescimento da sua fé.
+
+<p>&nbsp; &nbsp;Você não está sozinho. A partir de hoje, você faz parte da família de Deus, com identida&nbsp; &nbsp;de renovada e propósitos celestiais.
+
+<p>&nbsp; &nbsp;“E, assim, se alguém está em Cristo, é nova criatura; as coisas velhas já passaram, eis que tudo se fez novo.” (2 Coríntios 5:17)</p>
+
+`);
       }
       if (document.getElementById('naoBatizado').checked) {
         resultados.push(`<b>Ainda não é batizado:</b> inscreva-se no curso preparatório para o batismo e escolha uma igreja parceira para realizar este passo de fé.`);
+      }
+      if (document.getElementById('infiel').checked) {
+        resultados.push(`<p><b>&nbsp; &nbsp;Casados ou Noivos Infiel?</b></p>
+<p>&nbsp; &nbsp;A infidelidade, seja no namoro, no noivado ou no casamento, fere não apenas o coração da pessoa amada, mas também o coração de Deus. Relacionamentos foram criados para refletir fidelidade, compromisso e amor verdadeiro — e quando há traição, o desequilíbrio espiritual é evidente. A paz se esvai, os propósitos se confundem e as bênçãos parecem distantes.
+
+<p>&nbsp; &nbsp;Mas Deus é especialista em reconstruir aquilo que foi quebrado. 🙏 Não importa quão tortuoso esteja o caminho: <b>Ele continua sendo o Deus do impossível!<b><p>
+
+<p><b>&nbsp; &nbsp;Clamor de Libertação e Restauração</b></p>
+<p>&nbsp; &nbsp;**“Pai Santo, aqui estou em profunda aflição. O meu coração está dividido e a minha alma se contorce diante da dor da infidelidade. Se sou eu quem fere, transforma meu caráter, quebra o engano, destrói a tentação e renova em mim o desejo pela santidade.
+
+<p>&nbsp; &nbsp;Se sou eu quem sofre, sustenta-me com Tua graça, fortalece-me no meio da tempestade e sara as feridas abertas pelo desprezo.
+
+<p>&nbsp; &nbsp;Abençoa minha união, Senhor. Restaura o amor, reacende a chama da cumplicidade e afasta toda presença que semeia divisão.
+
+<p>&nbsp; &nbsp;Ajuda-me a ser fiel a Ti e ao meu cônjuge, a viver o propósito do casamento como pacto espiritual. Não permita que o inimigo roube o que foi selado pelo Teu nome.
+
+<p>&nbsp; &nbsp;Eu Te suplico, Pai, não se afaste de mim. Desejo intimidade Contigo, cura e paz. Em nome de Jesus, Amém.”**</b>
+
+<p><b>&nbsp; &nbsp;💡 Para os casados e noivos:</b> não deixem o tempo apagar o valor da aliança. Busquem juntos a Deus, pratiquem o perdão, conversem com sinceridade e orem como um só corpo.
+<p><b>&nbsp; &nbsp;✨ Solteiros:</b> Ore com fé para que as influências negativas ao seu redor se afastem. Quando você estiver liberto desses laços que te prendem ao pecado, então — no tempo certo — surgirá alguém que verdadeiramente compartilha da sua fé, sua alma gêmea.</p>
+
+<p>&nbsp; &nbsp;📖 E para todos que enfrentam batalhas nesse campo, lembrem-se de Tiago 4:7: <b>“Sujeitai-vos, pois, a Deus; resisti ao diabo, e ele fugirá de vós.”</b></p>
+`);
+      }
+      if (document.getElementById('sacrificio').checked) {
+        resultados.push(`<p><b>&nbsp; &nbsp;Sacrificio para Deus?</b></p>
+<p>&nbsp; &nbsp;Fazer o bem às pessoas que amamos — como nossos pais, cônjuges ou filhos — raramente é visto como sacrifício. Nós nos dedicamos com alegria. Da mesma forma, <b>agradar a Deus</b> não deve ser encarado como um fardo, mas como um privilégio.
+
+<p>&nbsp; &nbsp;Alguns acreditam que só jejuar, subir ao monte, ou passar por privação extrema é sinal de devoção. Mas Deus se agrada de atitudes sinceras que brotam do coração. Fazer o bem, perdoar, chorar com os que choram e se alegrar com os que se alegram, também são sacrifícios espirituais.
+
+<p>&nbsp; &nbsp;✨ A Bíblia diz: <b>“A sabedoria que vem do alto é, antes de tudo, pura; depois pacífica, bondosa e cheia de misericórdia.” </b>(Tiago 3:17)</p>
+
+<p><b>&nbsp; &nbsp;Jejum e Sensibilidade Espiritual</b></p>
+<p>&nbsp; &nbsp;O jejum é precioso — principalmente para aqueles que não conseguem sentir a dor da cruz, a dor do próximo, ou enxergar além de si mesmos. A fome sensibiliza a alma e nos ensina humildade. Mas, se você já possui um coração compassivo, então está vivendo a essência do evangelho.
+
+<p>&nbsp; &nbsp;📖 Deus diz: <b>“Tirarei de vós o coração de pedra e vos darei um coração de carne.” </b>(Ezequiel 36:26)</p>
+
+<p>&nbsp; &nbsp;Se você sente o peso do monte, saiba: não é a altitude que aproxima você de Deus, mas a humildade do seu espírito. A fraqueza física pode te tornar mais forte na alma.
+
+<p><b>&nbsp; &nbsp;Praticando o Verdadeiro Sacrifício 🙌</b></p>
+<p>&nbsp; &nbsp;Agora que você está compreendendo o que Deus deseja, volte sua atenção aos mais necessitados:</p>
+
+<p>&nbsp; &nbsp;° Faça algo pelas crianças
+
+<p>&nbsp; &nbsp;° Pelos moradores de rua
+
+<p>&nbsp; &nbsp;° Pelos doentes e menos favorecidos
+
+<p>&nbsp; &nbsp;° Pela sua família
+
+<p>&nbsp; &nbsp;✨ O próprio Jesus nos ensinou: <b>“Tudo o que fizerem a um destes pequeninos, a mim o fizeram.” </b>(Mateus 25:40)</p>
+
+<p>&nbsp; &nbsp;Essas ações não são pequenas — são sacrifícios vivos, agradáveis a Deus. <b>“Apresenteis os vossos corpos como sacrifício vivo, santo e agradável a Deus, que é o vosso culto racional.”</b> (Romanos 12:1)</p>
+`);
       }
       if (document.getElementById('naoOra').checked) {
         resultados.push(`<b>Ora apenas em dificuldades:</b> crie uma rotina de oração com ajuda do nosso app. Comece com 5 minutos por dia.`);
@@ -61,5 +152,6 @@
           : '<p class="text-success">Parabéns! Nenhuma área selecionada. Continue firme com Deus.</p>';
     }
   </script>
+
 </body>
 </html>
