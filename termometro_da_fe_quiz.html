@@ -180,8 +180,8 @@
         a: ["Sempre", "Se fizerem o certo", "Não"]
       },
       {
-        q: "Você evangeliza alguém por mês?",
-        a: ["Sim, sempre que posso", "De vez em quando", "Nunca"]
+        q: "Você é a favor da vingança?",
+        a: ["Não, de forma alguma", "Depende do ocorrido", "Sim, olho por olho"]
       }
     ];
 
@@ -222,7 +222,7 @@
     function showBreakdown() {
   const list = weakAnswers.map(q => `<li>${q}</li>`).join("");
   document.getElementById("breakdown").innerHTML = `
-    <strong>Perguntas que indicam pontos a melhorar:</strong>
+    <strong>Perguntas que indicam pontos a melhorar / Informações:</strong>
     <ul>${list}</ul>
     <a href="formulario_melhoria_fe.html" class="btn btn-primary mt-3" style="display:inline-block; margin-top:15px; padding:10px 20px; background-color:#007bff; color:white; border-radius:6px; text-decoration:none;">
       Ver Sugestões
@@ -232,8 +232,9 @@
 }
 
 showQuestion();
-
  
  </script>
+
+
 </body>
 </html>
