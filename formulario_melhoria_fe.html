@@ -33,6 +33,10 @@
         <label class="form-check-label" for="biblia">Não leu a Bíblia?</label>
       </div>
       <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="lider" id="lider">
+        <label class="form-check-label" for="lider">Não é lider nem membro de igreja?</label>
+      </div>
+      <div class="form-check">
         <input class="form-check-input" type="checkbox" value="naoBatizado" id="naoBatizado">
         <label class="form-check-label" for="naoBatizado">Ainda não é batizado nas águas</label>
       </div>
@@ -56,7 +60,7 @@
     function mostrarSugestoes() {
       const resultados = [];
       if (document.getElementById('naoEvang').checked) {
-        resultados.push(`<b>Você ainda não é evangélico:</b> <p>&nbsp; &nbsp;Ser evangélico é uma bênção — um passo importante na caminhada com Deus. No entanto, essa identidade não define, por si só, a profundidade da sua intimidade com Cristo.
+        resultados.push(`<b>Você ainda não é evangélico?</b> <p>&nbsp; &nbsp;Ser evangélico é uma bênção — um passo importante na caminhada com Deus. No entanto, essa identidade não define, por si só, a profundidade da sua intimidade com Cristo.
 
 <p>&nbsp; &nbsp;A Palavra nos ensina que a verdadeira conexão com Deus vai além de uma filiação denominacional ou prática religiosa. Jesus disse: “Este povo me honra com os lábios, mas o seu coração está longe de mim.” (Mateus 15:8)
 
@@ -81,7 +85,7 @@
 
 <p>&nbsp; &nbsp;✨ Refazer o quiz agora será uma oportunidade de confirmar essa transformação: com mais entendimento espiritual, sua pontuação certamente refletirá o crescimento da sua fé.
 
-<p>&nbsp; &nbsp;Você não está sozinho. A partir de hoje, você faz parte da família de Deus, com identida&nbsp; &nbsp;de renovada e propósitos celestiais.
+<p>&nbsp; &nbsp;Você não está sozinho. A partir de hoje, você faz parte da família de Deus, com identidade renovada e propósitos celestiais.
 
 <p>&nbsp; &nbsp;“E, assim, se alguém está em Cristo, é nova criatura; as coisas velhas já passaram, eis que tudo se fez novo.” (2 Coríntios 5:17)</p>
 
@@ -182,6 +186,34 @@
       if (document.getElementById('naoOra').checked) {
         resultados.push(`<b>Ora apenas em dificuldades:</b> crie uma rotina de oração com ajuda do nosso app. Comece com 5 minutos por dia.`);
       }
+      if (document.getElementById('lider').checked) {
+        resultados.push(`<section>
+  <b>&nbsp; &nbsp;O Chamado Bíblico para Liderar a Igreja Pessoa e a Igreja Templo</b>
+
+  <p>&nbsp; &nbsp;Ser igreja não significa apenas participar de um espaço físico — é ser parte viva do corpo de Cristo. Como está escrito em <strong>1 Coríntios 3:16</strong>: <em>"Vocês não sabem que são santuário de Deus e que o Espírito de Deus habita em vocês?"</em>. Essa é a igreja pessoa, o templo espiritual onde começa toda verdadeira liderança.</p>
+
+  <p>&nbsp; &nbsp;Mesmo que não esteja à frente de um ministério formal, você pode ser um <strong>líder espiritual</strong> dentro da sua família e comunidade. <strong>1 Pedro 2:9</strong> nos lembra: <em>"Vocês são geração eleita, sacerdócio real, nação santa, povo exclusivo de Deus."</em> Essa identidade é o primeiro passo para viver como exemplo de fé, paz e amor no cotidiano.</p>
+
+  <p>&nbsp; &nbsp;O papel de membro da igreja pessoa é assumir responsabilidades com maturidade espiritual, sendo luz na escuridão, mesmo que silenciosa. Como diz <strong>Mateus 5:14</strong>: <em>"Vocês são a luz do mundo. Não se pode esconder uma cidade construída sobre um monte."</em></p>
+
+  <p>&nbsp; &nbsp;Para quem deseja também servir na <strong>igreja templo</strong>, o chamado é igualmente nobre. <strong>Efésios 4:11-12</strong> nos revela: <em>"E ele designou alguns para apóstolos, outros para profetas, outros para evangelistas, outros para pastores e mestres, com o fim de preparar os santos para a obra do ministério."</em></p>
+
+  <p>&nbsp; &nbsp;Esse preparo exige dedicação, oração e entrega. Em <strong>Tiago 1:5</strong> somos encorajados: <em>"Se algum de vocês tem falta de sabedoria, peça-a a Deus, que a todos dá livremente."</em></p>
+
+  <p>&nbsp; &nbsp;Estamos prontos para apoiar essa caminhada espiritual oferecendo cursos, por meio de igrejas parceiras, voltados para formação de:</p>
+  <ul>
+    <li>Professores</li>
+    <li>Capelães</li>
+    <li>Diáconos</li>
+    <li>Presbíteros</li>
+    <li>Evangelistas</li>
+    <li>Pastores</li>
+  </ul>
+
+  <p>&nbsp; &nbsp;Como afirma <strong>Romanos 12:11</strong>: <em>"Nunca lhes falte o zelo, sejam fervorosos no espírito, sirvam ao Senhor."</em> O mundo precisa de líderes que compreendam que a igreja começa no coração. E se for do seu propósito, Deus te capacita também para liderar dentro dos templos.</p>
+</section>
+`);
+      }
       if (document.getElementById('naoLeBiblia').checked) {
         resultados.push(`<b>Nunca leu a Bíblia completa:</b> baixe nosso plano de leitura diária para concluir em 1 ano ou menos.`);
       }
@@ -191,5 +223,6 @@
           : '<p class="text-success">Parabéns! Nenhuma área selecionada. Continue firme com Deus.</p>';
     }
   </script>
+
 </body>
 </html>
