@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fortalecendo sua Fé</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f7f7f7; padding: 30px; }
+    .card { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+ 
+  
+  <div class="container">
+  <h2 class="mb-4 text-center">Fortalecendo sua Fé</h2>
+  <p class="text-center">Abaixo estão áreas em que você possa ter tido pontuação baixa. Escolha as que deseja melhorar e veja o que pode ser feito:</p>
+
+  <form id="melhoriaForm">
+    <!-- Cada campo está organizado e com as aspas corretas -->
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="naoEvang" id="naoEvang">
+      <label class="form-check-label" for="naoEvang">Não é evangélico?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="infiel" id="infiel">
+      <label class="form-check-label" for="infiel">Infiel?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="sacrificio" id="sacrificio">
+      <label class="form-check-label" for="sacrificio">Faz sacrifício para Deus?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="biblia" id="biblia">
+      <label class="form-check-label" for="biblia">Não leu a Bíblia?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="lider" id="lider">
+      <label class="form-check-label" for="lider">Não é líder nem membro de igreja?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="levabiblia" id="levabiblia">
+      <label class="form-check-label" for="levabiblia">Leva a sua Bíblia quando?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="evangeliza" id="evangeliza">
+      <label class="form-check-label" for="evangeliza">Evangeliza/compartilha a palavra de Deus?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="frequenta" id="frequenta">
+      <label class="form-check-label" for="frequenta">Frequenta uma igreja?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="ora" id="ora">
+      <label class="form-check-label" for="ora">Quando ora?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="vicios" id="vicios">
+      <label class="form-check-label" for="vicios">Tem vícios?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="teme" id="teme">
+      <label class="form-check-label" for="teme">Teme a quem?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="batizado1" id="batizado1">
+      <label class="form-check-label" for="batizado1">É batizado nas águas?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="certeza" id="certeza">
+      <label class="form-check-label" for="certeza">Tem certeza da salvação?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="fe" id="fe">
+      <label class="form-check-label" for="fe">Como está sua fé?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="familia" id="familia">
+      <label class="form-check-label" for="familia">Família evangélica?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="batizado2" id="batizado2">
+      <label class="form-check-label" for="batizado2">Batizado pelo Espírito Santo?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="vida" id="vida">
+      <label class="form-check-label" for="vida">Como está a vida pessoal?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="feliz" id="feliz">
+      <label class="form-check-label" for="feliz">É feliz e animado?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="paz" id="paz">
+      <label class="form-check-label" for="paz">É da paz?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="politica" id="politica">
+      <label class="form-check-label" for="politica">Está envolvido com política?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="apostador" id="apostador">
+      <label class="form-check-label" for="apostador">É apostador?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="perdoa" id="perdoa">
+      <label class="form-check-label" for="perdoa">Perdoa com facilidade?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="agradece" id="agradece">
+      <label class="form-check-label" for="agradece">É agradecido?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="respeita" id="respeita">
+      <label class="form-check-label" for="respeita">Respeita os governantes?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="vinganca" id="vinganca">
+      <label class="form-check-label" for="vinganca">Admira a vingança?</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="dicas" id="dicas">
+      <label class="form-check-label" for="dicas">Mais dicas importantes</label>
+    </div>
+
+    <button type="button" class="btn btn-primary mt-3" onclick="mostrarSugestoes()">Ver Sugestões</button>
+  </form>
+
+  <div id="sugestoes" class="mt-4"></div>
+</div>
+
+
+  <script>
+    function mostrarSugestoes() {
+      const resultados = [];
+      if (document.getElementById('naoEvang').checked) {
+        resultados.push(`<b>Você ainda não é evangélico?</b> <p>&nbsp; &nbsp;Ser evangélico é uma bênção — um passo importante na caminhada com Deus. No entanto, essa identidade não define, por si só, a profundidade da sua intimidade com Cristo.
+
+<p>&nbsp; &nbsp;A Palavra nos ensina que a verdadeira conexão com Deus vai além de uma filiação denominacional ou prática religiosa. Jesus disse: “Este povo me honra com os lábios, mas o seu coração está longe de mim.” (Mateus 15:8)
+
+<p>&nbsp; &nbsp;A intimidade com Deus se constrói por meio de uma vida de arrependimento, obediência e fé genuína. Como está escrito: “Chegai-vos a Deus, e Ele se chegará a vós.” (Tiago 4:8)
+
+<p>&nbsp; &nbsp;Assim como uma criança inocente é acolhida por Deus, o pecador arrependido também é recebido com graça. Ser um evangélico que erra e não busca transformação pode se afastar da verdadeira comunhão com o Senhor.
+
+<p>&nbsp; &nbsp;Por isso, não basta apenas o título — é necessário viver uma fé viva. Jesus morreu por você, e sua morte não deve ser em vão. Ele quer mais que seguidores, quer filhos íntimos.</p>
+<p><b>&nbsp; &nbsp;Conclusão</b>
+<p>&nbsp; &nbsp;Portanto, ser evangélico é um passo essencial — mas o verdadeiro caminho da salvação e da intimidade com Deus exige entrega, fé viva e comunhão constante.
+
+<p>&nbsp; &nbsp;Jesus disse: “Eu sou o caminho, e a verdade, e a vida. Ninguém vem ao Pai senão por mim.” (João 14:6)
+
+<p>&nbsp; &nbsp;Se hoje você deseja fortalecer esse relacionamento com o Senhor, feche agora os seus olhos e faça esta oração com sinceridade:
+
+<p><b>&nbsp; &nbsp;“Senhor, meu Pai, estou consciente de que preciso Te aceitar como meu Pai, e a Jesus Cristo como único Salvador da minha vida e da minha alma. Com todo o meu coração, eu Te recebo e me comprometo a buscar o Teu Espírito Santo, para viver em intimidade contigo e receber Tuas bênçãos. Tem misericórdia de mim e da minha família. Prometo dedicar-me à leitura da Tua Palavra e seguir os Teus conselhos, hoje e sempre. Amém.”</b>
+
+<p>&nbsp; &nbsp;Se você orou com fé, saiba que os céus se alegram com sua decisão: “Há alegria na presença dos anjos de Deus por um pecador que se arrepende.” (Lucas 15:10)</p>
+
+<p><b>&nbsp; &nbsp;Finalizando com Propósito 🙌</b>
+<p>&nbsp; &nbsp;Agora que você recebeu Jesus Cristo como seu único e verdadeiro Salvador, saiba que uma nova jornada começa. De coração aberto, você pode se considerar verdadeiramente cristão — e inclusive evangélico — como alguém que busca viver conforme os ensinamentos da Palavra, diferenciado dos costumes do mundo.</p>
+
+<p>&nbsp; &nbsp;✨ Refazer o quiz agora será uma oportunidade de confirmar essa transformação: com mais entendimento espiritual, sua pontuação certamente refletirá o crescimento da sua fé.
+
+<p>&nbsp; &nbsp;Você não está sozinho. A partir de hoje, você faz parte da família de Deus, com identidade renovada e propósitos celestiais.
+
+<p>&nbsp; &nbsp;“E, assim, se alguém está em Cristo, é nova criatura; as coisas velhas já passaram, eis que tudo se fez novo.” (2 Coríntios 5:17)</p>
+
+`);
+      }
+      if (document.getElementById('naoBatizado').checked) {
+        resultados.push(`<b>Ainda não é batizado:</b> inscreva-se no curso preparatório para o batismo e escolha uma igreja parceira para realizar este passo de fé.`);
+      }
+      if (document.getElementById('infiel').checked) {
+        resultados.push(`<p><b>&nbsp; &nbsp;Casados ou Noivos Infiel?</b></p>
+<p>&nbsp; &nbsp;A infidelidade, seja no namoro, no noivado ou no casamento, fere não apenas o coração da pessoa amada, mas também o coração de Deus. Relacionamentos foram criados para refletir fidelidade, compromisso e amor verdadeiro — e quando há traição, o desequilíbrio espiritual é evidente. A paz se esvai, os propósitos se confundem e as bênçãos parecem distantes.
+
+<p>&nbsp; &nbsp;Mas Deus é especialista em reconstruir aquilo que foi quebrado. 🙏 Não importa quão tortuoso esteja o caminho: <b>Ele continua sendo o Deus do impossível!<b><p>
+
+<p><b>&nbsp; &nbsp;Clamor de Libertação e Restauração</b></p>
+<p>&nbsp; &nbsp;**“Pai Santo, aqui estou em profunda aflição. O meu coração está dividido e a minha alma se contorce diante da dor da infidelidade. Se sou eu quem fere, transforma meu caráter, quebra o engano, destrói a tentação e renova em mim o desejo pela santidade.
+
+<p>&nbsp; &nbsp;Se sou eu quem sofre, sustenta-me com Tua graça, fortalece-me no meio da tempestade e sara as feridas abertas pelo desprezo.
+
+<p>&nbsp; &nbsp;Abençoa minha união, Senhor. Restaura o amor, reacende a chama da cumplicidade e afasta toda presença que semeia divisão.
+
+<p>&nbsp; &nbsp;Ajuda-me a ser fiel a Ti e ao meu cônjuge, a viver o propósito do casamento como pacto espiritual. Não permita que o inimigo roube o que foi selado pelo Teu nome.
+
+<p>&nbsp; &nbsp;Eu Te suplico, Pai, não se afaste de mim. Desejo intimidade Contigo, cura e paz. Em nome de Jesus, Amém.”**</b>
+
+<p><b>&nbsp; &nbsp;💡 Para os casados e noivos:</b> não deixem o tempo apagar o valor da aliança. Busquem juntos a Deus, pratiquem o perdão, conversem com sinceridade e orem como um só corpo.
+<p><b>&nbsp; &nbsp;✨ Solteiros:</b> Ore com fé para que as influências negativas ao seu redor se afastem. Quando você estiver liberto desses laços que te prendem ao pecado, então — no tempo certo — surgirá alguém que verdadeiramente compartilha da sua fé, sua alma gêmea.</p>
+
+<p>&nbsp; &nbsp;📖 E para todos que enfrentam batalhas nesse campo, lembrem-se de Tiago 4:7: <b>“Sujeitai-vos, pois, a Deus; resisti ao diabo, e ele fugirá de vós.”</b></p>
+`);
+      }
+      if (document.getElementById('sacrificio').checked) {
+        resultados.push(`<p><b>&nbsp; &nbsp;Sacrificio para Deus?</b></p>
+<p>&nbsp; &nbsp;Fazer o bem às pessoas que amamos — como nossos pais, cônjuges ou filhos — raramente é visto como sacrifício. Nós nos dedicamos com alegria. Da mesma forma, <b>agradar a Deus</b> não deve ser encarado como um fardo, mas como um privilégio.
+
+<p>&nbsp; &nbsp;Alguns acreditam que só jejuar, subir ao monte, ou passar por privação extrema é sinal de devoção. Mas Deus se agrada de atitudes sinceras que brotam do coração. Fazer o bem, perdoar, chorar com os que choram e se alegrar com os que se alegram, também são sacrifícios espirituais.
+
+<p>&nbsp; &nbsp;✨ A Bíblia diz: <b>“A sabedoria que vem do alto é, antes de tudo, pura; depois pacífica, bondosa e cheia de misericórdia.” </b>(Tiago 3:17)</p>
+
+<p><b>&nbsp; &nbsp;Jejum e Sensibilidade Espiritual</b></p>
+<p>&nbsp; &nbsp;O jejum é precioso — principalmente para aqueles que não conseguem sentir a dor da cruz, a dor do próximo, ou enxergar além de si mesmos. A fome sensibiliza a alma e nos ensina humildade. Mas, se você já possui um coração compassivo, então está vivendo a essência do evangelho.
+
+<p>&nbsp; &nbsp;📖 Deus diz: <b>“Tirarei de vós o coração de pedra e vos darei um coração de carne.” </b>(Ezequiel 36:26)</p>
+
+<p>&nbsp; &nbsp;Se você sente o peso do monte, saiba: não é a altitude que aproxima você de Deus, mas a humildade do seu espírito. A fraqueza física pode te tornar mais forte na alma.
+
+<p><b>&nbsp; &nbsp;Praticando o Verdadeiro Sacrifício 🙌</b></p>
+<p>&nbsp; &nbsp;Agora que você está compreendendo o que Deus deseja, volte sua atenção aos mais necessitados:</p>
+
+<p>&nbsp; &nbsp;° Faça algo pelas crianças
+
+<p>&nbsp; &nbsp;° Pelos moradores de rua
+
+<p>&nbsp; &nbsp;° Pelos doentes e menos favorecidos
+
+<p>&nbsp; &nbsp;° Pela sua família
+
+<p>&nbsp; &nbsp;✨ O próprio Jesus nos ensinou: <b>“Tudo o que fizerem a um destes pequeninos, a mim o fizeram.” </b>(Mateus 25:40)</p>
+
+<p>&nbsp; &nbsp;Essas ações não são pequenas — são sacrifícios vivos, agradáveis a Deus. <b>“Apresenteis os vossos corpos como sacrifício vivo, santo e agradável a Deus, que é o vosso culto racional.”</b> (Romanos 12:1)</p>
+`);
+      }
+      if (document.getElementById('biblia').checked) {
+        resultados.push(`<p><b>&nbsp; &nbsp;Já leu a Bíblia toda?</b>
+
+  <p>&nbsp; &nbsp;A Bíblia não é apenas um livro — ela é a <strong>Palavra viva de Deus</strong>, fonte de sabedoria, direção e salvação. Muito mais importante do que livros obrigatórios na escola, ela deveria ser essencial para todos que desejam se aproximar do Senhor.</p>
+
+  <p>&nbsp; &nbsp;Infelizmente, muitas pessoas deixam de lado a leitura da Bíblia para consumir conteúdos vazios ou até nocivos. Dizem que ficam sonolentas, que não entendem o que está escrito... mas essas desculpas não convencem a Deus.</p>
+
+  <p>&nbsp; &nbsp;É como ignorar as leis de um juiz: elas exigem compromisso, e o Senhor espera de nós esse esforço.</p>
+
+  <b>Comece Agora com um Propósito</b>
+
+  <p>&nbsp; &nbsp;Declare com fé: <em>“Hoje eu começo minha jornada na leitura da Bíblia!”</em></p>
+
+  <blockquote>
+    “Deus, meu Pai, quero fazer a Tua vontade revelada na Tua Palavra.  
+    Não desejo ser levado por opiniões alheias, mas encontrar prazer em ler o Teu livro sagrado, do início ao fim — não apenas uma vez, mas sempre.  
+    Abre meus olhos espirituais, retira a preguiça e o sono.  
+    Desperta meu entendimento e ajuda-me a compreender o que leio.  
+    Eu Te agradeço, Senhor! Muito obrigado por me conduzir a essa decisão. Amém.”
+  </blockquote>
+
+  <b>Plano de Leitura</b>
+  <ul>
+    <li><strong>7 capítulos por dia</strong> → completa a Bíblia em <strong>6 meses</strong></li>
+    <li><strong>4 capítulos por dia</strong> → conclui em <strong>menos de 1 ano</strong></li>
+  </ul>
+
+  <p>&nbsp; &nbsp;Use um aplicativo que combine texto com áudio para facilitar o acompanhamento. Escolha um horário fixo — pela manhã, à noite ou em momentos tranquilos — e mantenha a constância como quem alimenta o espírito diariamente.</p>
+
+  <blockquote>
+    <strong>“Medita nela dia e noite, para que tenhas cuidado de fazer conforme tudo quanto nela está escrito; então farás prosperar o teu caminho, e serás bem-sucedido.”</strong>  
+    (Josué 1:8)
+  </blockquote>
+`);
+      }
+      if (document.getElementById('naoOra').checked) {
+        resultados.push(`<b>Ora apenas em dificuldades:</b> crie uma rotina de oração com ajuda do nosso app. Comece com 5 minutos por dia.`);
+      }
+      if (document.getElementById('lider').checked) {
+        resultados.push(`<section>
+  <b>&nbsp; &nbsp;O Chamado Bíblico para Liderar a Igreja Pessoa e a Igreja Templo</b>
+
+  <p>&nbsp; &nbsp;Ser igreja não significa apenas participar de um espaço físico — é ser parte viva do corpo de Cristo. Como está escrito em <strong>1 Coríntios 3:16</strong>: <em>"Vocês não sabem que são santuário de Deus e que o Espírito de Deus habita em vocês?"</em>. Essa é a igreja pessoa, o templo espiritual onde começa toda verdadeira liderança.</p>
+
+  <p>&nbsp; &nbsp;Mesmo que não esteja à frente de um ministério formal, você pode ser um <strong>líder espiritual</strong> dentro da sua família e comunidade. <strong>1 Pedro 2:9</strong> nos lembra: <em>"Vocês são geração eleita, sacerdócio real, nação santa, povo exclusivo de Deus."</em> Essa identidade é o primeiro passo para viver como exemplo de fé, paz e amor no cotidiano.</p>
+
+  <p>&nbsp; &nbsp;O papel de membro da igreja pessoa é assumir responsabilidades com maturidade espiritual, sendo luz na escuridão, mesmo que silenciosa. Como diz <strong>Mateus 5:14</strong>: <em>"Vocês são a luz do mundo. Não se pode esconder uma cidade construída sobre um monte."</em></p>
+
+  <p>&nbsp; &nbsp;Para quem deseja também servir na <strong>igreja templo</strong>, o chamado é igualmente nobre. <strong>Efésios 4:11-12</strong> nos revela: <em>"E ele designou alguns para apóstolos, outros para profetas, outros para evangelistas, outros para pastores e mestres, com o fim de preparar os santos para a obra do ministério."</em></p>
+
+  <p>&nbsp; &nbsp;Esse preparo exige dedicação, oração e entrega. Em <strong>Tiago 1:5</strong> somos encorajados: <em>"Se algum de vocês tem falta de sabedoria, peça-a a Deus, que a todos dá livremente."</em></p>
+
+  <p>&nbsp; &nbsp;Estamos prontos para apoiar essa caminhada espiritual oferecendo cursos, por meio de igrejas parceiras, voltados para formação de:</p>
+  <ul>
+    <li>Professores</li>
+    <li>Capelães</li>
+    <li>Diáconos</li>
+    <li>Presbíteros</li>
+    <li>Evangelistas</li>
+    <li>Pastores</li>
+  </ul>
+
+  <p>&nbsp; &nbsp;Como afirma <strong>Romanos 12:11</strong>: <em>"Nunca lhes falte o zelo, sejam fervorosos no espírito, sirvam ao Senhor."</em> O mundo precisa de líderes que compreendam que a igreja começa no coração. E se for do seu propósito, Deus te capacita também para liderar dentro dos templos.</p>
+</section>
+`);
+              }
+      if (document.getElementById('levabiblia').checked) {
+        resultados.push(`texto`);
+        
+}
+      if (document.getElementById('evangeliza').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('frequenta').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('ora').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('vicios').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('teme').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('batizado1').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('certeza').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('fe').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('familia').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('batizado2').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('vida').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('feliz').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('paz').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('politica').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('apostador').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('perdoa').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('agradece').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('respeita').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('vinganca').checked) {
+        resultados.push(`texto`);
+}
+      if (document.getElementById('dicas').checked) {
+        resultados.push(`texto`);
+}
+      document.getElementById('sugestoes').innerHTML =
+        resultados.length > 0
+          ? '<h4>Sugestões para sua caminhada espiritual:</h4><ul class="list-group">' + resultados.map(r => `<li class="list-group-item">${r}</li>`).join('') + '</ul>'
+          : '<p class="text-success">Parabéns! Nenhuma área selecionada. Continue firme com Deus.</p>';
+    }
+  </script>
+
+</body>
+</html>
