@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -37,17 +38,93 @@
         <label class="form-check-label" for="lider">Não é lider nem membro de igreja?</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="naoBatizado" id="naoBatizado">
-        <label class="form-check-label" for="naoBatizado">Ainda não é batizado nas águas</label>
-      </div>
-      <div class="form-check">
         <input class="form-check-input" type="checkbox" value="naoOra" id="naoOra">
-        <label class="form-check-label" for="naoOra">Ora apenas quando tem problemas</label>
+        <label class="form-check-label" for="naoOra">Ora apenas quando tem problemas?</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="naoLeBiblia" id="naoLeBiblia">
-        <label class="form-check-label" for="naoLeBiblia">Nunca leu a Bíblia completa</label>
+        <input class="form-check-input" type="checkbox" value="evangeliza" id="evangeliza">
+        <label class="form-check-label" for="evangeliza">Evangeliza/compartilha a palavra de Deus?</label>
       </div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="teme" id="teme">
+        <label class="form-check-label" for="teme">Teme a quem?</label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="biblia_mao" id="biblia_mao">
+        <label class="form-check-label" for="biblia_mao">Não carrega a Bíblia?</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="frequenta" id="frequenta">
+        <label class="form-check-label" for="frequenta">Frequenta uma igreja?</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="vicios" id="vicios">
+        <label class="form-check-label" for="vicios">Tem vícios?</label>
+      </div>
+        <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="naoBatizado" id="naoBatizado">
+        <label class="form-check-label" for="naoBatizado">Ainda não é batizado nas águas?</label>
+      </div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="certeza" id="certeza">
+        <label class="form-check-label" for="certeza">Certeza a salvação?</label>
+</div>
+<div class="form-check">
+
+        <input class="form-check-input" type="checkbox" value="fe" id="fe">
+        <label class="form-check-label" for="fe">A sua fé?</label>
+</div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="familia" id="familia">
+        <label class="form-check-label" for="familia">Família evangélica?</label>
+</div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="batizado2" id="batizado2">
+        <label class="form-check-label" for="batizado2">Batizado pelo Espírito Santo?</label>
+</div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="vida" id="vida">
+        <label class="form-check-label" for="vida">A vida pessoal é?</label>
+</div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="feliz" id="feliz">
+        <label class="form-check-label" for="feliz">Feliz e animado?</label>
+        </div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="paz" id="paz">
+        <label class="form-check-label" for="paz">É da paz?</label>
+</div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="politica" id="politica">
+        <label class="form-check-label" for="politica">É envolvido com política?</label>
+</div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="apostador" id="apostador">
+        <label class="form-check-label" for="apostador">É apostador?</label>
+</div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="perdoa" id="perdoa">
+        <label class="form-check-label" for="perdoa">Perdoa?</label>
+</div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="agradece" id="agradece">
+        <label class="form-check-label" for="agradece">É agradecido?</label>
+</div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="respeita" id="respeita">
+        <label class="form-check-label" for="respeita">Respeita os governantes?</label>
+</div>
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="vinganca" id="vinganca">
+        <label class="form-check-label" for="vinganca">Admira a vingança?</label>
+</div>
+
+<div class="form-check">
+        <input class="form-check-input" type="checkbox" value="dicas" id="dicas">
+        <label class="form-check-label" for="dicas">Mais dicas importantes</label>
+</div>
+      
       <!-- Adicione mais campos conforme necessário -->
 
       <button type="button" class="btn btn-primary mt-3" onclick="mostrarSugestoes()">Ver Sugestões</button>
@@ -92,7 +169,29 @@
 `);
       }
       if (document.getElementById('naoBatizado').checked) {
-        resultados.push(`<b>Ainda não é batizado:</b> inscreva-se no curso preparatório para o batismo e escolha uma igreja parceira para realizar este passo de fé.`);
+        resultados.push(`<section> <h2>Por Que Ser Batizado nas Águas?</h2>
+
+<p>O batismo não é apenas um ritual religioso — ele é <strong>um ato público de fé</strong>, uma expressão sincera de arrependimento e uma confirmação do compromisso com Jesus Cristo. Acima de tudo, é um gesto de obediência ao próprio Cristo, que mesmo sendo Filho de Deus, foi batizado por João Batista.</p>
+
+<blockquote> <strong>“Então Jesus veio da Galileia ao Jordão para ser batizado por João.”</strong> <br><small>(Mateus 3:13)</small> </blockquote>
+
+<p>Jesus não precisava ser batizado por causa de pecado — Ele foi para <strong>cumprir a justiça</strong> e abrir o caminho para nós. João Batista nasceu com o propósito de preparar essa porta espiritual.</p>
+
+<p>Infelizmente, algumas religiões utilizam o batismo como <strong>pré-requisito organizacional</strong> para se tornar membro da instituição. Mas biblicamente, o batismo é sobre renascimento espiritual — não sobre adesão formal ao rebanho humano.</p>
+
+<blockquote> <strong>“Arrependei-vos, e cada um de vós seja batizado em nome de Jesus Cristo para perdão dos pecados.”</strong> <br><small>(Atos 2:38)</small> </blockquote>
+
+<p>Você talvez se preocupe em não cumprir todos os atributos que sua denominação exige para ser batizado — mas a Bíblia mostra que <strong>o mais importante é o desejo sincero de seguir Jesus</strong>. Veja o exemplo do eunuco, que foi batizado por Filipe <strong>imediatamente após crer</strong>:</p>
+
+<blockquote> <strong>“E disseram: Aqui há água; que impede que eu seja batizado?”</strong> <br><small>(Atos 8:36)</small> </blockquote>
+
+<h3>💡 O Batismo é:</h3> <ul> <li>🕊️ Símbolo de arrependimento e nova vida</li> <li>📖 Ato de obediência à Palavra</li> <li>🚿 Representação do sepultamento da velha natureza</li> <li>🙌 Confirmação pública de pertencimento ao corpo de Cristo</li> </ul>
+
+<p>Se ainda não está vinculado a uma igreja, não se preocupe. Estamos estruturando formas de parceria com ministérios que <strong>acolhem pessoas desejosas de obedecer à fé</strong>, sem exigências além daquelas que a Bíblia declara.</p>
+
+<h3>🙏 Oração antes do Batismo</h3> <blockquote> <em>“Senhor Jesus, eu reconheço que preciso de Ti. Quero Te seguir com todo meu coração e obedecer aos Teus mandamentos. Assim como foste batizado, desejo também declarar diante do céu e da terra que Te pertenço. Lava-me por inteiro, cura meu espírito e sela-me com Teu Espírito Santo. Prepara meu coração para esse momento e me conduz ao lugar certo. Em Teu nome eu oro. Amém.”</em> </blockquote>
+
+<p><strong>Conclusão:</strong> O batismo é o início de uma nova jornada. Seja guiado pelo Espírito e não pelas exigências humanas. Deus vê o coração e responde à sinceridade. Prepare-se: a intimidade com Ele só tende a crescer.</p> </section>`);
       }
       if (document.getElementById('infiel').checked) {
         resultados.push(`<p><b>&nbsp; &nbsp;Casados ou Noivos Infiel?</b></p>
@@ -183,9 +282,6 @@
   </blockquote>
 `);
       }
-      if (document.getElementById('naoOra').checked) {
-        resultados.push(`<b>Ora apenas em dificuldades:</b> crie uma rotina de oração com ajuda do nosso app. Comece com 5 minutos por dia.`);
-      }
       if (document.getElementById('lider').checked) {
         resultados.push(`<section>
   <b>&nbsp; &nbsp;O Chamado Bíblico para Liderar a Igreja Pessoa e a Igreja Templo</b>
@@ -214,9 +310,288 @@
 </section>
 `);
       }
-      if (document.getElementById('naoLeBiblia').checked) {
-        resultados.push(`<b>Nunca leu a Bíblia completa:</b> baixe nosso plano de leitura diária para concluir em 1 ano ou menos.`);
+      
+      if (document.getElementById('naoOra').checked) {
+        resultados.push(`<section>
+  <h2>O Valor da Oração: Muito Além dos Problemas</h2>
+
+  <p><strong>Você só ora quando está com dificuldades?</strong> A oração não deve ser um recurso emergencial, mas sim o alimento espiritual diário. Ela não é feita apenas para pedir — é também para agradecer, conversar, se alinhar com a vontade de Deus.</p>
+
+  <p>Deus já conhece as nossas necessidades. Ele se alegra quando oramos com gratidão e reverência. A Bíblia diz: <em>"Não andem ansiosos por coisa alguma, mas em tudo, pela oração e súplicas, e com ação de graças, apresentem seus pedidos a Deus."</em> (<strong>Filipenses 4:6</strong>)</p>
+
+  <p>Imagine como é obrigatório demonstrar reverência diante de um juiz humano. Ir direto a ele sem o protocolo pode gerar punição — quanto mais diante de Deus, que é <strong>autoridade suprema</strong> sobre tudo e todos. Orar de forma desrespeitosa, gritando ou com palavras vazias, não agrada ao Senhor.</p>
+
+  <p>Jesus nos alertou sobre orações feitas por vaidade: <em>"E, orando, não useis de vãs repetições, como os gentios, que pensam que por muito falarem serão ouvidos."</em> (<strong>Mateus 6:7</strong>)</p>
+
+  <p>Não sabe orar? Não se preocupe. <strong>Jesus nos ensinou uma oração simples e poderosa</strong>, suficiente para se conectar com o céu. Eis abaixo a oração ensinada por Cristo:</p>
+
+  <div style="background-color: #f0f0f0; padding: 15px; border-left: 5px solid #007b5e; margin: 20px 0;">
+    <h3>Oração do Pai Nosso 🙏</h3>
+    <p><em>"Pai nosso que estás nos céus,</em><br>
+    <em>Santificado seja o teu nome.</em><br>
+    <em>Venha o teu reino,</em><br>
+    <em>Seja feita a tua vontade, assim na terra como no céu.</em><br>
+    <em>O pão nosso de cada dia nos dá hoje.</em><br>
+    <em>Perdoa-nos as nossas dívidas, assim como nós também perdoamos aos nossos devedores.</em><br>
+    <em>E não nos deixes cair em tentação, mas livra-nos do mal.</em><br>
+    <em>Porque teu é o reino, o poder e a glória para sempre. Amém."</em>  
+    <br><small>(<strong>Mateus 6:9–13</strong>)</small></p>
+  </div>
+
+  <p>🎧 No aplicativo, você pode ouvir esta oração em áudio e acompanhar duas vezes ao dia — ao levantar e ao deitar — criando uma rotina de comunhão com Deus.</p>
+
+  <p>📖 A Bíblia também ensina: <em>"Orai sem cessar."</em> (<strong>1 Tessalonicenses 5:17</strong>). Isso significa cultivar o hábito de conversar com Deus continuamente, em todo tempo e lugar — mas sempre com respeito e entrega verdadeira.</p>
+
+  <p><strong>Conclusão:</strong> A oração é a ponte entre você e o Pai. Comece com o que sabe, e Deus te conduzirá ao que precisa. A simplicidade do coração vale mais que palavras rebuscadas.</p>
+</section>
+`);
       }
+if (document.getElementById('evangeliza').checked) {
+        resultados.push(`<section>
+  <h2>Evangelizar: Uma Expressão Viva de Amor</h2>
+
+  <p>Imagine seu pai ouvindo você falar bem dele para outra pessoa. Que alegria isso traria! Da mesma forma, <strong>Deus se alegra</strong> quando demonstramos reverência, gratidão e amor por Ele, não apenas em silêncio, mas <strong>com nossas palavras</strong>.</p>
+
+  <p>Evangelizar é mais que uma missão — é uma honra. Compartilhar a fé transforma o espírito e move os céus. A Bíblia nos ensina em <strong>Romanos 10:14</strong>: <em>"Como, pois, invocarão aquele em quem não creram? E como crerão naquele de quem não ouviram falar?"</em></p>
+
+  <p>Quando você fala de Deus, o inimigo é confrontado e precisa recuar. Como declara <strong>Tiago 4:7</strong>: <em>"Sujeitai-vos, pois, a Deus; resisti ao diabo, e ele fugirá de vós."</em></p>
+
+  <p>Você pode pensar: <em>"Não sei falar, tenho vergonha..."</em> Não se preocupe — Moisés também sentiu isso. Mas Deus usa os disponíveis, não os perfeitos. Hoje, temos ferramentas poderosas nas mãos, como as redes sociais, e podemos usá-las com sabedoria para <strong>compartilhar orações, versículos e conteúdos edificantes</strong>.</p>
+
+  <p>Jesus nos comissionou em <strong>Marcos 16:15</strong>: <em>"Ide por todo o mundo e pregai o evangelho a toda criatura."</em> Isso inclui suas redes, seus contatos, sua comunidade digital.</p>
+
+  <p>📱 <strong>Compartilhe os conteúdos do nosso aplicativo</strong> — orações, reflexões, áudios — com fé e confiança. Não subestime o poder de uma simples postagem. Muitas pessoas precisam ouvir e se sentir convidadas a conhecer o Senhor.</p>
+
+  <p>💬 Convide também amigos e familiares para nosso grupo no WhatsApp. Juntos podemos alcançar vidas:</p>
+  <p><a href="https://chat.whatsapp.com/K53vrU20Px4CZ46Jz9cjZz" target="_blank"><strong>➡️ Entrar no grupo do WhatsApp</strong></a></p>
+
+  <p>Evangelizar é agradar a quem verdadeiramente importa: <strong>Deus</strong>. É dar fruto como luz do mundo e sal da terra. <strong>Mateus 5:16</strong> nos lembra: <em>"Assim brilhe a luz de vocês diante dos homens, para que vejam as suas boas obras e glorifiquem ao Pai de vocês, que está nos céus."</em></p>
+
+  <p><strong>Conclusão:</strong> O mundo precisa ouvir sobre a esperança que há em Cristo. E essa voz pode ser a sua.</p>
+</section>
+`);
+      }
+if (document.getElementById('biblia_mao').checked) {
+        resultados.push(`<section> <h2>Levar a Bíblia: Uma Atitude de Intimidade e Honra</h2>
+
+<p>Levar a Palavra não se resume a falar sobre ela — é <strong>viver com ela, lembrar dela, andar com ela</strong>. Isso inclui <strong>levar a Bíblia no coração</strong>, mas também demonstrar reverência ao carregá-la consigo, seja na bolsa, na mochila ou no celular.</p>
+
+<p>Você faz questão de portar seus documentos por respeito às normas dos homens. Anda com seu celular para manter contato com a família. Mas e o <strong>contato com a Palavra de Deus</strong>, tem sido prioridade?</p>
+
+<p>Jesus ensinou claramente em <strong>Marcos 8:38</strong>: <em>“Se alguém se envergonhar de mim e das minhas palavras nesta geração adúltera e pecadora, o Filho do homem se envergonhará dele quando vier na glória de seu Pai com os santos anjos.”</em></p>
+
+<p>Não é vergonha andar com a Bíblia — é honra! Mesmo que você carregue uma versão pequena, ou até um aplicativo no celular, essa atitude revela o desejo de manter a comunhão viva. <strong>Não são os amuletos, trevos ou superstições que te protegem.</strong> É a Palavra de Deus que transforma, orienta e guarda.</p>
+
+<p>📖 <strong>Hebreus 4:12</strong> declara: <em>“Porque a palavra de Deus é viva e eficaz, e mais cortante do que qualquer espada de dois gumes...”</em></p>
+
+<p>✔️ <strong>Não precisa ser uma Bíblia grande:</strong> pode ser de bolso, digital, ou até mesmo decorada em versículos-chaves na memória — o importante é demonstrar <strong>intimidade verdadeira</strong> com Deus.</p>
+
+<p>💡 Recomendação: <strong><a href="https://play.google.com/store/apps/details?id=com.sirma.mobile.bible.android" target="_blank">Aplicativo da Bíblia</a></strong> — gratuito, sem anúncios ou vírus. Ideal para quem deseja estudar com paz e foco.</p>
+
+<h3>Oração de Intimidade com a Palavra</h3> <blockquote> <em>“Senhor Deus, quero andar contigo todos os dias, e para isso preciso da Tua Palavra perto de mim. Dá-me coragem para não me envergonhar de carregar a Bíblia. Que eu possa amar os Teus mandamentos, sentir alegria em abri-la, e entender o que está escrito. Mesmo que seja digital ou pequena, que ela seja viva no meu coração. Em nome de Jesus. Amém.”</em> </blockquote>
+
+<p><strong>Conclusão:</strong> Levar a Bíblia é declarar publicamente sua fé. É dizer ao mundo — e ao céu — que você tem um relacionamento real com Deus. Que tal começar hoje?</p>
+
+<blockquote> <strong>“Lâmpada para os meus pés é tua palavra, e luz para o meu caminho.”</strong> <br><small>(Salmos 119:105)</small> </blockquote> </section>`);
+      }
+if (document.getElementById('frequenta').checked) {
+        resultados.push(`<section> <h2>Por que ir ao templo? Um chamado à comunhão e à fé ativa</h2>
+
+<p>Ir ao templo é mais do que uma tradição religiosa — é um <strong>ato de comunhão, fé, resistência espiritual e obediência</strong> ao exemplo de Cristo.</p>
+
+<p>Jesus, mesmo sendo Filho de Deus, <strong>frequentava o templo</strong> (Lucas 4:16), ensinava ali, e ali curava. Se Ele, sendo perfeito, via valor na presença coletiva diante de Deus, quanto mais nós que dependemos da graça.</p>
+
+<h3>💒 A igreja somos nós, mas juntos somos mais fortes</h3> <ul> <li><strong>Unidade espiritual:</strong> Juntos somos como tijolos de uma construção firme e inabalável (Efésios 2:21).</li> <li><strong>Proteção mútua:</strong> A oração coletiva e os louvores fortalecem nossa defesa contra o mal.</li> <li><strong>Consolo para a família:</strong> Ver você caminhando rumo à casa de Deus traz paz e esperança aos que te amam.</li> </ul>
+
+<h3>🙌 Não se engane — o inimigo pode até tentar entrar</h3> <p>Mas isso não desqualifica a santidade da casa. Se há algo que não agrada ali, <strong>confie na justiça divina</strong> — ela se manifestará no tempo certo. A casa é dEle, e Ele zela por ela.</p>
+
+<h3>🎵 Louvar no templo é declarar fidelidade</h3> <p>Quando você louva e ora em um lugar consagrado, está dizendo: <em>“Eu pertenço ao Senhor e confio na Sua presença aqui.”</em></p>
+
+<h3>🕊️ A presença no templo fortalece o espírito</h3> <ul> <li>Revigora a fé</li> <li>Cria laços com irmãos na fé</li> <li>Relembra que você não está sozinho</li> </ul>
+
+<blockquote> <strong>“Alegrei-me quando me disseram: Vamos à casa do Senhor!”</strong> <br><small>(Salmos 122:1)</small> </blockquote>
+
+<h3>✨ Conclusão</h3> <p>O templo é mais que paredes — é o lugar onde corações se levantam juntos. Ir à igreja não é uma obrigação vazia, mas um privilégio espiritual. Que você e sua família encontrem consolo, direção e renovação nesse espaço dedicado ao Altíssimo.</p> </section>`);
+      }
+if (document.getElementById('vicios').checked) {
+        resultados.push(`<section> <h2>Vícios nos afastam de Deus?</h2>
+
+<p>Sim — o vício é uma enfermidade espiritual e física. Gostar de algo é natural, mas <strong>viver dependente disso é um sinal de escravidão</strong>, e foi justamente para nos libertar que Cristo se entregou.</p>
+
+<p>Deus criou o prazer com propósito: o prazer de comer nos mantém vivos; o prazer no afeto e na intimidade fortalece os laços humanos e nos faz multiplicar. Mas fora do equilíbrio, <strong>o que deveria abençoar, pode destruir</strong>.</p>
+
+<h3>⚠️ O corpo é templo do Espírito Santo</h3> <p>Fumar, beber em excesso, consumir drogas — lícitas ou ilícitas — e se alimentar de pornografia, mesmo que não te levem direto ao inferno, <strong>destroem a saúde, turvam a consciência, afastam a presença de Deus</strong> e corrompem a alma.</p>
+
+<blockquote> <strong>“Todas as coisas me são lícitas, mas nem todas convêm.”</strong> <br><small>(1 Coríntios 6:12)</small> </blockquote>
+
+<p>Não é sobre condenação automática — é sobre consequência inevitável. O abuso dessas práticas pode desencadear doenças, transtornos, e abrir portas para influências malignas sobre quem pratica e até sobre a família.</p>
+
+<blockquote> <strong>“Acaso não sabem que o corpo de vocês é santuário do Espírito Santo?”</strong> <br><small>(1 Coríntios 6:19)</small> </blockquote>
+
+<p>O inimigo age sorrateiramente e muitas vezes entra com algo que parece inofensivo — o <strong>primeiro copo</strong>, a primeira experiência. Por isso, o cuidado começa <strong>antes da queda</strong>.</p>
+
+<h3>🙏 Oração por libertação e proteção</h3> <blockquote> <em>“Pai amado, fortalece minha mente e meu espírito para não depender de nada que te ofenda. Que eu tenha prazer somente nas coisas que edificam. Livra-me dos vícios e de tudo que quer me dominar. Purifica meu corpo e minha alma, e enche-me do Teu Espírito Santo. Que eu não me esconda no consumo, mas que eu me achegue a Ti com coragem. Renova meu coração e minha vontade. Em nome de Jesus. Amém.”</em> </blockquote>
+
+<h3>✨ Conclusão</h3> <p>Deus não deseja filhos viciados — deseja filhos livres. A Bíblia nos ensina que o verdadeiro prazer está em viver com sabedoria e santidade:</p>
+
+<blockquote> <strong>“O temor do Senhor conduz à vida: quem o teme terá segurança e refúgio contra os perigos.”</strong> <br><small>(Provérbios 19:23)</small> </blockquote>
+
+<p>Rejeite o que te domina — e abrace o que te transforma. 💪</p> </section>`);
+      }
+      if (document.getElementById('certeza').checked) {
+        resultados.push(`<section> <h2>💖 Podemos Ter Certeza da Salvação?</h2>
+
+<p>Sim, podemos — e devemos! A certeza da salvação é <strongparte>fruto da fé</strongparte> e da confiança inabalável no sacrifício de Jesus. Assim como cremos na existência de Deus sem vê-Lo, confiamos que <strong>o sangue de Cristo foi suficiente</strong> para nos redimir.</p>
+
+<blockquote> <strong>“Ora, a fé é a certeza daquilo que esperamos e a prova das coisas que não vemos.”</strong> <br><small>(Hebreus 11:1)</small> </blockquote>
+
+<h3>🚫 Todos Somos Pecadores</h3> <p>Ninguém está isento. Todos falham, todos caem — mas o amor de Deus <strongparte>não depende da perfeição humana</strongparte>. Ele não rejeita os que se arrependem, mesmo quando o erro parece escondido. O que Ele busca é um coração sincero:</p>
+
+<blockquote> <strong>“Se confessarmos os nossos pecados, Ele é fiel e justo para nos perdoar…”</strong> <br><small>(1 João 1:9)</small> </blockquote>
+
+<h3>✅ Fé + Confissão = Certeza</h3> <ul> <li>🙌 A salvação não é conquistada por obras, mas recebida pela graça</li> <li>🧎‍♂️ A confissão e o arrependimento abrem o caminho para o perdão</li> <li>✝️ O sacrifício de Jesus é suficiente — não existe pecado que Ele não possa limpar</li> </ul>
+
+<h3>🗣️ Declare Com Autoridade</h3> <blockquote> <em>“Eu sou salvo pelo sangue de Jesus Cristo! Nenhuma condenação há para mim, pois fui justificado pela fé. Vivo pela graça, caminho com o Espírito, e não há sombra que me separe do amor de Deus!”</em> </blockquote>
+
+<h3>🔐 Uma Verdade Inabalável</h3> <p>O que dá paz ao coração é essa certeza: <strong>Ele prometeu, e Ele cumpre</strong>. A salvação não está baseada no sentimento — está baseada na promessa de Deus.</p>
+
+<blockquote> <strong>“Quem crê no Filho tem a vida eterna…”</strong> <br><small>(João 3:36)</small> </blockquote>
+
+<p><strong>Conclusão:</strong> Não viva com medo ou incerteza. Viva com convicção, com fé firme e alegria no coração. Você foi chamado, amado e escolhido. Caminhe com ousadia e declare essa verdade todos os dias: <strong>“Eu sou salvo!”</strong></p> </section>`);
+      }
+      
+      if (document.getElementById('fe').checked) {
+        resultados.push(`<section> <h2>🪶 O Tamanho da Fé: Pequena em aparência, gigante em ação</h2>
+
+<p>A fé é como uma criança no ventre — não é visível, mas sabemos que está lá. Vivemos por essa esperança invisível, que se fortalece no silêncio e cresce com o tempo. Assim como o nascimento é inevitável, a fé que permanece firme também gera vida, milagre e superação.</p>
+
+<blockquote> <strong>“Ora, a fé é a certeza daquilo que esperamos e a prova das coisas que não vemos.”</strong><br> <small>(Hebreus 11:1)</small> </blockquote>
+
+<p>Mesmo em meio ao afogamento emocional, à perda, à angústia mais profunda — a fé se transforma em boia, em âncora, em sopro de vida. Quem tem fé não desiste: espera a noite passar e acredita que o dia claro vai raiar.</p>
+
+<p>🌅 A fé que vence é aquela que acredita enquanto tudo parece impossível. Ela sobe montanhas, rompe correntes e transforma batalhas em vitórias. <strong>Não é o tamanho da sua dor que define seu futuro — é o tamanho da sua fé!</strong></p>
+
+<blockquote> <strong>“Se vocês tiverem fé como um grão de mostarda...”</strong><br> <em>“...dirão a este monte: 'Vá daqui para lá', e ele irá. Nada será impossível para vocês.”</em><br> <small>(Mateus 17:20)</small> </blockquote>
+
+<p>✝️ Uma fé sincera afasta pensamentos destrutivos, como o suicídio, a desistência ou o medo da vida. Ela clama por ajuda, espera por socorro, e reconhece que a sombra do Onipotente é refúgio seguro.</p>
+
+<blockquote> <strong>“Aquele que habita no esconderijo do Altíssimo, à sombra do Onipotente descansará.”</strong><br> <small>(Salmos 91:1)</small> </blockquote>
+
+<h3>🙏 Oração para aumentar a fé</h3> <blockquote> <em>“Senhor, fortalece minha fé, mesmo que ela pareça pequena aos olhos humanos. Que eu creia mesmo sem ver, que eu espere mesmo no caos, que eu te adore mesmo na dor, pois Tu és fiel e comigo estarás. Remove a dúvida do meu coração e planta a certeza. Eu confio, eu espero, eu creio — no nome de Jesus. Amém.”</em> </blockquote>
+
+<p>✨ Comece agora a praticar a fé diariamente. Não como um esforço vazio, mas como uma semente viva, regada com oração, louvor e coragem. Compartilhe essa fé com vontade, sem medo, pois quem crê não será confundido.</p>
+
+<p><strong>Conclusão:</strong> A sua fé não é pequena — ela é poderosa. E se hoje ela parecer um grão de mostarda, amanhã ela moverá montanhas.</p> </section>`);
+      }
+      if (document.getElementById('familia').checked) {
+        resultados.push(`<section> <h2>🌱 Não Está Sozinho: O Caminho é Familiar</h2>
+
+<p>No caminho evangélico, é comum sentir-se só, especialmente quando ainda ninguém da família ou dos amigos seguiu a mesma fé. Mas essa solidão é uma ilusão: <strong>em Cristo, todos os filhos de Deus são irmãos</strong>. A caminhada espiritual não é solitária — ela é comunitária, fraterna e cheia de promessas compartilhadas.</p>
+
+<blockquote> <strong>“E se um membro sofre, todos os membros sofrem com ele; e se um membro é honrado, todos os membros se regozijam com ele.”</strong><br> <small>(1 Coríntios 12:26)</small> </blockquote>
+
+<h3>🌾 Regando com amor — não com força</h3>
+
+<ul> <li>Nem toda semente germina no tempo que você espera, mas cada testemunho seu é uma rega silenciosa.</li> <li>As bênçãos que Deus te dá são como sinais luminosos para os que ainda andam na escuridão.</li> <li>O exemplo de fé é mais poderoso que qualquer discurso; o coração tocado virá ao Senhor com liberdade, não com pressão.</li> </ul>
+
+<p>E quando esses corações se abrirem, quando os familiares começarem a seguir os seus passos, algo maravilhoso acontecerá: <strong>eles também se tornarão semeadores</strong>. As vitórias que eles terão são sementes que você ajudou a plantar — são frutos do seu amor, da sua paciência e da sua fé.</p>
+
+<blockquote> <strong>“Crê no Senhor Jesus, e serão salvos tu e tua casa.”</strong><br> <small>(Atos 16:31)</small> </blockquote>
+
+<h3>🏠 Família espiritual e promessa divina</h3>
+
+<p>Você não está sozinho(a) — está com Deus. E os que ainda não vieram caminhar contigo estão <em>no tempo da promessa</em>. A família que você vê, e aquela que você ainda não enxerga, são todos filhos de Deus em formação.</p>
+
+<p><strong>Creia:</strong> quem caminha com o Senhor caminha cercado por uma multidão invisível, por anjos, por irmãos em Cristo e pelas promessas que ainda vão se cumprir.</p>
+
+<h3>🙏 Oração para quem se sente só</h3> <blockquote> <em>“Deus, fortalece meu coração quando me sinto só. Que eu saiba que Tu estás comigo, que pertenço a uma família de fé, e que minha vida é testemunho vivo para os que amo. Ensina-me a semear com paciência e colher com gratidão. Em nome de Jesus, amém.”</em> </blockquote>
+
+<p>🕊️ Continue semeando com carinho, com sabedoria e com fé. A colheita virá, e virá com festa.</p> </section>`);
+      }
+      if (document.getElementById('batizado2').checked) {
+        resultados.push(`texto`);
+      }
+      if (document.getElementById('vida').checked) {
+        resultados.push(`texto`);
+      }
+      if (document.getElementById('feliz').checked) {
+        resultados.push(`texto`);
+      }
+      if (document.getElementById('paz').checked) {
+        resultados.push(`texto`);
+      }
+      if (document.getElementById('politica').checked) {
+        resultados.push(`texto`);
+      }
+      if (document.getElementById('apostador').checked) {
+        resultados.push(`texto`);
+      }
+      if (document.getElementById('perdoa').checked) {
+        resultados.push(`texto`);
+      }
+      if (document.getElementById('agradece').checked) {
+        resultados.push(`texto`);
+      }
+      if (document.getElementById('respeita').checked) {
+        resultados.push(`texto`);
+      }
+      if (document.getElementById('vinganca').checked) {
+        resultados.push(`texto`);
+      }
+      if (document.getElementById('dicas').checked) {
+        resultados.push(`texto`);
+      }
+      if (document.getElementById('teme').checked) {
+        resultados.push(`<section>
+  <h2>Por Que Temer a Deus?</h2>
+
+  <p>“Temer” não significa apenas sentir medo — é também <strong>respeitar, reverenciar e reconhecer</strong> a autoridade suprema de Deus. O temor ao Senhor é a base da sabedoria, como está escrito:</p>
+
+  <blockquote>
+    <strong>“O temor do Senhor é o princípio da sabedoria.”</strong>  
+    <br><small>(Provérbios 9:10)</small>
+  </blockquote>
+
+  <p>Temer a Deus é reconhecer que Ele não apenas traz paz e livramento do mal, mas também corrige com justiça e pode permitir provações para despertar nossa fé. Jesus, nosso advogado, é também o Senhor dos senhores — não podemos brincar com Sua graça, pois Ele é <strong>Deus justo e santo</strong>.</p>
+
+  <p><strong>Hebreus 10:31</strong> nos alerta: <em>“Horrível coisa é cair nas mãos do Deus vivo.”</em></p>
+
+  <p>Por outro lado, a falta de intimidade com Deus expõe a pessoa a ataques espirituais, confusão, doenças e até desordem na família. Quando nos afastamos do Criador, abrimos portas para o inimigo agir.</p>
+
+  <p>📖 <strong>Salmos 34:7</strong> garante: <em>“O anjo do Senhor acampa ao redor dos que o temem e os livra.”</em></p>
+
+  <p>O medo do diabo só assombra aqueles que estão longe de Deus. Quem está em comunhão com o Senhor não se apavora, pois sabe que está guardado pelo Altíssimo. O próprio Jesus disse:</p>
+
+  <blockquote>
+    <strong>“Não temais os que matam o corpo e não podem matar a alma; temei antes aquele que pode fazer perecer no inferno a alma e o corpo.”</strong>  
+    <br><small>(Mateus 10:28)</small>
+  </blockquote>
+
+  <p><strong>Temer a Deus é viver em obediência e humildade</strong>, reconhecendo Sua soberania e caminhando conforme os ensinamentos de Cristo. Esse temor gera bênçãos e proteção sobre a vida e sobre toda a casa.</p>
+
+  <p>✨ Quando tememos o Senhor, os trabalhos malignos são quebrados, maldições são anuladas e a paz é restaurada. Esse temor não é terror — é <strong>honra e submissão voluntária</strong> ao Deus que nos ama.</p>
+
+  <h3>Oração para Viver em Temor Santo</h3>
+  <blockquote>
+    <em>“Senhor Deus, ensina-me a Te temer com reverência.  
+    Quero Te honrar em meus pensamentos, palavras e atitudes.  
+    Livra-me de todo orgulho, toda rebeldia, todo pecado oculto.  
+    Eu me rendo à Tua santidade e Te reconheço como meu único Senhor.  
+    Que o Teu Espírito Santo me conduza em obediência e temor verdadeiro,  
+    para que minha vida seja cheia da Tua paz e da Tua presença.  
+    Em nome de Jesus. Amém.”</em>
+  </blockquote>
+
+  <p>💡 Quem teme a Deus não precisa temer mais nada. É nesse temor que encontramos segurança, sabedoria e livramento.</p>
+
+  <blockquote>
+    <strong>“Bem-aventurado o homem que teme ao Senhor e se compraz nos seus mandamentos.”</strong>  
+    <br><small>(Salmos 112:1)</small>
+  </blockquote>
+</section>
+`);
+      }
+
       document.getElementById('sugestoes').innerHTML =
         resultados.length > 0
           ? '<h4>Sugestões para sua caminhada espiritual:</h4><ul class="list-group">' + resultados.map(r => `<li class="list-group-item">${r}</li>`).join('') + '</ul>'
