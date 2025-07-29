@@ -125,7 +125,7 @@
       },
       {
         q: "Você teme a quem?",
-        a: ["A Deus", "A Jesus", "Ao Diabo"]
+        a: ["A Deus/Jesus", "O pecado", "Ao Diabo"]
       },
       {
         q: "Você é batizado nas águas?",
@@ -161,7 +161,7 @@
       },
       {
         q: "Você se envolve com política?",
-        a: ["Só voto", "Participo de eventos", "Sou político"]
+        a: ["Só voto/participo de reuniões", "Participo de eventos/sou político", "Vou em passeatas e movimentos"]
       },
       {
         q: "Você aposta em jogos ou torce fanaticamente?",
@@ -176,7 +176,7 @@
         a: ["Sempre", "Às vezes", "Não"]
       },
       {
-        q: "Você respeita os governantes?",
+        q: "Você respeita autoridades/governantes?",
         a: ["Sempre", "Se fizerem o certo", "Não"]
       },
       {
@@ -223,6 +223,7 @@
   const list = weakAnswers.map(q => `<li>${q}</li>`).join("");
   document.getElementById("breakdown").innerHTML = `
     <strong>Perguntas que indicam pontos a melhorar / Informações:</strong>
+    <strong>Recomendo que leia as opções para observar os detalhes importantes.</strong>
     <ul>${list}</ul>
     <a href="formulario_melhoria_fe.html" class="btn btn-primary mt-3" style="display:inline-block; margin-top:15px; padding:10px 20px; background-color:#007bff; color:white; border-radius:6px; text-decoration:none;">
       Ver Sugestões
