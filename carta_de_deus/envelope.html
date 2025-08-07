@@ -28,10 +28,10 @@
     }
     .carta-frame {
       position: absolute;
-      top: 10.8%;
-      left: 16.2%;
-      width: 67.5%;
-      height: 37%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border: none;
       background: transparent;
       z-index: 1;
@@ -55,6 +55,7 @@
       border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s;
+      z-index: 3;
     }
     .btn-abrir:hover {
       background-color: #00307d;
@@ -77,13 +78,22 @@
   <div class="container">
     <h1>Você recebeu uma Carta de Deus</h1>
     <div class="carta-revelada" id="envelope">
-      <iframe src="carta_visual.html" class="carta-frame"></iframe>
+      <iframe class="carta-frame" src=""></iframe>
       <img src="https://orandoja.com.br/Imagens_carta/envelope.png" class="envelope-mascara" alt="Envelope com recorte">
     </div>
     <button class="btn-abrir" onclick="abrirCarta()">📩 Abrir Carta</button>
   </div>
 
   <script>
+    // Preencher o iframe com os parâmetros recebidos
+    window.addEventListener('load', () => {
+      const params = new URLSearchParams(window.location.search);
+      const nome = params.get("nome") || "";
+      const pedido = params.get("pedido") || "";
+      const iframe = document.querySelector(".carta-frame");
+      iframe.src = `carta_visual.html?nome=${encodeURIComponent(nome)}&pedido=${encodeURIComponent(pedido)}`;
+    });
+
     function abrirCarta() {
       const envelope = document.getElementById("envelope");
       envelope.style.animation = "abrirEnvelope 1s ease forwards";
