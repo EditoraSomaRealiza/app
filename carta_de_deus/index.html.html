@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário da Carta de Deus</title>
+  <style>
+    body {
+      background-color: #f8f8f8;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      color: #333;
+    }
+    .formulario {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    h2 {
+      font-size: 28px;
+      color: #004aad;
+      margin-bottom: 20px;
+    }
+    .explicacao {
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+    .explicacao p {
+      margin-bottom: 15px;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #004d00;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #003600;
+    }
+  </style>
+</head>
+<body>
+  <div class="formulario">
+   <center> <h1 style="color: blue;">Receba uma Carta de Deus</h1>
+    <div class="explicacao">
+      <p>Esta é uma experiência espiritual onde você poderá receber uma carta simbólica vinda do Pai Celestial.</p>
+      <p>Mais do que palavras bonitas, esta carta deseja tocar a sua alma com consolo, direção, esperança e amor eterno.</p>
+      <h2 style="color: red;">MAS ATENÇÃO:</h2>
+      <p>Antes de solicitar sua carta, dedique alguns segundos a um momento íntimo de fé. Feche os olhos por um instante, respire profundamente... e abra o coração.</p>
+      <p>O que você gostaria de ouvir de Deus hoje? Uma palavra de conforto? Uma resposta que alivia? Uma promessa que renova a esperança?</p>
+      <p>Logo abaixo, informe o seu <strong>nome</strong> e, se desejar, escreva o que gostaria que Deus lhe dissesse nesta carta.</p>
+      <p>A partir disso, sua carta será revelada com carinho, cuidado e significado.</p>
+<p>Uma linda carta para você imprimir e emoldurar, ou até compartilhar.</p>
+    </div>
+
+    <input type="text" id="nome" placeholder="Seu nome" required />
+    <textarea id="pedido" placeholder="O que você gostaria de ouvir de Deus? (opcional)"></textarea>
+    <button onclick="enviarCarta()">Receber Carta</button>
+  </center></div>
+
+  <script>
+    function enviarCarta() {
+      const nome = encodeURIComponent(document.getElementById('nome').value.trim());
+      const pedido = encodeURIComponent(document.getElementById('pedido').value.trim());
+
+      if (!nome) {
+        alert("Por favor, informe seu nome para continuar.");
+        return;
+      }
+
+      window.location.href = `envelope.html?nome=${nome}&pedido=${pedido}`;
+    }
+  </script>
+</body>
+</html>

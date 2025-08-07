@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta de Deus</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      background: #f0f0f0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .carta {
+      background: linear-gradient(to bottom right, #fffef5, #fdfdfd);
+      font-family: 'Great Vibes', cursive;
+      font-size: 22px;
+      line-height: 1.8;
+      color: #2b2b2b;
+      padding: 60px;
+      max-width: 800px;
+      margin: auto;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.12);
+      border: 1px solid #e8e6e0;
+      position: relative;
+    }
+    .carta::before {
+      content: "";
+      background-image: url('https://i.imgur.com/0dXocqV.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      width: 120px;
+      height: 120px;
+      opacity: 0.1;
+    }
+    .carta strong {
+      font-family: Arial, sans-serif;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .botoes {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .btn-acao {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+    }
+    @media print {
+      .botoes {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="carta" class="carta"></div>
+
+  <div class="botoes">
+    <button class="btn-acao" onclick="window.print()">🖨️ Imprimir</button>
+    <button class="btn-acao" onclick="baixarImagem()">📥 Baixar como imagem</button>
+    <button class="btn-acao" onclick="baixarPDF()">📄 Baixar como PDF</button>
+  </div>
+
+  <script>
+    function obterMensagem(nome, pedido) {
+      if (!pedido) return `Meu filho amado ${nome},\n\nMesmo quando você não sabe o que dizer, Eu te compreendo por completo. Conheço o teu coração, tuas batalhas silenciosas e os teus sonhos mais profundos. Você não está sozinho. Estou contigo em todos os momentos — quando sorri, quando chora, quando pensa que ninguém vê. Eu vejo. Eu ouço. Eu amo.`;
+
+      pedido = pedido.toLowerCase();
+
+      if (pedido.includes("sozinh") || pedido.includes("abandonado")) {
+        return `Meu filho ${nome}, você nunca esteve só. Mesmo quando tudo parece silêncio, Eu permaneço ao teu lado, segurando tua mão. Meu amor te envolve até nos dias mais escuros.`;
+      } else if (pedido.includes("medo") || pedido.includes("pânico") || pedido.includes("ansioso")) {
+        return `${nome}, não temas. Eu sou teu refúgio e fortaleza. Quando o medo tentar te parar, lembra que Eu estou contigo, como um escudo invisível te protegendo.`;
+      } else if (pedido.includes("direção") || pedido.includes("decisão") || pedido.includes("escolha")) {
+        return `${nome}, entrega teus caminhos a Mim, e Eu endireitarei tuas veredas. Mesmo sem ver o fim, confia no começo que Eu preparei.`;
+      } else if (pedido.includes("gratidão") || pedido.includes("obrigado") || pedido.includes("agradecido")) {
+        return `Fico feliz por ver teu coração grato, ${nome}. Minhas bênçãos não param quando você agradece — elas se multiplicam. Eu me alegro contigo.`;
+      } else if (pedido.includes("dor") || pedido.includes("triste") || pedido.includes("sofrimento") || pedido.includes("choro")) {
+        return `Meu querido ${nome}, Eu recolho cada lágrima que cai dos teus olhos. Nada passa despercebido diante de Mim. Confia — teu alívio virá.`;
+      } else if (pedido.includes("saudade") || pedido.includes("perda") || pedido.includes("ausência")) {
+        return `${nome}, até na ausência Eu sou presença. Aqueles que você ama estão sob Meu cuidado. Um dia, toda saudade será consolo eterno.`;
+      } else if (pedido.includes("fé") || pedido.includes("dúvida") || pedido.includes("desânimo")) {
+        return `Filho ${nome}, não desanime. Mesmo uma fé pequena move montanhas. Estou contigo mesmo quando tua força parece pouca.`;
+      }
+
+      return `Meu filho amado ${nome},\n\nMesmo quando você não sabe o que dizer, Eu te compreendo por completo. Conheço o teu coração, tuas batalhas silenciosas e os teus sonhos mais profundos. Você não está sozinho. Estou contigo em todos os momentos — quando sorri, quando chora, quando pensa que ninguém vê. Eu vejo. Eu ouço. Eu amo.`;
+    }
+
+    function preencherCarta() {
+      const params = new URLSearchParams(window.location.search);
+      const nome = decodeURIComponent(params.get("nome") || "");
+      const pedido = decodeURIComponent(params.get("pedido") || "");
+
+      if (!nome) {
+        document.getElementById("carta").innerHTML = "<p>Nome não informado.</p>";
+        return;
+      }
+
+      const data = new Date();
+      const hoje = data.toLocaleDateString("pt-BR");
+      const hora = data.toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' });
+      const mensagem = obterMensagem(nome, pedido);
+
+      document.getElementById("carta").innerHTML = `
+        <strong>Cidade Celestial, ${hoje} – ${hora}</strong><br><br>
+        ${mensagem.replace(/\n/g, '<br><br>')}<br><br>
+        Com amor eterno,<br>
+        <strong>Teu Pai Celestial</strong>
+      `;
+    }
+
+    function baixarImagem() {
+      html2canvas(document.getElementById("carta")).then(function(canvas) {
+        const link = document.createElement("a");
+        link.download = "carta_de_deus.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    }
+
+    function baixarPDF() {
+      const { jsPDF } = window.jspdf;
+      html2canvas(document.getElementById("carta")).then(function(canvas) {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF();
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save("carta_de_deus.pdf");
+      });
+    }
+
+    preencherCarta();
+  </script>
+</body>
+</html>

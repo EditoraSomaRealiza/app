@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Abra Sua Carta Celestial</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #f1f1f1, #d9e6ff);
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .carta-revelada {
+      position: relative;
+      width: 90vw;
+      max-width: 740px;
+      aspect-ratio: 1 / 1;
+      margin-bottom: 40px;
+      animation: desdobrar 1s ease-out;
+    }
+    .carta-frame {
+      position: absolute;
+      top: 10.8%;
+      left: 16.2%;
+      width: 67.5%;
+      height: 37%;
+      border: none;
+      background: transparent;
+      z-index: 1;
+    }
+    .envelope-mascara {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .btn-abrir {
+      margin-top: 30px;
+      padding: 12px 30px;
+      font-size: 18px;
+      background-color: #004aad;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .btn-abrir:hover {
+      background-color: #00307d;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 40px;
+    }
+    @keyframes abrirEnvelope {
+      0%   { transform: scale(1) rotate(0deg); opacity: 1; }
+      100% { transform: scale(0.1) rotate(-720deg); opacity: 0; }
+    }
+    @keyframes desdobrar {
+      from { transform: scale(0.8) rotateX(-90deg); opacity: 0; }
+      to { transform: scale(1) rotateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Você recebeu uma Carta de Deus</h1>
+    <div class="carta-revelada" id="envelope">
+      <iframe src="carta_visual.html" class="carta-frame"></iframe>
+      <img src="https://orandoja.com.br/Imagens_carta/envelope.png" class="envelope-mascara" alt="Envelope com recorte">
+    </div>
+    <button class="btn-abrir" onclick="abrirCarta()">📩 Abrir Carta</button>
+  </div>
+
+  <script>
+    function abrirCarta() {
+      const envelope = document.getElementById("envelope");
+      envelope.style.animation = "abrirEnvelope 1s ease forwards";
+      setTimeout(() => {
+        const params = new URLSearchParams(window.location.search);
+        const nome = params.get("nome") || "";
+        const pedido = params.get("pedido") || "";
+        window.location.href = `carta_visual.html?nome=${encodeURIComponent(nome)}&pedido=${encodeURIComponent(pedido)}`;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
