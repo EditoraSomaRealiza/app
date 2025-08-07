@@ -75,7 +75,7 @@
 
   <script>
     function obterMensagem(nome, pedido) {
-      if (!pedido) return `Meu filho amado ${nome},\n\nMesmo quando você não sabe o que dizer, Eu te compreendo por completo. Conheço o teu coração, tuas batalhas silenciosas e os teus sonhos mais profundos. Você não está sozinho. Estou contigo em todos os momentos — quando sorri, quando chora, quando pensa que ninguém vê. Eu vejo. Eu ouço. Eu amo.`;
+      if (!pedido) return `<center>Meu filho amado ${nome},</center><br>Mesmo quando você não sabe o que dizer, Eu te compreendo por completo. Conheço o teu coração, tuas batalhas silenciosas e os teus sonhos mais profundos. Você não está sozinho. Estou contigo em todos os momentos — quando sorri, quando chora, quando pensa que ninguém vê. Eu vejo. Eu ouço. Eu amo.`;
 
       pedido = pedido.toLowerCase();
 
@@ -114,8 +114,8 @@
       const mensagem = obterMensagem(nome, pedido);
 
       document.getElementById("carta").innerHTML = `
-        <strong>Cidade Celestial, ${hoje} – ${hora}</strong><br><br>
-        ${mensagem.replace(/\n/g, '<br><br>')}<br><br>
+        <center><strong>Cidade Celestial, ${hoje} – ${hora}</strong></center><br>
+        ${mensagem.replace(/\n/g, '<br><br>')}<br>
         Com amor eterno,<br>
         <strong>Teu Pai Celestial</strong>
       `;
