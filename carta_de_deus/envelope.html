@@ -11,21 +11,24 @@
       text-align: center;
       overflow: hidden;
     }
+
     .container {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: 60vh;
     }
+
     .carta-revelada {
       position: relative;
-      width: 90vw;
-      max-width: 740px;
+      width: 150vw;
+      max-width: 940px;
       aspect-ratio: 1 / 1;
       margin-bottom: 40px;
       animation: desdobrar 1s ease-out;
     }
+
     .carta-frame {
       position: absolute;
       top: 10%;
@@ -36,6 +39,7 @@
       background: transparent;
       z-index: 1;
     }
+
     .envelope-mascara {
       position: absolute;
       top: 0;
@@ -45,12 +49,13 @@
       z-index: 2;
       pointer-events: none;
     }
+
     .btn-abrir-flutuante {
       position: fixed;
       bottom: 20px;
       right: 20px;
       padding: 14px 28px;
-      font-size: 18px;
+      font-size: 40px;
       background-color: #004aad;
       color: white;
       border: none;
@@ -60,30 +65,54 @@
       z-index: 9999;
       animation: flutuar 0.6s ease-in-out forwards;
     }
+
     .btn-abrir-flutuante:hover {
       background-color: #00307d;
     }
+
     h1 {
       color: #333;
       margin-bottom: 40px;
     }
+
     @keyframes abrirEnvelope {
       0%   { transform: scale(1) rotate(0deg); opacity: 1; }
       100% { transform: scale(0.1) rotate(-720deg); opacity: 0; }
     }
+
     @keyframes desdobrar {
       from { transform: scale(0.8) rotateX(-90deg); opacity: 0; }
       to { transform: scale(1) rotateX(0); opacity: 1; }
     }
+
     @keyframes flutuar {
       from { transform: translateY(40px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* 📱 Ajustes para celular */
+    @media (max-width: 600px) {
+      .btn-abrir-flutuante {
+        bottom: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        font-size: 28px;
+      }
+
+      .container {
+        height: auto;
+        padding-bottom: 80px; /* espaço pro botão fixo */
+      }
+
+      .carta-revelada {
+        width: 90vw;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Você recebeu uma Carta de Deus</h1>
+    <h1>Você recebeu uma carta de Deus</h1>
     <div class="carta-revelada" id="envelope">
       <iframe class="carta-frame" src=""></iframe>
       <img src="https://orandoja.com.br/Imagens_carta/envelope.png" class="envelope-mascara" alt="Envelope com recorte">
