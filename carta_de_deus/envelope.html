@@ -9,7 +9,6 @@
       background: linear-gradient(to bottom, #f1f1f1, #d9e6ff);
       font-family: Arial, sans-serif;
       text-align: center;
-      overflow: hidden;
     }
 
     .container {
@@ -17,15 +16,22 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 60vh;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+      font-size: 28px;
     }
 
     .carta-revelada {
       position: relative;
-      width: 150vw;
-      max-width: 940px;
+      width: 100%;
+      max-width: 500px;
       aspect-ratio: 1 / 1;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       animation: desdobrar 1s ease-out;
     }
 
@@ -50,29 +56,20 @@
       pointer-events: none;
     }
 
-    .btn-abrir-flutuante {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
+    .btn-abrir {
       padding: 14px 28px;
-      font-size: 40px;
+      font-size: 24px;
       background-color: #004aad;
       color: white;
       border: none;
       border-radius: 50px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       cursor: pointer;
-      z-index: 9999;
       animation: flutuar 0.6s ease-in-out forwards;
     }
 
-    .btn-abrir-flutuante:hover {
+    .btn-abrir:hover {
       background-color: #00307d;
-    }
-
-    h1 {
-      color: #333;
-      margin-bottom: 40px;
     }
 
     @keyframes abrirEnvelope {
@@ -90,22 +87,20 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
-    /* 📱 Ajustes para celular */
+    /* Responsivo para celular */
     @media (max-width: 600px) {
-      .btn-abrir-flutuante {
-        bottom: 10px;
-        right: 10px;
-        padding: 10px 20px;
-        font-size: 28px;
-      }
-
-      .container {
-        height: auto;
-        padding-bottom: 80px; /* espaço pro botão fixo */
+      h1 {
+        font-size: 22px;
+        margin-bottom: 20px;
       }
 
       .carta-revelada {
         width: 90vw;
+      }
+
+      .btn-abrir {
+        font-size: 20px;
+        padding: 10px 20px;
       }
     }
   </style>
@@ -113,11 +108,13 @@
 <body>
   <div class="container">
     <h1>Você recebeu uma carta de Deus</h1>
+    
     <div class="carta-revelada" id="envelope">
       <iframe class="carta-frame" src=""></iframe>
       <img src="https://orandoja.com.br/Imagens_carta/envelope.png" class="envelope-mascara" alt="Envelope com recorte">
     </div>
-    <button class="btn-abrir-flutuante" onclick="abrirCarta()">📩 Abrir Carta</button>
+    
+    <button class="btn-abrir" onclick="abrirCarta()">📩 Abrir Carta</button>
   </div>
 
   <script>
