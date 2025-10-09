@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerar Certificado de Batismo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+    form { margin-bottom: 20px; }
+    label { display: block; margin-top: 10px; }
+    input { padding: 5px; width: 80%; max-width: 400px; }
+
+    #certificadoPreview {
+      position: relative;
+      width: 1123px;
+      height: 794px;
+      margin: 20px auto;
+    }
+
+    #certificadoPreview img.bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1123px;
+      height: 794px;
+      z-index: 0;
+    }
+
+    .campo {
+      position: absolute;
+      color: #000;
+      font-size: 25px;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    .nome {
+      font-family: 'Parisienne', cursive;
+      font-size: 48px;
+      top: 210px;
+      left: 350px;
+    }
+    .igreja { top: 371px; left: 200px; }
+    .local { top: 465px; left: 130px; }
+
+    .endereco {
+      font-size: 18px;
+      top: 630px;
+      left: 130px;
+      max-width: 600px;
+      text-align: left;
+      white-space: pre-line; /* respeita \n */
+    }
+
+    .dia { top: 327px; left: 245px; }
+    .mes { top: 327px; left: 500px; }
+    .ano { top: 327px; left: 900px; }
+
+    .logo {
+      position: absolute;
+      top: 640px;
+      left: 50px;
+      width: 70px;
+      height: auto;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Gerador de Certificado de Batismo</h1>
+  
+  <form id="formCertificado">
+    <label>Nome do Aluno: <input type="text" id="nomeAluno"></label>
+    <label>Nome da Igreja: <input type="text" id="nomeIgreja"></label>
+
+    <label>Data do Batismo:</label>
+    <input type="number" id="diaBatismo" placeholder="Dia" style="width:60px;">
+    <input type="text" id="mesBatismo" placeholder="Mês" style="width:100px;">
+    <input type="number" id="anoBatismo" placeholder="Ano" style="width:80px;">
+
+    <label>Local do Batismo: <input type="text" id="localBatismo"></label>
+    <label>Endereço da Igreja: <input type="text" id="enderecoIgreja"></label>
+    <label>Logo da Igreja: <input type="file" id="logoIgreja" accept="image/*"></label>
+    <button type="button" onclick="gerarCertificado()">Gerar Certificado</button>
+  </form>
+
+  <div id="certificadoPreview">
+    <!-- imagem de fundo como <img> para html2canvas capturar -->
+    <img src="https://orandoja.com.br/certificados/certificado_batismo.png" class="bg">
+    
+    <img id="logoPreview" class="logo" style="display:none;">
+    <div id="nomePreview" class="campo nome"></div>
+    <div id="igrejaPreview" class="campo igreja"></div>
+    <div id="diaPreview" class="campo dia"></div>
+    <div id="mesPreview" class="campo mes"></div>
+    <div id="anoPreview" class="campo ano"></div>
+    <div id="localPreview" class="campo local"></div>
+    <div id="enderecoPreview" class="campo endereco"></div>
+  </div>
+
+  <button id="baixarPDF" style="display:none;" onclick="baixarPDF()">Baixar PDF</button>
+  <button id="imprimirPDF" style="display:none;" onclick="imprimirPDF()">Imprimir</button>
+
+  <script>
+    async function gerarCertificado() {
+      document.getElementById("nomePreview").textContent = document.getElementById("nomeAluno").value;
+      document.getElementById("igrejaPreview").textContent = document.getElementById("nomeIgreja").value;
+      document.getElementById("diaPreview").textContent = document.getElementById("diaBatismo").value;
+      document.getElementById("mesPreview").textContent = document.getElementById("mesBatismo").value;
+      document.getElementById("anoPreview").textContent = document.getElementById("anoBatismo").value;
+      document.getElementById("localPreview").textContent = document.getElementById("localBatismo").value;
+
+      // quebra endereço em até 20 caracteres por linha
+      const endereco = document.getElementById("enderecoIgreja").value;
+      const enderecoQuebrado = endereco.match(/.{1,25}/g)?.join("\n") || "";
+      document.getElementById("enderecoPreview").textContent = enderecoQuebrado;
+
+      // logo
+      const logoInput = document.getElementById("logoIgreja").files[0];
+      if (logoInput) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const logoImg = document.getElementById("logoPreview");
+          logoImg.src = e.target.result;
+          logoImg.style.display = "block";
+        };
+        reader.readAsDataURL(logoInput);
+      }
+
+      document.getElementById("baixarPDF").style.display = "inline-block";
+      document.getElementById("imprimirPDF").style.display = "inline-block";
+    }
+
+    async function baixarPDF() {
+      const preview = document.getElementById("certificadoPreview");
+      const canvas = await html2canvas(preview, { scale: 2, useCORS: true });
+      const imgData = canvas.toDataURL("image/png");
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF("landscape", "pt", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+      pdf.save("certificado_batismo.pdf");
+    }
+
+    async function imprimirPDF() {
+      const preview = document.getElementById("certificadoPreview");
+      const canvas = await html2canvas(preview, { scale: 2, useCORS: true });
+      const imgData = canvas.toDataURL("image/png");
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF("landscape", "pt", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+      pdf.autoPrint();
+      window.open(pdf.output("bloburl"), "_blank");
+    }
+  </script>
+
+</body>
+</html>
