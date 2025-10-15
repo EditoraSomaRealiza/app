@@ -46,7 +46,7 @@
     .local { top: 465px; left: 130px; }
 
     .endereco {
-      font-size: 18px;
+      font-size: 14px;
       top: 630px;
       left: 130px;
       max-width: 600px;
@@ -73,17 +73,31 @@
   <h1>Gerador de Certificado de Batismo</h1>
   
   <form id="formCertificado">
-    <label>Nome do Aluno: <input type="text" id="nomeAluno"></label>
-    <label>Nome da Igreja: <input type="text" id="nomeIgreja"></label>
-
+    <input type="text" id="nomeAluno" placeholder="Nome do Aluno" style="width:350px;"><br><br>
+    <input type="text" id="nomeIgreja" placeholder="Nome da Igreja" style="width:350px;">
     <label>Data do Batismo:</label>
-    <input type="number" id="diaBatismo" placeholder="Dia" style="width:60px;">
-    <input type="text" id="mesBatismo" placeholder="Mês" style="width:100px;">
-    <input type="number" id="anoBatismo" placeholder="Ano" style="width:80px;">
-
-    <label>Local do Batismo: <input type="text" id="localBatismo"></label>
-    <label>Endereço da Igreja: <input type="text" id="enderecoIgreja"></label>
-    <label>Logo da Igreja: <input type="file" id="logoIgreja" accept="image/*"></label>
+    
+    <input type="number" id="diaBatismo" placeholder="Dia" style="width:60px;">    
+    <select name="mes" id="mesBatismo">
+    <option value="">--Mês--</option>
+    <option value="Janeiro">Janeiro</option>
+    <option value="Fevereiro">Fevereiro</option>
+    <option value="Março">Março</option>
+    <option value="Abril">Abril</option>
+    <option value="Maio">Maio</option>
+    <option value="Junho">Junho</option>
+    <option value="Julho">Julho</option>
+    <option value="Agosto">Agosto</option>
+    <option value="Setembro">Setembro</option>
+    <option value="Outubro">Outubro</option>
+    <option value="Novembro">Novembro</option>
+    <option value="Dezembro">Dezembro</option>
+  </select>
+    <input type="number" id="anoBatismo" placeholder="Ano" style="width:80px;"><br><br>
+    <input type="text" id="localBatismo" placeholder="Local do Batismo (Cidade, Estado e País)" style="width:350px;">
+     <br><br>
+    <input type="text" id="enderecoIgreja" placeholder="Endereço da Igreja" style="width:350px;">
+    <label>Logo da Igreja: <input type="file" id="logoIgreja" accept="image/*"></label> 
     <button type="button" onclick="gerarCertificado()">Gerar Certificado</button>
   </form>
 
