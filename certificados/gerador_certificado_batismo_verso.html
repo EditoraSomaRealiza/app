@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerar Certificado de Batismo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 18px; text-align: center; }
+    form { margin-bottom: 20px; }
+    label { display: block; margin-top: 10px; }
+    input { padding: 5px; width: 80%; max-width: 400px; }
+
+    #certificadoPreview {
+      position: relative;
+      width: 1123px;
+      height: 794px;
+      margin: 20px auto;
+    }
+
+    #certificadoPreview img.bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1123px;
+      height: 794px;
+      z-index: 0;
+    }
+
+    .campo {
+      position: absolute;
+      color: #000;
+      font-size: 18px;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    .nome {
+      font-size: 18px;
+      top: 140px;
+      left: 185px;
+    }
+    .igreja { top: 225px; left: 370px; }
+    .cpfaluno { top: 140px; left: 670px; }
+    .local { top: 307px; left: 670px; }
+
+    .endereco {
+      font-size: 18px;
+      top: 245px;
+      left: 260px;
+      max-width: 600px;
+      text-align: left;
+      white-space: pre-line; /* respeita \n */
+    }
+
+    .dia { top: 307px; left: 330px; }
+    .mes { top: 307px; left: 353px; }
+    .ano { top: 307px; left: 435px; }
+    .cpfa { top: 140px; left: 782px; }
+    .pastor { top: 287px; left: 363px; }
+    .cpfpastor { top: 287px; left: 782px; }
+    .cnpj { top: 265px; left: 205px; }
+    .fone { top: 265px; left: 780px; }
+    .testemunha1 { top: 370px; left: 222px; }
+    .cpftestemunha1 { top: 370px; left: 782px; }
+    .testemunha2 { top: 392px; left: 222px; }
+    .cpftestemunha2 { top: 392px; left: 782px; }
+    .imersao { top: 412px; left: 605px; }
+    .livro { top: 433px; left: 525px; }
+    .pagina { top: 433px; left: 675px; }
+    .logo {
+      position: absolute;
+      top: 580px;
+      left: 90px;
+      width: 70px;
+      height: auto;
+      z-index: 1;
+    }
+    .assinaturaNome {
+      position: absolute;
+      top: 603px;
+      left: 400px;
+      font-size: 12px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Gerador de Certificado de Batismo</h1>
+  
+  <form id="formCertificado">
+    
+    <input type="text" id="nomeAluno" placeholder="Nome do Aluno" style="width:350px;">
+    <input type="number" id="cpfaBatismo" placeholder="CPF Aluno" style="width:130px;"><br><br>
+    <input type="text" id="nomeIgreja" placeholder="Nome da Igreja" style="width:350px;">
+    <input type="number" id="cnpj" placeholder="CNPJ da igreja" style="width:180px;">
+    <input type="number" id="fone" placeholder="Telefone da igreja" style="width:180px;">
+    <label>Data do Batismo:</label>
+    <input type="number" id="diaBatismo" placeholder="Dia" style="width:60px;">    
+    <select name="mes" id="mesBatismo">
+    <option value="">--Mês--</option>
+    <option value="Janeiro">Janeiro</option>
+    <option value="Fevereiro">Fevereiro</option>
+    <option value="Março">Março</option>
+    <option value="Abril">Abril</option>
+    <option value="Maio">Maio</option>
+    <option value="Junho">Junho</option>
+    <option value="Julho">Julho</option>
+    <option value="Agosto">Agosto</option>
+    <option value="Setembro">Setembro</option>
+    <option value="Outubro">Outubro</option>
+    <option value="Novembro">Novembro</option>
+    <option value="Dezembro">Dezembro</option>
+  </select>
+    <input type="number" id="anoBatismo" placeholder="Ano" style="width:80px;"><br><br>
+    <input type="text" id="pastorBatismo" placeholder="Pastor" style="width:350px;">
+    <input type="number" id="cpfpastor" placeholder="CPF Pastor" style="width:130px;"><br><br>
+    <input type="text" id="localBatismo" placeholder="Local do Batismo (Cidade, Estado e País)" style="width:350px;">
+     <br><br>
+    <input type="text" id="enderecoIgreja" placeholder="Endereço da Igreja" style="width:350px;"><br><br>
+    <input type="text" id="testemunha1" placeholder="Testemunha 1" style="width:350px;">
+    <input type="text" id="cpftestemunha1" placeholder="CPF da Testemunha 1" style="width:150px;"><br><br>
+    <input type="text" id="testemunha2" placeholder="Testemunha 2" style="width:350px;">
+    <input type="text" id="cpftestemunha2" placeholder="CPF da Testemunha 2" style="width:150px;"><br><br>
+    <input type="text" id="imersao" placeholder="Local da Imersão (Lago, lagoa, rio, riacho, piscina etc." style="width:350px;"><br><br>
+    <input type="text" id="livro" placeholder="Livro nº" style="width:150px;">
+    <input type="text" id="pagina" placeholder="Página nº" style="width:150px;">
+    <label>Logo da Igreja: <input type="file" id="logoIgreja" accept="image/*"></label>
+    <button type="button" onclick="gerarCertificado()">Gerar Certificado</button>
+  </form>
+
+  <div id="certificadoPreview">
+    <!-- imagem de fundo como <img> para html2canvas capturar -->
+    <img src="https://orandoja.com.br/certificados/verso_certificado_batismo.png" class="bg">
+    
+    <img id="logoPreview" class="logo" style="display:none;">
+    <div id="nomePreview" class="campo nome"></div>
+    <div id="igrejaPreview" class="campo igreja"></div>
+    <div id="diaPreview" class="campo dia"></div>
+    <div id="mesPreview" class="campo mes"></div>
+    <div id="anoPreview" class="campo ano"></div>
+    <div id="cpfaPreview" class="campo cpfa"></div>
+    <div id="pastorPreview" class="campo pastor"></div>
+    <div id="cpfpastorPreview" class="campo cpfpastor"></div>
+    <div id="cnpjPreview" class="campo cnpj"></div>
+    <div id="fonePreview" class="campo fone"></div>
+    <div id="localPreview" class="campo local"></div>
+    <div id="enderecoPreview" class="campo endereco"></div>
+    <div id="testemunha1Preview" class="campo testemunha1"></div>
+    <div id="cpftestemunha1Preview" class="campo cpftestemunha1"></div>
+    <div id="testemunha2Preview" class="campo testemunha2"></div>
+    <div id="cpftestemunha2Preview" class="campo cpftestemunha2"></div>
+    <div id="imersaoPreview" class="campo imersao"></div>
+    <div id="livroPreview" class="campo livro"></div>
+    <div id="paginaPreview" class="campo pagina"></div>
+    <div id="assinaturaNome" class="assinaturaNome"></div>
+  </div>
+
+  <button id="baixarPDF" style="display:none;" onclick="baixarPDF()">Baixar PDF</button>
+  <button id="imprimirPDF" style="display:none;" onclick="imprimirPDF()">Imprimir</button>
+
+  <script>
+    async function gerarCertificado() {
+      const nome = document.getElementById("nomeAluno").value;
+      document.getElementById("nomePreview").textContent = document.getElementById("nomeAluno").value;
+      document.getElementById("igrejaPreview").textContent = document.getElementById("nomeIgreja").value;
+      document.getElementById("diaPreview").textContent = document.getElementById("diaBatismo").value;
+      document.getElementById("mesPreview").textContent = document.getElementById("mesBatismo").value;
+      document.getElementById("anoPreview").textContent = document.getElementById("anoBatismo").value;
+      document.getElementById("cpfaPreview").textContent = document.getElementById("cpfaBatismo").value;
+      document.getElementById("pastorPreview").textContent = document.getElementById("pastorBatismo").value;
+      document.getElementById("cpfpastorPreview").textContent = document.getElementById("cpfpastor").value;
+      document.getElementById("cnpjPreview").textContent = document.getElementById("cnpj").value;
+      document.getElementById("fonePreview").textContent = document.getElementById("fone").value;
+      document.getElementById("localPreview").textContent = document.getElementById("localBatismo").value;
+      document.getElementById("testemunha1Preview").textContent = document.getElementById("testemunha1").value;
+      document.getElementById("cpftestemunha1Preview").textContent = document.getElementById("cpftestemunha1").value;
+      document.getElementById("testemunha2Preview").textContent = document.getElementById("testemunha2").value;
+      document.getElementById("cpftestemunha2Preview").textContent = document.getElementById("cpftestemunha2").value;
+      document.getElementById("imersaoPreview").textContent = document.getElementById("imersao").value;
+      document.getElementById("livroPreview").textContent = document.getElementById("livro").value;
+      document.getElementById("paginaPreview").textContent = document.getElementById("pagina").value;
+      document.getElementById("assinaturaNome").textContent = nome;
+      // quebra endereço em até 20 caracteres por linha
+      const endereco = document.getElementById("enderecoIgreja").value;
+      const enderecoQuebrado = endereco.match(/.{1,80}/g)?.join("\n") || "";
+      document.getElementById("enderecoPreview").textContent = enderecoQuebrado;
+
+      // logo
+      const logoInput = document.getElementById("logoIgreja").files[0];
+      if (logoInput) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const logoImg = document.getElementById("logoPreview");
+          logoImg.src = e.target.result;
+          logoImg.style.display = "block";
+        };
+        reader.readAsDataURL(logoInput);
+      }
+
+      document.getElementById("baixarPDF").style.display = "inline-block";
+      document.getElementById("imprimirPDF").style.display = "inline-block";
+    }
+
+    async function baixarPDF() {
+      const preview = document.getElementById("certificadoPreview");
+      const canvas = await html2canvas(preview, { scale: 2, useCORS: true });
+      const imgData = canvas.toDataURL("image/png");
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF("landscape", "pt", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+      pdf.save("certificado_batismo.pdf");
+    }
+
+    async function imprimirPDF() {
+      const preview = document.getElementById("certificadoPreview");
+      const canvas = await html2canvas(preview, { scale: 2, useCORS: true });
+      const imgData = canvas.toDataURL("image/png");
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF("landscape", "pt", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+      pdf.autoPrint();
+      window.open(pdf.output("bloburl"), "_blank");
+    }
+  </script>
+
+</body>
+</html>
