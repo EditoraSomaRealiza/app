@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Carteira de Membro - Gerador</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f2f4f8;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      padding: 20px 0;
+      color: #003366;
+      background: linear-gradient(to right, #004b8d, #0077cc);
+      color: white;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    form {
+      width: 90%;
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px 25px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      font-weight: 600;
+      color: #003366;
+      font-size: 14px;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      margin-top: 4px;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      background: #fafafa;
+      transition: all 0.2s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #0077cc;
+      background: #fff;
+      box-shadow: 0 0 5px rgba(0,119,204,0.3);
+    }
+
+    .botoes {
+      grid-column: span 2;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    button {
+      margin: 8px;
+      padding: 10px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+      background-color: #0077cc;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    #carteiraPreview {
+      position: relative;
+      width: 1000px;
+      height: 309px;
+      margin: 40px auto;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      background-color: white;
+    }
+
+    img.bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .campo {
+      position: absolute;
+      color: #000;
+      font-size: 16px;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    .logo { top: 10px; left: 25px; width: 70px; height: auto; z-index: 1; position: absolute; }
+    .foto { top: 140px; left: 360px; width: 120px; height: 150px; z-index: 1; position: absolute; object-fit: cover; }
+
+    .nome { top: 205px; left: 30px; font-size: 20px; }
+    .nomeigreja { top: 13px; left: 100px; color:white; font-size: 25px; }
+    .ministerio { top: 40px; left: 100px; color:white; font-size: 18px; }
+    .funcao { top: 155px; left: 140px; font-size: 20px; color: darkblue; font-weight: bold; }
+    .endereco { top: 85px; left: 50px; width: 400px; text-align: left; }
+    .endereco2 { top: 100px; left: 50px; width: 400px; text-align: left; }
+    .endereco3 { top: 115px; left: 50px; width: 400px; text-align: left; }
+    .inscricao { top: 257px; left: 30px; font-size: 20px; }
+    .validade { top: 257px; left: 215px; font-size: 20px; }
+    .pastor { top: 252px; left: 610px; }
+    .congregacao { top: 40px; left: 530px; font-size: 20px; }
+    .naturalidade { top: 40px; left: 760px;  font-size: 20px;}
+    .rgcpf { top: 100px; left: 535px; font-size: 20px; }
+    .estadocivil { top: 100px; left: 800px; font-size: 20px; }
+    .batismo { top: 155px; left: 535px; font-size: 20px; }
+    .nascimento { top: 155px; left: 675px; font-size: 20px; }
+  </style>
+</head>
+<body>
+
+<h2>Gerador de Carteira de Membro</h2>
+
+<form id="formCarteira">
+  <label>Logo da Igreja: <input type="file" id="logoInput" accept="image/*"></label>
+  <label>Foto do Membro: <input type="file" id="fotoInput" accept="image/*"></label>
+  <label>Nome da Igreja: <input type="text" id="nomeigreja"></label>
+  <label>Ministério: <input type="text" id="ministerio"></label>
+  <label>Endereço da Igreja, rua n. bairro: <input type="text" id="endereco"></label>
+  <label>Endereço da Igreja, cidade, estado, telefone, CNPJ: <input type="text" id="endereco2"></label>
+  <label>Endereço da Igreja, E-mail/Site: <input type="text" id="endereco3"></label>
+  <label>Pastor(a) Responsável: <input type="text" id="pastor"></label>
+  <label>Nome do Membro: <input type="text" id="nome"></label>
+  <label>Função/Cargo: <input type="text" id="funcao"></label>
+  <label>Nº Inscrição: <input type="text" id="inscricao"></label>
+  <label>Validade da Carteira: <input type="text" id="validade"></label>
+  <label>Congregação: <input type="text" id="congregacao"></label>
+  <label>Naturalidade: <input type="text" id="naturalidade"></label>
+  <label>RG/CPF: <input type="text" id="rgcpf"></label>
+  <label>Estado Civil: <input type="text" id="estadocivil"></label>
+  <label>Data do Batismo: <input type="text" id="batismo"></label>
+  <label>Data de Nascimento: <input type="text" id="nascimento"></label>
+
+  <div class="botoes">
+    <button type="button" onclick="gerarCarteira()">Gerar Carteira</button>
+    <button type="button" onclick="baixarPDF()">⬇️ Baixar PDF</button>
+  </div>
+</form>
+
+<div id="carteiraPreview">
+  <img src="https://orandoja.com.br/certificados/carteira_de_membro.png" class="bg" crossorigin="anonymous">
+  <img id="logoPreview" class="logo" style="display:none;">
+  <img id="fotoPreview" class="foto" style="display:none;">
+  <div id="nomePreview" class="campo nome"></div>
+  <div id="funcaoPreview" class="campo funcao"></div>
+  <div id="enderecoPreview" class="campo endereco"></div>
+  <div id="endereco2Preview" class="campo endereco2"></div>
+  <div id="endereco3Preview" class="campo endereco3"></div>
+  <div id="nomeigrejaPreview" class="campo nomeigreja"></div>
+  <div id="ministerioPreview" class="campo ministerio"></div>
+  <div id="pastorPreview" class="campo pastor"></div>
+  <div id="inscricaoPreview" class="campo inscricao"></div>
+  <div id="validadePreview" class="campo validade"></div>
+  <div id="congregacaoPreview" class="campo congregacao"></div>
+  <div id="naturalidadePreview" class="campo naturalidade"></div>
+  <div id="rgcpfPreview" class="campo rgcpf"></div>
+  <div id="estadocivilPreview" class="campo estadocivil"></div>
+  <div id="batismoPreview" class="campo batismo"></div>
+  <div id="nascimentoPreview" class="campo nascimento"></div>
+</div>
+
+<script>
+function gerarCarteira() {
+  const campos = [
+    "nome","funcao","endereco","endereco2","endereco3","nomeigreja","ministerio",
+    "pastor","inscricao","validade","congregacao","naturalidade",
+    "rgcpf","estadocivil","batismo","nascimento"
+  ];
+  campos.forEach(c => {
+    document.getElementById(c + "Preview").textContent = document.getElementById(c).value;
+  });
+
+  const logoFile = document.getElementById("logoInput").files[0];
+  if (logoFile) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const logo = document.getElementById("logoPreview");
+      logo.src = e.target.result;
+      logo.style.display = "block";
+    };
+    reader.readAsDataURL(logoFile);
+  }
+
+  const fotoFile = document.getElementById("fotoInput").files[0];
+  if (fotoFile) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const foto = document.getElementById("fotoPreview");
+      foto.src = e.target.result;
+      foto.style.display = "block";
+    };
+    reader.readAsDataURL(fotoFile);
+  }
+}
+
+// Mantém o sistema de baixar PDF sem alterações
+async function baixarPDF() {
+  const { jsPDF } = window.jspdf;
+  const carteira = document.getElementById("carteiraPreview");
+  const canvas = await html2canvas(carteira, { scale: 2, backgroundColor: "#ffffff", useCORS: true });
+  const imgData = canvas.toDataURL("image/png");
+
+  const pdf = new jsPDF("p", "mm", "a4");
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const margin = 2;
+  const imgDisplayWidth = pdfWidth - (margin * 2);
+  const imgDisplayHeight = (canvas.height * imgDisplayWidth) / canvas.width;
+
+  pdf.addImage(imgData, "PNG", margin, margin, imgDisplayWidth, imgDisplayHeight);
+  pdf.save("Carteira_de_Membro.pdf");
+}
+</script>
+
+</body>
+</html>
