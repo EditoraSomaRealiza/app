@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerar Certificado de Casamento</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #003366;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 900px;
+      margin: 0 auto 30px;
+    }
+
+    label {
+      flex: 1 1 250px;
+      text-align: left;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #0077cc;
+      color: white;
+      font-size: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover { background-color: #005fa3; }
+
+    #certificadoPreview {
+      position: relative;
+      width: 1123px;
+      height: 794px;
+      margin: 20px auto;
+    }
+
+    #certificadoPreview img.bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1123px;
+      height: 794px;
+      z-index: 0;
+    }
+
+    .campo {
+      position: absolute;
+      color: #000;
+      font-size: 22px;
+      font-family: Arial;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    .nome {
+      top: 208px;
+      left: 440px;
+    }
+
+    .noiva {
+      
+      top: 238px;
+      left: 232px;
+      max-width: 800px;
+      text-align: left;
+      white-space: pre-line;
+    }
+
+    .igreja { top: 328px; left: 325px; }
+    .local { top: 530px; left: 690px; }
+    .dia { top: 300px; left: 780px; }
+
+    .pastor {
+      top: 385px;
+      left: 125px;
+      max-width: 800px;
+      text-align: left;
+      white-space: pre-line;
+    }
+
+    /* ✅ Novas posições para assinaturas (ajuste manual depois) */
+    .assinatura-noivo {
+      top: 601px;
+      left: 255px;
+      
+    }
+
+    .assinatura-noiva {
+      top: 601px;
+      left: 700px;
+     
+    }
+
+    .assinatura-pastor {
+      top: 665px;
+      left: 475px;
+      
+    }
+
+    .logo {
+      position: absolute;
+      top: 580px;
+      left: 60px;
+      width: 100px;
+      height: auto;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Gerador de Certificado de Casamento</h1>
+
+  <form id="formCertificado">
+    <label>Nome do Noivo:
+      <input type="text" id="nomeNoivo" placeholder="Ex: João da Silva Ribeiro">
+    </label>
+  
+    <label>Nome da Noiva:
+      <input type="text" id="noiva" placeholder="Ex: Maria Souza Salgado">
+    </label>
+
+    <label>Nome da Igreja:
+      <input type="text" id="nomeIgreja" placeholder="Ex: Igreja Universidade de Cristo">
+    </label>
+
+    <label>Data do Casamento:
+      <input type="date" id="dia" lang="pt-BR">
+    </label>
+
+    <label>Local:
+      <input type="text" id="local" placeholder="Ex: Campos dos Goytacazes - RJ">
+    </label>
+
+    <label>Pastor(a) Responsável:
+      <input type="text" id="pastorIgreja" placeholder="Ex: Carlos Andrade Nascimento">
+    </label>
+
+    <label>Logo da Igreja:
+      <input type="file" id="logoIgreja" accept="image/*">
+    </label>
+
+    <button type="button" onclick="gerarCertificado()">Gerar Certificado</button>
+  </form>
+
+  <div id="certificadoPreview">
+    <img src="https://orandoja.com.br/certificados/certificado_casamento.png" class="bg">
+    <img id="logoPreview" class="logo" style="display:none;">
+    <div id="nomePreview" class="campo nome"></div>
+    <div id="igrejaPreview" class="campo igreja"></div>
+    <div id="diaPreview" class="campo dia"></div>
+    <div id="localPreview" class="campo local"></div>
+    <div id="pastorPreview" class="campo pastor"></div>
+    <div id="noivaPreview" class="campo noiva"></div>
+
+    <!-- 🖊️ Nomes duplicados abaixo das assinaturas -->
+    <div id="assinaturaNoivo" class="campo assinatura-noivo"></div>
+    <div id="assinaturaNoiva" class="campo assinatura-noiva"></div>
+    <div id="assinaturaPastor" class="campo assinatura-pastor"></div>
+  </div>
+
+  <button id="baixarPDF" style="display:none;" onclick="baixarPDF()">⬇️ Baixar PDF</button>
+  <button id="imprimirPDF" style="display:none;" onclick="imprimirPDF()">🖨️ Imprimir</button>
+
+  <script>
+    function formatarDataBrasileira(dataISO) {
+      if (!dataISO) return "";
+      const [ano, mes, dia] = dataISO.split("-");
+      return `${dia}/${mes}/${ano}`;
+    }
+
+    async function gerarCertificado() {
+      const nomeNoivo = document.getElementById("nomeNoivo").value;
+      const nomeNoiva = document.getElementById("noiva").value;
+      const nomeIgreja = document.getElementById("nomeIgreja").value;
+      const local = document.getElementById("local").value;
+      const pastor = document.getElementById("pastorIgreja").value;
+
+      const dataISO = document.getElementById("dia").value;
+      const dataFormatada = formatarDataBrasileira(dataISO); 
+
+      document.getElementById("nomePreview").textContent = nomeNoivo;
+      document.getElementById("igrejaPreview").textContent = nomeIgreja;
+      document.getElementById("diaPreview").textContent = dataFormatada;
+      document.getElementById("localPreview").textContent = local;
+      document.getElementById("pastorPreview").textContent = pastor;
+      document.getElementById("noivaPreview").textContent = nomeNoiva;
+
+      // ✅ Duplica nomes abaixo das assinaturas
+      document.getElementById("assinaturaNoivo").textContent = nomeNoivo;
+      document.getElementById("assinaturaNoiva").textContent = nomeNoiva;
+      document.getElementById("assinaturaPastor").textContent = pastor;
+
+      // ✅ Logo
+      const logoInput = document.getElementById("logoIgreja").files[0];
+      if (logoInput) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const logoImg = document.getElementById("logoPreview");
+          logoImg.src = e.target.result;
+          logoImg.style.display = "block";
+        };
+        reader.readAsDataURL(logoInput);
+      }
+
+      document.getElementById("baixarPDF").style.display = "inline-block";
+      document.getElementById("imprimirPDF").style.display = "inline-block";
+    }
+
+    async function baixarPDF() {
+      const preview = document.getElementById("certificadoPreview");
+      const canvas = await html2canvas(preview, { scale: 2, useCORS: true });
+      const imgData = canvas.toDataURL("image/png");
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF("landscape", "pt", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+      pdf.save("certificado_casamento.pdf");
+    }
+
+    async function imprimirPDF() {
+      const preview = document.getElementById("certificadoPreview");
+      const canvas = await html2canvas(preview, { scale: 2, useCORS: true });
+      const imgData = canvas.toDataURL("image/png");
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF("landscape", "pt", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+      pdf.autoPrint();
+      window.open(pdf.output("bloburl"), "_blank");
+    }
+  </script>
+
+</body>
+</html>
