@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gerador - Verso Certificado de Casamento</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    :root{--accent:#8b0000;}
+    body { font-family: Arial, sans-serif; background: #f4f7fa; padding: 18px; text-align:center; margin:0;}
+    .wrap{max-width:1180px;margin:0 auto;padding:10px}
+    header{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:14px}
+    header img{width:64px;height:auto;border-radius:6px;object-fit:cover}
+    h1 { color:var(--accent); margin:0 0 10px 0; font-size:22px; }
+
+    form {
+      display:flex; flex-wrap:wrap;
+      justify-content:center;
+      gap:12px;
+      background:#fff;
+      padding:14px;
+      border-radius:8px;
+      max-width:1000px;
+      margin:0 auto 16px;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
+    }
+    label { flex:1 1 300px; text-align:left; font-weight:600; color:#333; font-size:14px; }
+    input, textarea {
+      width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; margin-top:6px; box-sizing:border-box;
+      font-size:14px;
+    }
+    textarea { min-height:70px; resize:vertical; }
+
+    .actions { display:flex; gap:10px; justify-content:center; width:100%; margin-top:6px; }
+
+    button {
+      padding:10px 18px; border-radius:8px; border:0; cursor:pointer;
+      background:var(--accent); color:#fff; font-weight:700;
+    }
+    button.secondary { background:#eee;color:#333;border:1px solid #ddd; font-weight:600; }
+
+    /* Preview A4-like (1123x794 px) */
+    #preview { position:relative; width:1123px; height:794px; margin:18px auto; border-radius:6px; overflow:hidden; background:#fff; box-shadow:0 8px 24px rgba(0,0,0,.08); }
+    #preview img.bg { position:absolute; top:0; left:0; width:1123px; height:794px; object-fit:cover; z-index:0; }
+
+    .campo { position:absolute; font-size:20px; color:#000; z-index:2; pointer-events:none; }
+
+    .noiva { top:350px; left:400px; }
+    .cpfNoiva { top:372px; left:93px; }
+
+    .noivo { top:370px; left:403px; }
+    .cpfNoivo { top:390px; left:93px; }
+
+    .igreja { top:260px; left:118px; }
+    .cnpj { top:260px; left:810px; }
+
+    .enderecoIgreja {
+      top:305px;
+      left:138px;
+      font-size:18px;
+      max-width:870px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height:22px;
+      z-index:2;
+    }
+
+    .pastor { top:282px; left:175px; }
+    .cpfPastor { top:282px; left:810px; }
+
+    .data { top:390px; left:405px; }
+
+    .padrinhoNoivo { top:480px; left:220px; }
+    .cpfPadrinhoNoivo { top:480px; left:800px; }
+
+    .madrinhaNoivo { top:502px; left:70px; }
+    .cpfMadrinhaNoivo {top:502px; left:800px;}
+
+    .padrinhoNoiva { top:435px; left:220px; }
+    .cpfPadrinhoNoiva { top:435px; left:800px; }
+
+    .madrinhaNoiva { top:457px; left:70px; }
+    .cpfMadrinhaNoiva { top:457px; left:800px; }
+
+    .livro { top:525px; left:555px; }
+    .pagina { top:525px; left:705px; }
+
+    .telefone { top:735px; left:815px; }
+
+    .assNoivo { top:595px; left:635px;}
+    .assNoiva { top:595px; left:105px; }
+    .assPastor { top:750px; left:280px; }
+
+    .assPadrinhoNoivo { top:688px; left:745px; }
+    .assMadrinhaNoivo { top:640px; left:747px; }
+    .assPadrinhoNoiva { top:690px; left:210px; }
+    .assMadrinhaNoiva { top:642px; left:210px; }
+
+    .hint { color:#666; font-size:13px; margin-top:8px; }
+
+    @media (max-width:1200px){
+      #preview { transform:scale(0.85); transform-origin:top center; }
+      .wrap{padding:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Gerador — Verso do Certificado de Casamento</h1>
+    </header>
+
+    <form id="form">
+      <label>Noiva: <input id="noiva" type="text" placeholder="Nome da Noiva"></label>
+      <label>CPF da Noiva: <input id="cpfNoiva" type="text" placeholder="000.000.000-00"></label>
+
+      <label>Noivo: <input id="noivo" type="text" placeholder="Nome do Noivo"></label>
+      <label>CPF do Noivo: <input id="cpfNoivo" type="text" placeholder="000.000.000-00"></label>
+
+      <label>Nome da Igreja: <input id="igreja" type="text" placeholder="Nome da Igreja"></label>
+      <label>CNPJ da Igreja: <input id="cnpj" type="text" placeholder="00.000.000/0000-00"></label>
+
+      <label>Endereço da Igreja (use Enter para nova linha): 
+        <textarea id="enderecoIgreja" placeholder="Rua X, nº Y\nBairro - Cidade - UF\nCEP"></textarea>
+      </label>
+
+      <label>Pastor(a): <input id="pastor" type="text" placeholder="Nome do Pastor(a)"></label>
+      <label>CPF do Pastor(a): <input id="cpfPastor" type="text" placeholder="000.000.000-00"></label>
+
+      <label>Data da Cerimônia: <input id="data" type="date"></label>
+
+      <label>Padrinho do Noivo: <input id="padrinhoNoivo" type="text"></label>
+      <label>CPF: <input id="cpfPadrinhoNoivo" type="text"></label>
+
+      <label>Madrinha do Noivo: <input id="madrinhaNoivo" type="text"></label>
+      <label>CPF: <input id="cpfMadrinhaNoivo" type="text"></label>
+
+      <label>Padrinho da Noiva: <input id="padrinhoNoiva" type="text"></label>
+      <label>CPF: <input id="cpfPadrinhoNoiva" type="text"></label>
+
+      <label>Madrinha da Noiva: <input id="madrinhaNoiva" type="text"></label>
+      <label>CPF: <input id="cpfMadrinhaNoiva" type="text"></label>
+
+      <label>Livro: <input id="livro" type="text" placeholder="Nº do livro"></label>
+      <label>Página: <input id="pagina" type="text" placeholder="Nº da página"></label>
+
+      <label>Telefone da Igreja: <input id="telefone" type="text" placeholder="(XX) XXXXX-XXXX"></label>
+
+      <div class="actions" style="width:100%;">
+        <button type="button" onclick="gerar()">Gerar</button>
+        <button type="button" id="baixarPDF" onclick="baixarPDF()" style="display:none;">⬇️ Baixar PDF</button>
+        <button type="button" id="imprimirPDF" onclick="imprimirPDF()" style="display:none;">🖨️ Imprimir</button>
+      </div>
+    </form>
+
+    <div id="preview" aria-label="preview">
+
+      <!-- 🔥 Correção aplicada -->
+      <img class="bg"
+           src="https://orandoja.com.br/certificados/verso_certificado_casamento.png"
+           crossorigin="anonymous"
+           onerror="this.crossOrigin=null;"
+           alt="verso">
+
+      <div id="prevNoiva" class="campo noiva"></div>
+      <div id="prevCpfNoiva" class="campo cpfNoiva"></div>
+
+      <div id="prevNoivo" class="campo noivo"></div>
+      <div id="prevCpfNoivo" class="campo cpfNoivo"></div>
+
+      <div id="prevIgreja" class="campo igreja"></div>
+      <div id="prevCnpj" class="campo cnpj"></div>
+
+      <div id="prevEnderecoIgreja" class="campo enderecoIgreja"></div>
+
+      <div id="prevPastor" class="campo pastor"></div>
+      <div id="prevCpfPastor" class="campo cpfPastor"></div>
+
+      <div id="prevData" class="campo data"></div>
+
+      <div id="prevPadrinhoNoivo" class="campo padrinhoNoivo"></div>
+      <div id="prevCpfPadrinhoNoivo" class="campo cpfPadrinhoNoivo"></div>
+
+      <div id="prevMadrinhaNoivo" class="campo madrinhaNoivo"></div>
+      <div id="prevCpfMadrinhaNoivo" class="campo cpfMadrinhaNoivo"></div>
+
+      <div id="prevPadrinhoNoiva" class="campo padrinhoNoiva"></div>
+      <div id="prevCpfPadrinhoNoiva" class="campo cpfPadrinhoNoiva"></div>
+
+      <div id="prevMadrinhaNoiva" class="campo madrinhaNoiva"></div>
+      <div id="prevCpfMadrinhaNoiva" class="campo cpfMadrinhaNoiva"></div>
+
+      <div id="prevLivro" class="campo livro"></div>
+      <div id="prevPagina" class="campo pagina"></div>
+
+      <div id="prevTelefone" class="campo telefone"></div>
+
+      <div id="prevAssNoivo" class="campo assNoivo"></div>
+      <div id="prevAssNoiva" class="campo assNoiva"></div>
+      <div id="prevAssPastor" class="campo assPastor"></div>
+
+      <div id="prevAssPadrinhoNoivo" class="campo assPadrinhoNoivo"></div>
+      <div id="prevAssMadrinhaNoivo" class="campo assMadrinhaNoivo"></div>
+      <div id="prevAssPadrinhoNoiva" class="campo assPadrinhoNoiva"></div>
+      <div id="prevAssMadrinhaNoiva" class="campo assMadrinhaNoiva"></div>
+
+    </div>
+
+<script>
+function formatarDataBR(dataISO) {
+  if (!dataISO) return "";
+  const [ano, mes, dia] = dataISO.split("-");
+  return `${dia}/${mes}/${ano}`;
+}
+
+function safeGet(id) {
+  const el = document.getElementById(id);
+  return el ? el.value : "";
+}
+
+function gerar() {
+  const pares = [
+    ["noiva","prevNoiva"], ["cpfNoiva","prevCpfNoiva"],
+    ["noivo","prevNoivo"], ["cpfNoivo","prevCpfNoivo"],
+    ["igreja","prevIgreja"], ["cnpj","prevCnpj"],
+    ["pastor","prevPastor"], ["cpfPastor","prevCpfPastor"],
+    ["padrinhoNoivo","prevPadrinhoNoivo"], ["cpfPadrinhoNoivo","prevCpfPadrinhoNoivo"],
+    ["madrinhaNoivo","prevMadrinhaNoivo"], ["cpfMadrinhaNoivo","prevCpfMadrinhaNoivo"],
+    ["padrinhoNoiva","prevPadrinhoNoiva"], ["cpfPadrinhoNoiva","prevCpfPadrinhoNoiva"],
+    ["madrinhaNoiva","prevMadrinhaNoiva"], ["cpfMadrinhaNoiva","prevCpfMadrinhaNoiva"],
+    ["livro","prevLivro"], ["pagina","prevPagina"],
+    ["telefone","prevTelefone"]
+  ];
+
+  pares.forEach(([src,dst])=>{
+    const v = safeGet(src) || "";
+    const out = document.getElementById(dst);
+    if(out) out.textContent = v;
+  });
+
+  const enderecoRaw = safeGet("enderecoIgreja") || "";
+  const enderecoOut = document.getElementById("prevEnderecoIgreja");
+  if (enderecoOut) enderecoOut.textContent = enderecoRaw;
+
+  document.getElementById("prevData").textContent = formatarDataBR(safeGet("data"));
+
+  document.getElementById("prevAssNoivo").textContent = safeGet("noivo");
+  document.getElementById("prevAssNoiva").textContent = safeGet("noiva");
+  document.getElementById("prevAssPastor").textContent = safeGet("pastor");
+
+  document.getElementById("prevAssPadrinhoNoivo").textContent = safeGet("padrinhoNoivo");
+  document.getElementById("prevAssMadrinhaNoivo").textContent = safeGet("madrinhaNoivo");
+  document.getElementById("prevAssPadrinhoNoiva").textContent = safeGet("padrinhoNoiva");
+  document.getElementById("prevAssMadrinhaNoiva").textContent = safeGet("madrinhaNoiva");
+
+  document.getElementById("baixarPDF").style.display = "inline-block";
+  document.getElementById("imprimirPDF").style.display = "inline-block";
+}
+
+async function baixarPDF() {
+  const preview = document.getElementById("preview");
+  try {
+    const canvas = await html2canvas(preview, { scale: 2, useCORS: true, backgroundColor: "#ffffff" });
+    const imgData = canvas.toDataURL("image/png");
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("landscape", "pt", "a4");
+    pdf.addImage(imgData, "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+    pdf.save("verso_certificado_casamento.pdf");
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao gerar PDF. Provavelmente a imagem não permitiu CORS.");
+  }
+}
+
+async function imprimirPDF() {
+  const preview = document.getElementById("preview");
+  try {
+    const canvas = await html2canvas(preview, { scale: 2, useCORS: true, backgroundColor: "#ffffff" });
+    const imgData = canvas.toDataURL("image/png");
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("landscape", "pt", "a4");
+    pdf.addImage(imgData, "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+    pdf.autoPrint();
+    const blobUrl = pdf.output("bloburl");
+    window.open(blobUrl, "_blank");
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao preparar impressão. A imagem pode estar bloqueando.");
+  }
+}
+</script>
+
+</body>
+</html>
